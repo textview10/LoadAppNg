@@ -1,10 +1,13 @@
-package com.loadapp.load;
+package com.loadapp.load.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.loadapp.load.R;
+import com.loadapp.load.base.BaseActivity;
+
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
