@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="146dp"
+
+        android:src="@drawable/ic_spalish_logo"
+        />
+
+
+    <TextView
+        android:layout_width="159dp"
+        android:layout_height="16dp"
+        android:text="Input your phone number"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="40dp"
+        />
+
+
+
+
+
+</RelativeLayout>
