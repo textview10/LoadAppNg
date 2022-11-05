@@ -1,5 +1,7 @@
 <resources>
     <string name="main_click_me" >点击我</string>
+    <string name="main_loan">借贷</string>
+    <string name="main_me">我的</string>
     <string name="spalish_welcome" >欢迎Haikyfun</string>
     <string name="spalish_sign_in" >登录</string>
     <string name="spalish_sign_up" >注册</string>

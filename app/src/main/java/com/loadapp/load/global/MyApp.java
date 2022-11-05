@@ -9,6 +9,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.DBCookieStore;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
+import com.lzy.okgo.model.HttpHeaders;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -75,6 +76,11 @@ public class MyApp extends Application {
 
         OkGo.getInstance().init(this)
                 .setOkHttpClient(builder.build());
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.put("APP-Language", "ch");
+        httpHeaders.put("APP-ID", "111111");
+        OkGo.getInstance().addCommonHeaders(httpHeaders);
     }
 
 
