@@ -2,22 +2,33 @@ package com.loadapp.load.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.loadapp.load.R;
+import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
+import com.loadapp.load.bean.ServerLiveBean;
 import com.loadapp.load.ui.home.HomeActivity;
 import com.loadapp.load.ui.login.SignInActivity;
 import com.loadapp.load.ui.login.SignUpActivity;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * splash 
  */
 public class SplashActivity extends BaseActivity {
+    private static final String TAG = "SplashActivity";
 
     private RelativeLayout rlContainer;
 
@@ -48,5 +59,36 @@ public class SplashActivity extends BaseActivity {
             }
         });
         rlContainer.addView(btn);
+
+        checkServerAvailable();
+    }
+
+    private void checkServerAvailable() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("request_time", System.currentTimeMillis());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+//        Log.e(TAG, " = " + jsonObject.toString());
+        OkGo.<String>post(Api.CHECK_SERVER_ALIVE).tag(TAG)
+                .params("data",jsonObject.toString())
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        ServerLiveBean serverLiveBean = checkResponseSuccess(response, ServerLiveBean.class);
+                        if (serverLiveBean != null && serverLiveBean.isServer_live()){
+                            Log.d(TAG, "the server is alive");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Log.e(TAG, "the server is not alive");
+                        ToastUtils.showShort("server is not alive .");
+                    }
+                });
+
     }
 }

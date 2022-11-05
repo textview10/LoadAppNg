@@ -23,7 +23,7 @@ public class SignInActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
-        testLogin();
+
 //        testCheckPhoneNum();
     }
 
@@ -49,29 +49,5 @@ public class SignInActivity extends BaseActivity {
         });
     }
 
-    private void testLogin() {
-        JSONObject jsonObject = new JSONObject();
-        try {
-//            JSONObject data = new JSONObject();
-//            jsonObject.put("data", data);
-            jsonObject.put("request_time", System.currentTimeMillis());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Log.e(TAG, " = " + jsonObject.toString());
-        OkGo.<String>post(Api.CHECK_SERVER_ALIVE).tag(TAG)
-                .params("data",jsonObject.toString())
-                .execute(new StringCallback() {
-            @Override
-            public void onSuccess(Response<String> response) {
-                Log.e(TAG, "response 2 = " + response.body().toString());
-            }
 
-            @Override
-            public void onError(Response<String> response) {
-                super.onError(response);
-            }
-        });
-
-    }
 }
