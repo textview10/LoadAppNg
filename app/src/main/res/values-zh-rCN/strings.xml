@@ -1,3 +1,5 @@
 <resources>
     <string name="main_click_me" >点击我</string>
+    <string name="main_loan">借贷</string>
+    <string name="main_me">我的</string>
 </resources>
