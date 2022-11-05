@@ -10,4 +10,10 @@
     <string name="spalish_Input_your_phone_number" >Input your phone number</string>
     <string name="spalish_Next" >Next</string>
     <string name="spalish_Please_enter" >Please enter</string>
+
+    <string name="Input_your_OTP" >Input your OTP</string>
+    <string name="The_verification_OTP_has_been_sent_to_99909909_Via_SMS" >The verification OTP has been sent to 99909909 via SMS</string>
+
+    <string name="The_verification_code_has_been_sent_to_your_phone_number" >The verification code has been sent to your phone number</string>
+    <string name="Resent_now" >Resent now</string>
 </resources>
