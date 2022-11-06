@@ -23,21 +23,10 @@
 
         android:layout_marginLeft="40dp"
         android:layout_marginTop="60dp"
-        android:text="@string/The_verification_code_has_been_sent_to_your_phone_number"
+        android:text="@string/The_verification_OTP_has_been_sent_to_99909909_Via_SMS"
 
         android:textColor="#666666"
         android:textSize="12sp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="180dp"
-        android:text="@string/Resent_now"
-
-        android:textColor="#0EC6A2"
-        android:textSize="14sp"
         />
 
     <ImageView
@@ -45,7 +34,7 @@
         android:layout_height="72dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="146dp"
-        android:src="@drawble/" />
+        android:src="@drawable/ic_back" />
 
 
 
