@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="select_green">#0EC6A2</color>
     <color name="unselect_gray">#8A8C8B</color>
+    <color name="verify_sms_unselect">#E5E5E5</color>
+    <color name="verify_sms_select">#0EC6A2</color>
 </resources>

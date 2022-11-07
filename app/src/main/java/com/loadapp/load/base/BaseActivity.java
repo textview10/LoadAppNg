@@ -19,17 +19,18 @@ import com.lzy.okgo.model.Response;
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected final Gson gson = new Gson();
-//    public void toFragment(BaseFragment fragment) {
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();   // 开启一个事务
-//        transaction.replace(getFragmentContainerRes(), fragment);
-//        transaction.commitAllowingStateLoss();
-//    }
-//
-//    protected @IdRes
-//    int getFragmentContainerRes() {
-//        return R.id.fl_main_container;
-//    }
+
+    public void toFragment(BaseFragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();   // 开启一个事务
+        transaction.replace(getFragmentContainerRes(), fragment);
+        transaction.commitAllowingStateLoss();
+    }
+
+    protected @IdRes
+    int getFragmentContainerRes() {
+        return R.id.fl_sign_up_container;
+    }
 
     protected <T> T checkResponseSuccess(Response<String> response, Class<T> clazz) {
         String body = checkResponseSuccess(response);

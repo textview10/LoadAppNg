@@ -1,19 +1,27 @@
 <resources>
     <string name="app_name" translatable="false">LoadApp</string>
-    <string name="main_click_me" >click me</string>
+    <string name="main_click_me">click me</string>
     <string name="main_loan">Loan</string>
     <string name="main_me">Me</string>
-    <string name="spalish_welcome" >Welcome to Haikyfun</string>
-    <string name="spalish_sign_in" >Sign in</string>
-    <string name="spalish_sign_up" >Sign up</string>
+    <string name="spalish_welcome">Welcome to Haikyfun</string>
+    <string name="spalish_sign_in">Sign in</string>
+    <string name="spalish_sign_up">Sign up</string>
 
-    <string name="spalish_Input_your_phone_number" >Input your phone number</string>
-    <string name="spalish_Next" >Next</string>
-    <string name="spalish_Please_enter" >Please enter</string>
+    <string name="spalish_Input_your_phone_number">Input your phone number</string>
+    <string name="spalish_Next">Next</string>
+    <string name="spalish_Please_enter">Please input your phone num:</string>
 
-    <string name="Input_your_OTP" >Input your OTP</string>
-    <string name="The_verification_OTP_has_been_sent_to_99909909_Via_SMS" >The verification OTP has been sent to 99909909 via SMS</string>
+    <string name="Input_your_OTP">Input your OTP</string>
+    <string name="The_verification_OTP_has_been_sent_to_99909909_Via_SMS">The verification OTP has been sent to 99909909 via SMS</string>
 
-    <string name="The_verification_code_has_been_sent_to_your_phone_number" >The verification code has been sent to your phone number</string>
-    <string name="Resent_now" >Resent now</string>
+    <string name="The_verification_code_has_been_sent_to_your_phone_number">The verification code has been sent to your phone number</string>
+    <string name="Resent_now">Resend now</string>
+    <string name="Resent_after">Resend After</string>
+
+    <string name="signup_input_otp">Input your OTP</string>
+    <string name="signup_input_desc">The verification code has been send to %s via sms</string>
+    <string name="signup_set_pwd_title">create a 4-digit password </string>
+    <string name="signup_set_pwd_1">Please input 4-digit password : </string>
+    <string name="signup_set_pwd_2">Repeat 4-digit Password :</string>
+    <string name="signup_set_pwd_commit">commit</string>
 </resources>

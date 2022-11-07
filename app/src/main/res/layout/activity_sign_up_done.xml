@@ -3,68 +3,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="146dp"
-android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_spalish_logo"
-        />
-<ImageView
-    android:layout_width="280dp"
-    android:layout_height="1dp"
-    android:src="@drawable/source_3"
-    android:layout_marginTop="325dp"
-    android:layout_marginLeft="40dp"
-    android:color="#ffeeeeee"
-    />
+        android:src="@drawable/ic_spalish_logo" />
+
+    <ImageView
+        android:layout_width="280dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="325dp"
+        android:color="#ffeeeeee"
+        android:src="@drawable/source_3" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
         android:layout_marginLeft="40dp"
-        android:textSize="14sp"
+        android:layout_marginTop="300dp"
         android:text="+234"
-        />
+        android:textSize="14sp" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="290dp"
         android:layout_marginLeft="88dp"
-        />
+        android:layout_marginTop="290dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="250dp"
         android:text="@string/spalish_Input_your_phone_number"
         android:textColor="#333333"
         android:textSize="16sp"
-        android:layout_marginTop="250dp"
-        android:layout_marginLeft="40dp"
 
         />
+
     <LinearLayout
         android:layout_width="280dp"
         android:layout_height="50dp"
-        android:background="@drawable/source2"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="373dp"
         android:layout_centerHorizontal="true"
-        >
+        android:layout_marginTop="373dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/source2">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="120dp"
-        android:text="@string/spalish_Next"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp" />
-
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="120dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/spalish_Next"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
 
 
     </LinearLayout>

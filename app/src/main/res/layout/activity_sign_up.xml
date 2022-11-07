@@ -1,71 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="146dp"
-        android:src="@drawable/ic_spalish_logo" />
+   <FrameLayout
+       android:id="@+id/fl_sign_up_container"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"/>
 
-    <ImageView
-        android:layout_width="280dp"
-        android:layout_height="1dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="325dp"
-        android:color="#ffeeeeee"
-        android:src="@drawable/source_3" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="300dp"
-        android:text="+234"
-        android:textSize="14sp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="88dp"
-        android:layout_marginTop="290dp"
-        android:hint="@string/spalish_Please_enter" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="250dp"
-        android:text="@string/spalish_Input_your_phone_number"
-        android:textColor="#333333"
-        android:textSize="16sp"
-
-        />
-
-    <LinearLayout
-        android:layout_width="280dp"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="373dp"
-        android:layout_marginRight="40dp"
-        android:background="@drawable/source2">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="120dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/spalish_Next"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp" />
-
-
-    </LinearLayout>
-
-
-</RelativeLayout>
+</FrameLayout>
