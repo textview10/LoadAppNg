@@ -11,6 +11,7 @@ import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
 import com.loadapp.load.bean.LoginResponseBean;
 import com.loadapp.load.global.Constant;
+import com.loadapp.load.ui.SplashActivity;
 import com.loadapp.load.ui.home.HomeActivity;
 import com.loadapp.load.ui.login.fragment.InputPhoneNumFragment;
 import com.loadapp.load.ui.login.fragment.SetPwdFragment;
@@ -55,6 +56,12 @@ public class SignUpActivity extends BaseActivity {
 
     public void toHomePage(){
         Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void backPress(){
+        Intent intent = new Intent(this, SplashActivity.class);
         startActivity(intent);
         finish();
     }

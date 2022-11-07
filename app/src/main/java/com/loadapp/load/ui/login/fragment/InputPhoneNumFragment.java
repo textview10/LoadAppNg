@@ -31,6 +31,8 @@ public class InputPhoneNumFragment extends BaseFragment {
 
     private static final String TAG = "InputPhoneNumFragment";
     private AppCompatEditText etInput;
+    private PhoneNumPresenter presenter;
+    private Spinner spinner;
 
     @Nullable
     @Override
@@ -42,11 +44,11 @@ public class InputPhoneNumFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Spinner spinner = view.findViewById(R.id.spinner_signup_input);
+        spinner = view.findViewById(R.id.spinner_signup_input);
         etInput = view.findViewById(R.id.et_signup_input);
         RelativeLayout rlCommit = view.findViewById(R.id.rl_signup_input_commit);
 
-        PhoneNumPresenter presenter = new PhoneNumPresenter(getContext());
+        presenter = new PhoneNumPresenter(getContext());
         presenter.initSpinner(spinner);
 
         rlCommit.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +80,9 @@ public class InputPhoneNumFragment extends BaseFragment {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("request_time", System.currentTimeMillis());
+            String prefix = presenter.getSelectString(spinner.getSelectedItemPosition());
+//            jsonObject.put("mobile", prefix + mobile);
+            // TODO 暂时去掉前缀
             jsonObject.put("mobile", mobile);
         } catch (JSONException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package com.loadapp.load.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.TextUtils;
@@ -12,6 +13,10 @@ import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
 import com.loadapp.load.bean.LoginResponseBean;
 import com.loadapp.load.global.Constant;
+import com.loadapp.load.ui.SplashActivity;
+import com.loadapp.load.ui.home.HomeActivity;
+import com.loadapp.load.ui.login.fragment.InputPhoneNumFragment;
+import com.loadapp.load.ui.login.fragment.LoginFragment;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -26,71 +31,29 @@ public class SignInActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
-        login("18518511461", "aa123456");
+        LoginFragment loginFragment = new LoginFragment();
+        toFragment(loginFragment);
     }
 
-    private void login(String phoneNum, String password) {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("request_time", System.currentTimeMillis());
-            jsonObject.put("mobile", phoneNum);
-            jsonObject.put("password", password);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        OkGo.<String>post(Api.LOGIN).tag(TAG)
-                .params("data", jsonObject.toString())
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        LoginResponseBean loginBean = checkResponseSuccess(response, LoginResponseBean.class);
-                        if (loginBean == null) {
-                            Log.e(TAG,"login error");
-                            return;
-                        }
-                        Constant.mAccountId = loginBean.getAccount_id();
-                        Constant.mToken = loginBean.getAccess_token();
-                        Log.e(TAG, "login success = " + response.body().toString());
-                        modifyPassword("aa123456", "ab123456", "ab123456");
-                    }
-
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+    @Override
+    protected int getFragmentContainerRes() {
+        return R.id.fl_signin_container;
     }
 
-    private void modifyPassword(String oldPwd, String newPwd, String confirmPwd){
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("request_time", System.currentTimeMillis());
-            jsonObject.put("account_id", Constant.mAccountId);
-            jsonObject.put("access_token", Constant.mToken);
-            jsonObject.put("password_old", oldPwd);
-            jsonObject.put("password_new", newPwd);
-            jsonObject.put("password_confirm", confirmPwd);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        OkGo.<String>post(Api.MODIFY_PSD).tag(TAG)
-                .params("data", jsonObject.toString())
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        String responseStr = checkResponseSuccess(response);
-                        if (TextUtils.isEmpty(responseStr)) {
-                            Log.e(TAG,"modify password error");
-                            return;
-                        }
+    public void toHomePage(){
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
-                        Log.e(TAG, "modify password success = " + response.body().toString());
-                    }
+    public void backPress(){
+        Intent intent = new Intent(this, SplashActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+    @Override
+    public void onBackPressed() {
+        backPress();
     }
 }

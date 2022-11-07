@@ -6,7 +6,8 @@
     tools:context=".ui.login.SignInActivity"
     tools:ignore="MissingDefaultResource">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <FrameLayout
+        android:id="@+id/fl_signin_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </RelativeLayout>

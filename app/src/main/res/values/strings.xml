@@ -24,4 +24,8 @@
     <string name="signup_set_pwd_1">Please input 4-digit password : </string>
     <string name="signup_set_pwd_2">Repeat 4-digit Password :</string>
     <string name="signup_set_pwd_commit">commit</string>
+
+    <string name="signin_set_account">Please input account: </string>
+    <string name="signin_set_pwd">Please input password :</string>
+    <string name="signin_login">login</string>
 </resources>

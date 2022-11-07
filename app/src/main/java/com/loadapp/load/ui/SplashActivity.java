@@ -40,13 +40,25 @@ public class SplashActivity extends BaseActivity {
         findViewById(R.id.rl_welcome_signin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SplashActivity.this, SignInActivity.class));
+                checkServerAvailable(new CallBack() {
+                    @Override
+                    public void onEnd() {
+                        startActivity(new Intent(SplashActivity.this, SignInActivity.class));
+                        finish();
+                    }
+                });
             }
         });
         findViewById(R.id.rl_welcome_signup).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SplashActivity.this, SignUpActivity.class));
+                checkServerAvailable(new CallBack() {
+                    @Override
+                    public void onEnd() {
+                        startActivity(new Intent(SplashActivity.this, SignUpActivity.class));
+                        finish();
+                    }
+                });
             }
         });
 
@@ -60,10 +72,10 @@ public class SplashActivity extends BaseActivity {
         });
         rlContainer.addView(btn);
 
-        checkServerAvailable();
+
     }
 
-    private void checkServerAvailable() {
+    private void checkServerAvailable(CallBack callBack) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("request_time", System.currentTimeMillis());
@@ -80,6 +92,9 @@ public class SplashActivity extends BaseActivity {
                         if (serverLiveBean != null && serverLiveBean.isServer_live()){
                             Log.d(TAG, "the server is alive");
                         }
+                        if (callBack != null){
+                            callBack.onEnd();
+                        }
                     }
 
                     @Override
@@ -90,5 +105,9 @@ public class SplashActivity extends BaseActivity {
                     }
                 });
 
+    }
+
+    public interface CallBack {
+        void onEnd();
     }
 }
