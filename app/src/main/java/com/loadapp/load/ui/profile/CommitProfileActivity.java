@@ -9,7 +9,9 @@ import androidx.annotation.StringRes;
 
 import com.loadapp.load.R;
 import com.loadapp.load.base.BaseActivity;
-import com.loadapp.load.ui.home.profile.PersonProfileFragment;
+import com.loadapp.load.ui.profile.fragment.GarantorInfoFragment;
+import com.loadapp.load.ui.profile.fragment.PersonProfile2Fragment;
+import com.loadapp.load.ui.profile.fragment.PersonProfileFragment;
 
 public class CommitProfileActivity extends BaseActivity {
 
@@ -35,13 +37,22 @@ public class CommitProfileActivity extends BaseActivity {
         if (tvTitle != null) {
             tvTitle.setText(strRes);
         }
+
     }
 
-    private void switchFragment(int index) {
+    public void switchFragment(int index) {
         switch (index) {
             case 0:
                 PersonProfileFragment personProfileFragment = new PersonProfileFragment();
                 toFragment(personProfileFragment);
+                break;
+            case 1:
+                GarantorInfoFragment garantorInfoFragment = new GarantorInfoFragment();
+                toFragment(garantorInfoFragment);
+                break;
+            case 2:
+                PersonProfile2Fragment personProfile2Fragment = new PersonProfile2Fragment();
+                toFragment(personProfile2Fragment);
                 break;
         }
     }

@@ -13,15 +13,15 @@
         android:orientation="horizontal">
 
         <View
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:background="@drawable/shape_round_green" />
-
-        <View
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:layout_marginStart="30dp"
             android:background="@drawable/shape_round_white" />
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/shape_round_green" />
 
         <View
             android:layout_width="12dp"
@@ -42,83 +42,72 @@
             android:layout_marginEnd="20dp"
             android:orientation="vertical">
 
-            <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_first_name"
+            <TextView
+                style="@style/garantor_info_title"
+                android:text="@string/loan_garantor_info_desc1" />
+
+            <com.loadapp.load.ui.profile.widget.EditSelectContainer
+                android:id="@+id/select_container_garantor_info_number"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_first_name" />
+                android:layout_marginTop="20dp"
+                app:select_view_hint="@string/loan_garantor_info_number" />
 
             <View style="@style/view_divide" />
 
             <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_middle_name"
+                android:id="@+id/select_container_garantor_info_legal_name"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_middle_name" />
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_family_name"
-                android:layout_width="match_parent"
-                android:layout_height="62dp"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_family_name" />
+                app:select_view_hint="@string/loan_garantor_info_legal_name" />
 
             <View style="@style/view_divide" />
 
             <com.loadapp.load.ui.profile.widget.SelectContainer
                 android:layout_width="match_parent"
+                android:layout_height="62dp"
                 android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_gender"
-                android:layout_height="62dp"/>
+                app:select_view_hint="@string/loan_garantor_info_relationship" />
+
+            <View style="@style/view_divide" />
+
+            <TextView
+                style="@style/garantor_info_title"
+                android:text="@string/loan_garantor_info_desc2" />
+
+            <com.loadapp.load.ui.profile.widget.EditSelectContainer
+                android:id="@+id/select_container_garantor_info_number2"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="20dp"
+                app:select_view_hint="@string/loan_garantor_info_number" />
+
+            <View style="@style/view_divide" />
+
+            <com.loadapp.load.ui.profile.widget.EditTextContainer
+                android:id="@+id/select_container_garantor_info_legal_name2"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="10dp"
+                app:select_view_hint="@string/loan_garantor_info_legal_name" />
 
             <View style="@style/view_divide" />
 
             <com.loadapp.load.ui.profile.widget.SelectContainer
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_birth"
-                android:layout_height="62dp"/>
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_email"
-                android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_email" />
+                app:select_view_hint="@string/loan_garantor_info_relationship" />
 
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.SelectContainer
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_residential_address"
-                android:layout_height="62dp"/>
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_street_address"
-                android:layout_width="match_parent"
-                android:layout_height="62dp"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_street_address" />
-
-            <View style="@style/view_divide" />
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp" />
         </LinearLayout>
     </ScrollView>
 
-
     <FrameLayout
-        android:id="@+id/fl_person_profile_commit"
+        android:id="@+id/fl_garantor_info_commit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"

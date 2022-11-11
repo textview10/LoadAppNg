@@ -15,19 +15,19 @@
         <View
             android:layout_width="15dp"
             android:layout_height="15dp"
+            android:background="@drawable/shape_round_white" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/shape_round_white" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="30dp"
             android:background="@drawable/shape_round_green" />
-
-        <View
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginStart="30dp"
-            android:background="@drawable/shape_round_white" />
-
-        <View
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginStart="30dp"
-            android:background="@drawable/shape_round_white" />
     </LinearLayout>
 
     <ScrollView
@@ -42,74 +42,60 @@
             android:layout_marginEnd="20dp"
             android:orientation="vertical">
 
-            <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_first_name"
+            <com.loadapp.load.ui.profile.widget.SelectContainer
+                android:id="@+id/select_view_person_profile2_marital"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_first_name" />
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_middle_name"
-                android:layout_width="match_parent"
-                android:layout_height="62dp"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_middle_name" />
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_family_name"
-                android:layout_width="match_parent"
-                android:layout_height="62dp"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_family_name" />
+                app:select_view_hint="@string/loan_person_profile2_marital" />
 
             <View style="@style/view_divide" />
 
             <com.loadapp.load.ui.profile.widget.SelectContainer
+                android:id="@+id/select_view_person_profile2_education"
                 android:layout_width="match_parent"
+                android:layout_height="62dp"
                 android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_gender"
-                android:layout_height="62dp"/>
+                app:select_view_hint="@string/loan_person_profile2_education" />
 
             <View style="@style/view_divide" />
 
             <com.loadapp.load.ui.profile.widget.SelectContainer
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_birth"
-                android:layout_height="62dp"/>
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_email"
+                android:id="@+id/select_view_person_profile2_employment"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_email" />
+                app:select_view_hint="@string/loan_person_profile2_employment" />
 
             <View style="@style/view_divide" />
 
             <com.loadapp.load.ui.profile.widget.SelectContainer
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_residential_address"
-                android:layout_height="62dp"/>
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_street_address"
+                android:id="@+id/select_view_person_profile2_income"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_street_address" />
+                app:select_view_hint="@string/loan_person_profile2_income" />
 
             <View style="@style/view_divide" />
+
+            <com.loadapp.load.ui.profile.widget.SelectContainer
+                android:id="@+id/select_view_person_profile2_payday"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="10dp"
+                app:select_view_hint="@string/loan_person_profile2_payday" />
+
+            <View style="@style/view_divide" />
+
+            <com.loadapp.load.ui.profile.widget.SelectContainer
+                android:id="@+id/select_view_person_profile2_paid_judge"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="10dp"
+                app:select_view_hint="@string/loan_person_profile2_paid_judge" />
+
+            <View style="@style/view_divide" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="20dp"/>

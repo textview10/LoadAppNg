@@ -1,4 +1,4 @@
-package com.loadapp.load.ui.home.widget;
+package com.loadapp.load.ui.profile.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 
@@ -31,17 +32,26 @@ public class EditTextContainer extends FrameLayout {
 
     public EditTextContainer(Context context) {
         super(context);
-        initializeView();
+        initializeView(context, null);
     }
 
     public EditTextContainer(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.select_view);
-        hint = typedArray.getString(R.styleable.select_view_select_view_hint);
-        initializeView();
+        initializeView(context, attrs);
     }
 
-    private void initializeView() {
+    public EditTextContainer(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initializeView(context, attrs);
+    }
+
+    private void initializeView(Context context, AttributeSet attrs) {
+        if (attrs != null) {
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.select_view);
+            if (typedArray != null) {
+                hint = typedArray.getString(R.styleable.select_view_select_view_hint);
+            }
+        }
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_edit_text, this, false);
         layout = view.findViewById(R.id.edit_view_input_layout);
         editText = view.findViewById(R.id.edit_view_edit_text);

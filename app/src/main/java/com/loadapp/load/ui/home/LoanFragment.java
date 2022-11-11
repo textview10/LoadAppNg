@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.loadapp.load.R;
 import com.loadapp.load.base.BaseFragment;
-import com.loadapp.load.ui.home.profile.PersonProfileFragment;
 import com.loadapp.load.ui.profile.CommitProfileActivity;
 
 public class LoanFragment extends BaseFragment {
