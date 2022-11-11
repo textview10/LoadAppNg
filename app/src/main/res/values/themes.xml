@@ -13,4 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="TextInputLayout" parent="Widget.Design.TextInputLayout">
+            <item name="android:textColor">#999999</item>
+            <item name="android:textColorHint">#999999</item>
+    </style>
 </resources>

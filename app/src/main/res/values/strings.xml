@@ -28,4 +28,14 @@
     <string name="signin_set_account">Please input account: </string>
     <string name="signin_set_pwd">Please input password :</string>
     <string name="signin_login">login</string>
+
+    <string name="loan_person_profile_first_name">First Name </string>
+    <string name="loan_person_profile_middle_name">Middle Name (Optional) </string>
+    <string name="loan_person_profile_family_name">Family Name </string>
+    <string name="loan_person_profile_gender">Gender </string>
+    <string name="loan_person_profile_birth">Date of birth </string>
+    <string name="loan_person_profile_email">Email </string>
+    <string name="loan_person_profile_residential_address">Residential Address</string>
+    <string name="loan_person_profile_street_address">Street Address</string>
+
 </resources>

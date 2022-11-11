@@ -53,6 +53,9 @@
             android:name=".ui.home.HomeActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".ui.profile.CommitProfileActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".ui.SettingActivity"
             android:screenOrientation="portrait" />
