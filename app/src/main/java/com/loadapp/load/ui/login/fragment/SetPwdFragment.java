@@ -22,6 +22,7 @@ import com.loadapp.load.base.BaseFragment;
 import com.loadapp.load.bean.LoginResponseBean;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.login.SignUpActivity;
+import com.loadapp.load.util.BuildRequestJsonUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -114,9 +115,8 @@ public class SetPwdFragment extends BaseFragment {
     }
 
     private void register(String phoneNum, String password){
-        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
-            jsonObject.put("request_time", System.currentTimeMillis());
             jsonObject.put("mobile", phoneNum);
             //测试验证码：6666
             jsonObject.put("password", password);

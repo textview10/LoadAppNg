@@ -21,5 +21,6 @@ public class Api {
     public static final String MODIFY_PSD = HOST + "/api/v1/account/modify_password";
     //上传fcm token
     public static final String UPLOAD_FCM_TOKEN = HOST + "/api/v1/account/upload_fcmtoken";
-
+    //获取基本信息
+    public static final String GET_CONFIG = HOST + "/api/v1/account/base_profile_config";
 }

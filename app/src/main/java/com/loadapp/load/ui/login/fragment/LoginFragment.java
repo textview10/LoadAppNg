@@ -25,6 +25,7 @@ import com.loadapp.load.global.Constant;
 import com.loadapp.load.presenter.PhoneNumPresenter;
 import com.loadapp.load.ui.login.SignInActivity;
 import com.loadapp.load.ui.login.SignUpActivity;
+import com.loadapp.load.util.BuildRequestJsonUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -119,14 +120,14 @@ public class LoginFragment extends BaseFragment {
     }
 
     private void login(String phoneNum, String password) {
-        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
-            jsonObject.put("request_time", System.currentTimeMillis());
             String prefix = mPresenter.getSelectString(spinner.getSelectedItemPosition());
             // TODO 暂时去掉前缀
 //            jsonObject.put("mobile", prefix + phoneNum);
             jsonObject.put("mobile", phoneNum);
             jsonObject.put("password", password);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -144,7 +145,7 @@ public class LoginFragment extends BaseFragment {
                         Constant.mToken = loginBean.getAccess_token();
                         SPUtils.getInstance().put(KEY_PHONE_NUM, phoneNum);
                         SPUtils.getInstance().put(KEY_PASS_CODE, password);
-                        Log.e(TAG, "login success = " + response.body().toString());
+                        Log.i(TAG, "login success = " + response.body().toString());
 //                        modifyPassword("aa123456", "ab123456", "ab123456");
                         if (getActivity() instanceof SignInActivity) {
                             ((SignInActivity) getActivity()).toHomePage();

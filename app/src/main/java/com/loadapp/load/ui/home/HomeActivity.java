@@ -11,11 +11,25 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.loadapp.load.R;
+import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
+import com.loadapp.load.bean.BaseConfigBean;
+import com.loadapp.load.bean.LoginResponseBean;
+import com.loadapp.load.global.ConfigMgr;
+import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.home.widget.BottomTabLayout;
+import com.loadapp.load.ui.login.SignInActivity;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class HomeActivity extends BaseActivity {
+    private static final String TAG = "HomeActivity";
 
     private BottomTabLayout mBottomLayout;
     private LoanFragment loanFragment;
@@ -28,6 +42,7 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         initializeView();
         initializeData();
+        ConfigMgr.getAllConfig();
     }
 
 
@@ -48,17 +63,10 @@ public class HomeActivity extends BaseActivity {
         meFragment = new MeFragment();
 
         vpMain.setCurrentItem(0,false);
-
     }
 
     private void updateSelectFragment(int index) {
-//        Log.e("wangxu", "update = " + index );
         vpMain.setCurrentItem(index, false);
-//        if (index == 0) {
-//            toFragment(loanFragment);
-//        } else if (index == 1) {
-//            toFragment(meFragment);
-//        }
     }
 
     private FragmentPagerAdapter mMainAdapter = new FragmentPagerAdapter(getSupportFragmentManager()
@@ -71,7 +79,6 @@ public class HomeActivity extends BaseActivity {
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            Log.e("Wangxu", "position = " + position);
             if (position == 0){
                 return loanFragment;
             } else {

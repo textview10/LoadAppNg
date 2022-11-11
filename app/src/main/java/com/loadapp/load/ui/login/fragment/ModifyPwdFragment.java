@@ -14,6 +14,7 @@ import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseFragment;
 import com.loadapp.load.global.Constant;
+import com.loadapp.load.util.BuildRequestJsonUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -38,9 +39,8 @@ public class ModifyPwdFragment extends BaseFragment {
     }
 
     private void modifyPassword(String oldPwd, String newPwd, String confirmPwd){
-        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
-            jsonObject.put("request_time", System.currentTimeMillis());
             jsonObject.put("account_id", Constant.mAccountId);
             jsonObject.put("access_token", Constant.mToken);
             jsonObject.put("password_old", oldPwd);

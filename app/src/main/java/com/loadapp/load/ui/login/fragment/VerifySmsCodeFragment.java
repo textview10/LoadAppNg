@@ -27,6 +27,7 @@ import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseFragment;
 import com.loadapp.load.ui.login.SignUpActivity;
 import com.loadapp.load.ui.login.widget.InputVerifyCodeView;
+import com.loadapp.load.util.BuildRequestJsonUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -116,9 +117,8 @@ public class VerifySmsCodeFragment extends BaseFragment {
     }
 
     private void verifySmsCode(String phoneNum, String verifyCode) {
-        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
-            jsonObject.put("request_time", System.currentTimeMillis());
             jsonObject.put("mobile", phoneNum);
             //测试验证码：6666
             jsonObject.put("auth_code", verifyCode);

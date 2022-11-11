@@ -14,9 +14,11 @@ import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
 import com.loadapp.load.bean.ServerLiveBean;
+import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.home.HomeActivity;
 import com.loadapp.load.ui.login.SignInActivity;
 import com.loadapp.load.ui.login.SignUpActivity;
+import com.loadapp.load.util.BuildRequestJsonUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -25,7 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * splash 
+ * splash
  */
 public class SplashActivity extends BaseActivity {
     private static final String TAG = "SplashActivity";
@@ -76,23 +78,24 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void checkServerAvailable(CallBack callBack) {
-        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
-            jsonObject.put("request_time", System.currentTimeMillis());
+            jsonObject.put("access_token", Constant.mToken);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 //        Log.e(TAG, " = " + jsonObject.toString());
         OkGo.<String>post(Api.CHECK_SERVER_ALIVE).tag(TAG)
-                .params("data",jsonObject.toString())
+                .params("data", jsonObject.toString())
+//                .upJson(jsonObject)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
                         ServerLiveBean serverLiveBean = checkResponseSuccess(response, ServerLiveBean.class);
-                        if (serverLiveBean != null && serverLiveBean.isServer_live()){
+                        if (serverLiveBean != null && serverLiveBean.isServer_live()) {
                             Log.d(TAG, "the server is alive");
                         }
-                        if (callBack != null){
+                        if (callBack != null) {
                             callBack.onEnd();
                         }
                     }

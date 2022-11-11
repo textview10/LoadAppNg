@@ -20,6 +20,7 @@ import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseFragment;
 import com.loadapp.load.presenter.PhoneNumPresenter;
 import com.loadapp.load.ui.login.SignUpActivity;
+import com.loadapp.load.util.BuildRequestJsonUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -77,9 +78,8 @@ public class InputPhoneNumFragment extends BaseFragment {
     }
 
     private void checkPhoneNumAvailable(String mobile){
-        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
-            jsonObject.put("request_time", System.currentTimeMillis());
             String prefix = presenter.getSelectString(spinner.getSelectedItemPosition());
 //            jsonObject.put("mobile", prefix + mobile);
             // TODO 暂时去掉前缀
@@ -109,9 +109,8 @@ public class InputPhoneNumFragment extends BaseFragment {
     }
 
     private void sendSmsCode(String phoneNum){
-        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
-            jsonObject.put("request_time", System.currentTimeMillis());
             jsonObject.put("mobile", phoneNum);
             //1是注册
             jsonObject.put("send_type", "1");

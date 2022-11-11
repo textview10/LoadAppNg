@@ -78,8 +78,10 @@ public class MyApp extends Application {
                 .setOkHttpClient(builder.build());
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.put("APP-Language", "ch");
-        httpHeaders.put("APP-ID", "111111");
+        httpHeaders.put("APP-Language", "en");
+        httpHeaders.put("APP-ID", "1111");
+        httpHeaders.put("Accept", "application/json");
+        httpHeaders.put("User-Agent", "retrofit");
         OkGo.getInstance().addCommonHeaders(httpHeaders);
     }
 
