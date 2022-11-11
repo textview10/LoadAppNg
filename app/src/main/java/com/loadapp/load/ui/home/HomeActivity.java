@@ -52,7 +52,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void updateSelectFragment(int index) {
-        Log.e("wangxu", "update = " + index );
+//        Log.e("wangxu", "update = " + index );
         vpMain.setCurrentItem(index, false);
 //        if (index == 0) {
 //            toFragment(loanFragment);
