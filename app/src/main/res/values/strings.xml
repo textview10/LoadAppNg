@@ -29,16 +29,22 @@
     <string name="signin_set_pwd">Please input password :</string>
     <string name="signin_login">login</string>
 
-    <string name="loan_person_profile_first_name">First Name </string>
-    <string name="loan_person_profile_middle_name">Middle Name (Optional) </string>
-    <string name="loan_person_profile_family_name">Family Name </string>
+<!--    <string name="loan_person_profile_first_name">First Name </string>-->
+<!--    <string name="loan_person_profile_middle_name">Middle Name (Optional) </string>-->
+<!--    <string name="loan_person_profile_family_name">Family Name </string>-->
+    <string name="loan_person_profile_email">E-mail </string>
+    <string name="loan_person_profile_monthly_salary">Monthly salary </string>
+    <string name="loan_person_profile_work_year">Current working years </string>
+    <string name="loan_person_profile_province">Current Province </string>
+    <string name="loan_person_profile_address">Current Address </string>
+
     <string name="loan_person_profile_gender">Gender </string>
     <string name="loan_person_profile_birth">Date of birth </string>
-    <string name="loan_person_profile_email">Email </string>
+
     <string name="loan_person_profile_residential_address">Residential Address</string>
     <string name="loan_person_profile_street_address">Street Address</string>
     <string name="loan_person_profile_next">Next</string>
-    <string name="loan_person_profile_title">Personal Profile</string>
+    <string name="loan_person_profile_title">Basic information</string>
 
     <string name="loan_garantor_info_title">Garantor information</string>
     <string name="loan_garantor_info_desc1">Choose a guarantor from your next of kin</string>

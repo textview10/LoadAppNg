@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import com.loadapp.load.R;
 import com.loadapp.load.base.BaseFragment;
 
-public class PersonProfile2Fragment extends BaseFragment {
+public class PersonProfile2Fragment extends BaseCommitFragment {
 
     @Nullable
     @Override

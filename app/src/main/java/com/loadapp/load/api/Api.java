@@ -23,4 +23,8 @@ public class Api {
     public static final String UPLOAD_FCM_TOKEN = HOST + "/api/v1/account/upload_fcmtoken";
     //获取基本信息
     public static final String GET_CONFIG = HOST + "/api/v1/account/base_profile_config";
+    //获取客户信息
+    public static final String GET_PROFILE = HOST + "/api/v1/account/get_profile";
+    //上传客户基本信息
+    public static final String UPLOAD_BASE = HOST + "/api/v1/account/upload_base";
 }

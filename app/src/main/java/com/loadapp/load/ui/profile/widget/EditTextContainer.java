@@ -111,10 +111,15 @@ public class EditTextContainer extends FrameLayout {
     }
 
     public void setEditTextAndSelection(String editTextStr){
-        if (editText != null){
-            editText.setText(editTextStr);
-            editText.setSelection(editTextStr.length());
-        }
+        post(new Runnable() {
+            @Override
+            public void run() {
+                if (editText != null){
+                    editText.setText(editTextStr);
+                    editText.setSelection(editTextStr.length());
+                }
+            }
+        });
     }
 
     public void setPassWordMode(boolean isPasswordMode){

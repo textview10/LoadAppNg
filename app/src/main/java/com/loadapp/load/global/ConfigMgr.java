@@ -27,9 +27,9 @@ import java.util.Iterator;
 public class ConfigMgr {
     private static final String TAG = "ConfigMgr";
 
-    public final static HashSet<String> mMonthSalaryList = new HashSet<>();
-    public final static HashSet<String> mRelativeShipList = new HashSet<>();
-    public final static HashSet<String> mWorkingYearList = new HashSet<>();
+    public final static HashSet<Pair<String, String>> mMonthSalaryList = new HashSet<>();
+    public final static HashSet<Pair<String, String>> mRelativeShipList = new HashSet<>();
+    public final static HashSet<Pair<String, String>> mWorkingYearList = new HashSet<>();
     public final static HashMap<String, HashSet<String>> mStateCityList = new HashMap<>();
 
     public static void getAllConfig() {
@@ -71,8 +71,8 @@ public class ConfigMgr {
                 });
     }
 
-    private static HashSet<String> parseItem(Object obj) {
-        HashSet<String> set = new HashSet<>();
+    private static HashSet<Pair<String, String>> parseItem(Object obj) {
+        HashSet<Pair<String, String>> set = new HashSet<>();
         try {
             JSONObject jsonObject = new JSONObject(GsonUtils.toJson(obj));
             Iterator<String> iterator = jsonObject.keys();
@@ -80,7 +80,7 @@ public class ConfigMgr {
                 String key = iterator.next();
                 String str = jsonObject.optString(key);
                 if (!TextUtils.isEmpty(str)) {
-                    set.add(str);
+                    set.add(new Pair<>(str, key));
                 }
             }
         } catch (JSONException e) {

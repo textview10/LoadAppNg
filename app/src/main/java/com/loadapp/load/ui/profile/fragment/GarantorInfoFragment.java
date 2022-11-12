@@ -13,7 +13,7 @@ import com.loadapp.load.R;
 import com.loadapp.load.base.BaseFragment;
 import com.loadapp.load.ui.profile.CommitProfileActivity;
 
-public class GarantorInfoFragment extends BaseFragment {
+public class GarantorInfoFragment extends BaseCommitFragment {
 
     private FrameLayout flCommit;
 

@@ -17,7 +17,7 @@ import com.loadapp.load.R;
 
 public class SelectContainer extends FrameLayout {
 
-    private TextView tvDesc;
+    private TextView tvTitle, tvDesc;
     private ImageView ivIcon;
     private String hint;
     private @DrawableRes
@@ -47,13 +47,22 @@ public class SelectContainer extends FrameLayout {
             }
         }
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_select, this, false);
+        tvTitle = view.findViewById(R.id.view_select_tv_title);
         tvDesc = view.findViewById(R.id.view_select_tv_desc);
         ivIcon = view.findViewById(R.id.view_select_iv_icon);
 
-        tvDesc.setText(hint);
+        tvTitle.setText(hint);
         if (drawableRes != 0) {
             ivIcon.setImageResource(drawableRes);
         }
         addView(view);
+    }
+
+    public void setData(String data){
+        tvDesc.setText(data);
+    }
+
+    public String getData(){
+        return tvDesc == null ? "" : tvDesc.getText().toString();
     }
 }

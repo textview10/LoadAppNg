@@ -43,76 +43,68 @@
             android:orientation="vertical">
 
             <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_first_name"
-                android:layout_width="match_parent"
-                android:layout_height="62dp"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_first_name" />
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_middle_name"
-                android:layout_width="match_parent"
-                android:layout_height="62dp"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_middle_name" />
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_family_name"
-                android:layout_width="match_parent"
-                android:layout_height="62dp"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_family_name" />
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.SelectContainer
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_gender"
-                android:layout_height="62dp"/>
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.SelectContainer
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_birth"
-                android:layout_height="62dp"/>
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.EditTextContainer
                 android:id="@+id/edit_view_person_profile_email"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="10dp"
                 app:select_view_hint="@string/loan_person_profile_email" />
 
-            <View style="@style/view_divide" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="@android:color/black" />
 
             <com.loadapp.load.ui.profile.widget.SelectContainer
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_residential_address"
-                android:layout_height="62dp"/>
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.EditTextContainer
-                android:id="@+id/edit_view_person_profile_street_address"
+                android:id="@+id/select_view_person_profile_monthly_salary"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile_street_address" />
+                app:select_view_hint="@string/loan_person_profile_monthly_salary" />
 
-            <View style="@style/view_divide" />
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp"/>
+                android:layout_height="0.8dp"
+                android:background="@android:color/black" />
+
+            <com.loadapp.load.ui.profile.widget.SelectContainer
+                android:id="@+id/select_view_person_profile_work_year"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="10dp"
+                app:select_view_hint="@string/loan_person_profile_work_year" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="@android:color/black" />
+
+            <com.loadapp.load.ui.profile.widget.SelectContainer
+                android:id="@+id/select_view_person_profile_province"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="10dp"
+                app:select_view_hint="@string/loan_person_profile_province" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="@android:color/black" />
+
+            <com.loadapp.load.ui.profile.widget.EditTextContainer
+                android:id="@+id/edittext_view_person_profile_address"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="10dp"
+                app:select_view_hint="@string/loan_person_profile_address" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="@android:color/black" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
         </LinearLayout>
     </ScrollView>
 
