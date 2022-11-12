@@ -13,21 +13,21 @@
         android:orientation="horizontal">
 
         <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:background="@drawable/shape_round_white" />
+
+        <View
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:background="@drawable/shape_round_white" />
-
-        <View
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginStart="30dp"
-            android:background="@drawable/shape_round_white" />
-
-        <View
-            android:layout_width="12dp"
-            android:layout_height="12dp"
             android:layout_marginStart="30dp"
             android:background="@drawable/shape_round_green" />
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/shape_round_white" />
     </LinearLayout>
 
     <ScrollView
@@ -42,69 +42,76 @@
             android:layout_marginEnd="20dp"
             android:orientation="vertical">
 
+            <TextView
+                style="@style/garantor_info_title"
+                android:text="@string/loan_person_profile_emergency_contact1" />
+
             <com.loadapp.load.ui.profile.widget.SelectContainer
-                android:id="@+id/select_view_person_profile2_marital"
+                android:id="@+id/select_container_profile2_relationship1"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile2_marital" />
+                android:layout_marginTop="20dp"
+                app:select_view_hint="@string/loan_person_profile_relationship" />
 
             <View style="@style/view_divide" />
 
-            <com.loadapp.load.ui.profile.widget.SelectContainer
-                android:id="@+id/select_view_person_profile2_education"
+            <com.loadapp.load.ui.profile.widget.EditSelectContainer
+                android:id="@+id/edittext_container_profile2_mobile1"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile2_education" />
+                app:select_view_icon="@drawable/ic_contact"
+                app:select_view_hint="@string/loan_person_profile_mobile" />
 
             <View style="@style/view_divide" />
 
-            <com.loadapp.load.ui.profile.widget.SelectContainer
-                android:id="@+id/select_view_person_profile2_employment"
+            <com.loadapp.load.ui.profile.widget.EditTextContainer
+                android:id="@+id/edittext_container_profile2_name1"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile2_employment" />
+                app:select_view_hint="@string/loan_person_profile_name" />
 
             <View style="@style/view_divide" />
 
+            <TextView
+                style="@style/garantor_info_title"
+                android:text="@string/loan_person_profile_emergency_contact2" />
+
             <com.loadapp.load.ui.profile.widget.SelectContainer
-                android:id="@+id/select_view_person_profile2_income"
+                android:id="@+id/select_container_profile2_relationship2"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="20dp"
+                app:select_view_hint="@string/loan_person_profile_relationship" />
+
+            <View style="@style/view_divide" />
+
+            <com.loadapp.load.ui.profile.widget.EditSelectContainer
+                android:id="@+id/edittext_container_profile2_mobile2"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile2_income" />
+                app:select_view_icon="@drawable/ic_contact"
+                app:select_view_hint="@string/loan_person_profile_mobile" />
 
             <View style="@style/view_divide" />
 
-            <com.loadapp.load.ui.profile.widget.SelectContainer
-                android:id="@+id/select_view_person_profile2_payday"
+            <com.loadapp.load.ui.profile.widget.EditTextContainer
+                android:id="@+id/edittext_container_profile2_name2"
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile2_payday" />
-
-            <View style="@style/view_divide" />
-
-            <com.loadapp.load.ui.profile.widget.SelectContainer
-                android:id="@+id/select_view_person_profile2_paid_judge"
-                android:layout_width="match_parent"
-                android:layout_height="62dp"
-                android:layout_marginTop="10dp"
-                app:select_view_hint="@string/loan_person_profile2_paid_judge" />
-
-            <View style="@style/view_divide" />
+                app:select_view_hint="@string/loan_person_profile_name" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp" />
         </LinearLayout>
     </ScrollView>
 
-
     <FrameLayout
-        android:id="@+id/fl_person_profile_commit"
+        android:id="@+id/fl_profile2_commit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"

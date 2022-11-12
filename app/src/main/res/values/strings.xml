@@ -29,35 +29,32 @@
     <string name="signin_set_pwd">Please input password :</string>
     <string name="signin_login">login</string>
 
-<!--    <string name="loan_person_profile_first_name">First Name </string>-->
-<!--    <string name="loan_person_profile_middle_name">Middle Name (Optional) </string>-->
-<!--    <string name="loan_person_profile_family_name">Family Name </string>-->
+    <string name="loan_person_profile_title">Basic information</string>
+    <string name="loan_person_profile_title2">Contact</string>
+    <string name="loan_person_profile_title3">CNIC</string>
+
     <string name="loan_person_profile_email">E-mail </string>
     <string name="loan_person_profile_monthly_salary">Monthly salary </string>
     <string name="loan_person_profile_work_year">Current working years </string>
     <string name="loan_person_profile_province">Current Province </string>
     <string name="loan_person_profile_address">Current Address </string>
 
+    <string name="loan_person_profile_emergency_contact1">Emergency Contact1</string>
+    <string name="loan_person_profile_emergency_contact2">Emergency Contact2</string>
+    <string name="loan_person_profile_relationship">Relationship</string>
+    <string name="loan_person_profile_mobile">Mobile Phone Number</string>
+    <string name="loan_person_profile_name">Name</string>
+
+    <string name="loan_person_profile_upload_cnic">Upload CNIC</string>
+    <string name="loan_person_profile_upload_cnic_desc">Please take a photo of the original card</string>
+    <string name="loan_person_profile_cnic_front">Front</string>
+    <string name="loan_person_profile_cnic_back">Back</string>
+    <string name="loan_person_profile_father_name">Father,s Name</string>
     <string name="loan_person_profile_gender">Gender </string>
-    <string name="loan_person_profile_birth">Date of birth </string>
-
-    <string name="loan_person_profile_residential_address">Residential Address</string>
-    <string name="loan_person_profile_street_address">Street Address</string>
+    <string name="loan_person_profile_enter_cnic_info">Enter CNIC information </string>
+    <string name="loan_person_profile_enter_cnic_info_desc">Computerized National Idently Card</string>
+    <string name="loan_person_profile_cnic_num">CNIC Number</string>
+    <string name="loan_person_profile_birth">Date of Birth</string>
     <string name="loan_person_profile_next">Next</string>
-    <string name="loan_person_profile_title">Basic information</string>
-
-    <string name="loan_garantor_info_title">Garantor information</string>
-    <string name="loan_garantor_info_desc1">Choose a guarantor from your next of kin</string>
-    <string name="loan_garantor_info_number">Garantor\'s phone number</string>
-    <string name="loan_garantor_info_legal_name">Garantor\'s Full Legal Name</string>
-    <string name="loan_garantor_info_relationship">Relationship</string>
-    <string name="loan_garantor_info_desc2">Choose a guarantor from your friends or colleagues</string>
-
-    <string name="loan_person_profile2_marital">Marital Status </string>
-    <string name="loan_person_profile2_education">Highest Education Level Achieved </string>
-    <string name="loan_person_profile2_employment">Employment Details</string>
-    <string name="loan_person_profile2_income">Monthly Income</string>
-    <string name="loan_person_profile2_payday">Salary Payday</string>
-    <string name="loan_person_profile2_paid_judge">Do you have any unpaid loans?</string>
 
 </resources>

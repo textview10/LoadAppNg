@@ -6,4 +6,13 @@
     <color name="unselect_gray">#8A8C8B</color>
     <color name="verify_sms_unselect">#E5E5E5</color>
     <color name="verify_sms_select">#0EC6A2</color>
+
+    <color name="custom_dialog_confirm_text_color_light">#161A20</color>
+    <!--    <color name="custom_dialog_cancel_text_color_light">#666666</color>-->
+    <color name="custom_dialog_cancel_text_color_light">#161A20</color>
+    <color name="custom_dialog_text_color_light">#333333</color>
+    <color name="custom_dialog_title_text_color_light">#000000</color>
+    <color name="custom_dialog_check_text_color_light">#666666</color>
+
+    <color name="blue">#0077f4</color>
 </resources>

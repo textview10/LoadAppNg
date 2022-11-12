@@ -109,9 +109,7 @@ public class PersonProfileFragment extends BaseCommitFragment {
         flCommit.setOnClickListener(view1 -> {
             boolean check = checkProfileParams();
             if (check) {
-
                 uploadBase();
-
             }
         });
     }
@@ -249,10 +247,17 @@ public class PersonProfileFragment extends BaseCommitFragment {
     }
 
     private void uploadBase(){
+        // TODO
+        if (true) {
+            if (getActivity() instanceof CommitProfileActivity) {
+                ((CommitProfileActivity) getActivity()).switchFragment(1);
+            }
+            return;
+        }
         JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
             jsonObject.put("access_token", Constant.mToken);
-            jsonObject.put("account_id", Constant.mAccountId);
+            jsonObject.put("account_id", Constant.mAccountId + "");
             jsonObject.put("email", emailEditText.getText());
             jsonObject.put("month_salary", mMonthSalary.second);
             jsonObject.put("working_year", mWorkYear.second);

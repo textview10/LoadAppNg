@@ -9,17 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import com.google.gson.Gson;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
 import com.loadapp.load.bean.AccountProfileBean;
-import com.loadapp.load.bean.BaseResponseBean;
-import com.loadapp.load.global.ConfigMgr;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.profile.fragment.BaseCommitFragment;
-import com.loadapp.load.ui.profile.fragment.GarantorInfoFragment;
 import com.loadapp.load.ui.profile.fragment.PersonProfile2Fragment;
+import com.loadapp.load.ui.profile.fragment.PersonProfile3Fragment;
 import com.loadapp.load.ui.profile.fragment.PersonProfileFragment;
 import com.loadapp.load.util.BuildRequestJsonUtil;
 import com.lzy.okgo.OkGo;
@@ -74,10 +71,10 @@ public class CommitProfileActivity extends BaseActivity {
                 mCurFragment = new PersonProfileFragment();
                 break;
             case 1:
-                mCurFragment = new GarantorInfoFragment();
+                mCurFragment = new PersonProfile2Fragment();
                 break;
             case 2:
-                mCurFragment = new PersonProfile2Fragment();
+                mCurFragment = new PersonProfile3Fragment();
                 break;
         }
         if (mCurFragment != null) {

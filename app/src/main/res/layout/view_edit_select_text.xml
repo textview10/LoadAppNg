@@ -35,6 +35,5 @@
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:src="@drawable/ic_edit_text_clear"
-        android:visibility="invisible" />
+        android:src="@drawable/ic_edit_text_clear" />
 </LinearLayout>

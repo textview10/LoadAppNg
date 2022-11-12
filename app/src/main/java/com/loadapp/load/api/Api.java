@@ -27,4 +27,6 @@ public class Api {
     public static final String GET_PROFILE = HOST + "/api/v1/account/get_profile";
     //上传客户基本信息
     public static final String UPLOAD_BASE = HOST + "/api/v1/account/upload_base";
+    //上传联系人信息
+    public static final String UPLOAD_CONTACT = HOST + "/api/v1/account/upload_contact";
 }

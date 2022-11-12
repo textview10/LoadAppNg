@@ -55,16 +55,13 @@ public class EditSelectContainer extends FrameLayout {
         editText = view.findViewById(R.id.edit_select_view_edit_text);
         ivClear = view.findViewById(R.id.edit_select_view_clear);
 
-        editText.setHint(hintStr);
+        inputLayout.setHint(hintStr);
         if (drawableRes != 0) {
             ivClear.setImageResource(drawableRes);
         }
-        view.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mListener != null){
-                    mListener.onClick();
-                }
+        view.setOnClickListener(v -> {
+            if (mListener != null){
+                mListener.onClick();
             }
         });
         addView(view);
