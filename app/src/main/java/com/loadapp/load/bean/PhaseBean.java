@@ -5,7 +5,7 @@ public class PhaseBean {
     private int current_phase;
     private int next_phase;
     private int progress;
-    private int server_time;
+    private long server_time;
 
     public int getCurrent_phase() {
         return current_phase;
@@ -31,11 +31,11 @@ public class PhaseBean {
         this.progress = progress;
     }
 
-    public int getServer_time() {
+    public long getServer_time() {
         return server_time;
     }
 
-    public void setServer_time(int server_time) {
+    public void setServer_time(long server_time) {
         this.server_time = server_time;
     }
 }

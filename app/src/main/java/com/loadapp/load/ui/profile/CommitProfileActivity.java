@@ -1,5 +1,6 @@
 package com.loadapp.load.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
@@ -50,7 +52,7 @@ public class CommitProfileActivity extends BaseActivity {
             }
         });
         getProfile();
-        switchFragment(0);
+        switchFragment(2);
     }
 
     @Override
@@ -76,6 +78,10 @@ public class CommitProfileActivity extends BaseActivity {
             case 2:
                 mCurFragment = new PersonProfile3Fragment();
                 break;
+            case 3:
+                ToastUtils.showShort("modify success");
+                finish();
+                return;
         }
         if (mCurFragment != null) {
             if (mProfileBean != null) {
@@ -127,5 +133,13 @@ public class CommitProfileActivity extends BaseActivity {
 
     private void onBackInternal(){
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (mCurFragment != null && mCurFragment instanceof PersonProfile3Fragment) {
+            ((PersonProfile3Fragment) mCurFragment).OnActivityResultInternal(requestCode, data);
+        }
     }
 }

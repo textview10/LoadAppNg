@@ -248,12 +248,12 @@ public class PersonProfileFragment extends BaseCommitFragment {
 
     private void uploadBase(){
         // TODO
-        if (true) {
-            if (getActivity() instanceof CommitProfileActivity) {
-                ((CommitProfileActivity) getActivity()).switchFragment(1);
-            }
-            return;
-        }
+//        if (true) {
+//            if (getActivity() instanceof CommitProfileActivity) {
+//                ((CommitProfileActivity) getActivity()).switchFragment(1);
+//            }
+//            return;
+//        }
         JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
             jsonObject.put("access_token", Constant.mToken);

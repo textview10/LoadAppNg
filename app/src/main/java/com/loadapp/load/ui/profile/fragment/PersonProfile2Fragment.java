@@ -302,7 +302,7 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
                             return;
                         }
                         if (getActivity() instanceof CommitProfileActivity) {
-                            ((CommitProfileActivity) getActivity()).switchFragment(1);
+                            ((CommitProfileActivity) getActivity()).switchFragment(2);
                         }
                     }
 

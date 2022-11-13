@@ -29,4 +29,6 @@ public class Api {
     public static final String UPLOAD_BASE = HOST + "/api/v1/account/upload_base";
     //上传联系人信息
     public static final String UPLOAD_CONTACT = HOST + "/api/v1/account/upload_contact";
+
+    public static final String UPLOAD_IDENTITY = HOST + "/api/v1/account/upload_identity";
 }

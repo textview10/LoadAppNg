@@ -5,120 +5,209 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:orientation="horizontal">-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
-<!--        <View-->
-<!--            android:layout_width="15dp"-->
-<!--            android:layout_height="15dp"-->
-<!--            android:background="@drawable/shape_round_white" />-->
+        <View
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/shape_round_white" />
 
-<!--        <View-->
-<!--            android:layout_width="12dp"-->
-<!--            android:layout_height="12dp"-->
-<!--            android:layout_marginStart="30dp"-->
-<!--            android:background="@drawable/shape_round_white" />-->
+        <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/shape_round_white" />
 
-<!--        <View-->
-<!--            android:layout_width="12dp"-->
-<!--            android:layout_height="12dp"-->
-<!--            android:layout_marginStart="30dp"-->
-<!--            android:background="@drawable/shape_round_green" />-->
-<!--    </LinearLayout>-->
+        <View
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/shape_round_green" />
+    </LinearLayout>
 
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_weight="1">-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="20dp"-->
-<!--            android:layout_marginEnd="20dp"-->
-<!--            android:orientation="vertical">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical">
 
-<!--            <com.loadapp.load.ui.profile.widget.SelectContainer-->
-<!--                android:id="@+id/select_view_person_profile2_marital"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="62dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                app:select_view_hint="@string/loan_person_profile2_marital" />-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-<!--            <View style="@style/view_divide" />-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/loan_person_profile_upload_cnic"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
-<!--            <com.loadapp.load.ui.profile.widget.SelectContainer-->
-<!--                android:id="@+id/select_view_person_profile2_education"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="62dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                app:select_view_hint="@string/loan_person_profile2_education" />-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/loan_person_profile_upload_cnic_desc"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
-<!--            <View style="@style/view_divide" />-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
 
-<!--            <com.loadapp.load.ui.profile.widget.SelectContainer-->
-<!--                android:id="@+id/select_view_person_profile2_employment"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="62dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                app:select_view_hint="@string/loan_person_profile2_employment" />-->
+                    <FrameLayout
+                        android:id="@+id/fl_person_profile3_left_cnic"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
-<!--            <View style="@style/view_divide" />-->
+                        <ImageView
+                            android:id="@+id/iv_person_profile3_left_cnic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center" />
 
-<!--            <com.loadapp.load.ui.profile.widget.SelectContainer-->
-<!--                android:id="@+id/select_view_person_profile2_income"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="62dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                app:select_view_hint="@string/loan_person_profile2_income" />-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/loan_person_profile3_click" />
+                    </FrameLayout>
 
-<!--            <View style="@style/view_divide" />-->
+                    <FrameLayout
+                        android:id="@+id/fl_person_profile3_right_cnic"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
-<!--            <com.loadapp.load.ui.profile.widget.SelectContainer-->
-<!--                android:id="@+id/select_view_person_profile2_payday"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="62dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                app:select_view_hint="@string/loan_person_profile2_payday" />-->
+                        <ImageView
+                            android:id="@+id/iv_person_profile3_right_cnic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center" />
 
-<!--            <View style="@style/view_divide" />-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/loan_person_profile3_click" />
 
-<!--            <com.loadapp.load.ui.profile.widget.SelectContainer-->
-<!--                android:id="@+id/select_view_person_profile2_paid_judge"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="62dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                app:select_view_hint="@string/loan_person_profile2_paid_judge" />-->
+                    </FrameLayout>
 
-<!--            <View style="@style/view_divide" />-->
+                </LinearLayout>
+            </LinearLayout>
 
-<!--            <View-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="20dp"/>-->
-<!--        </LinearLayout>-->
-<!--    </ScrollView>-->
+            <View style="@style/view_divide" />
 
+            <com.loadapp.load.ui.profile.widget.EditTextContainer
+                android:id="@+id/edittext_container_profile3_name"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="10dp"
+                app:select_view_hint="@string/loan_person_profile_name" />
 
-<!--    <FrameLayout-->
-<!--        android:id="@+id/fl_person_profile_commit"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_gravity="bottom"-->
-<!--        android:layout_marginStart="40dp"-->
-<!--        android:layout_marginEnd="40dp"-->
-<!--        android:layout_marginBottom="70dp"-->
-<!--        android:background="@drawable/source2">-->
+            <View style="@style/view_divide" />
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:text="@string/loan_person_profile_next"-->
-<!--            android:textColor="#FFFFFF"-->
-<!--            android:textSize="16sp" />-->
-<!--    </FrameLayout>-->
+            <com.loadapp.load.ui.profile.widget.EditTextContainer
+                android:id="@+id/edittext_container_profile3_father_name"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="10dp"
+                app:select_view_hint="@string/loan_person_profile_father_name" />
+
+            <View style="@style/view_divide" />
+
+            <include
+                android:id="@+id/gender_container_profile3_gender"
+                layout="@layout/gender_checkbox"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="62dp" />
+
+            <View style="@style/view_divide" />
+
+            <com.loadapp.load.ui.profile.widget.EditTextContainer
+                android:id="@+id/edittext_container_profile3_cnic_num"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="10dp"
+                app:select_view_hint="@string/loan_person_profile_cnic_num" />
+
+            <View style="@style/view_divide" />
+
+            <com.loadapp.load.ui.profile.widget.SelectContainer
+                android:id="@+id/select_container_profile3_birth"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginTop="10dp"
+                app:select_view_hint="@string/loan_person_profile_birth" />
+
+            <View style="@style/view_divide" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Face recognition"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <FrameLayout
+                android:id="@+id/fl_person_profile3_recognition"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+                <ImageView
+                    android:id="@+id/iv_person_profile3_recognition"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="face recognition"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"/>
+
+            </FrameLayout>
+
+            <View style="@style/view_divide" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/fl_person_profile3_commit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/source2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/loan_person_profile_next"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+    </FrameLayout>
 </LinearLayout>
