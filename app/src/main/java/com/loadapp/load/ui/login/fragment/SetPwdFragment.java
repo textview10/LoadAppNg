@@ -143,7 +143,7 @@ public class SetPwdFragment extends BaseFragment {
                     @Override
                     public void onError(Response<String> response) {
                         super.onError(response);
-                        Log.e(TAG, "register failure = " + response.body().toString());
+                        Log.e(TAG, "register failure = " + response.body());
                     }
                 });
     }

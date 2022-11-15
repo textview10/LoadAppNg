@@ -239,19 +239,30 @@ public class PersonProfile3Fragment extends BaseCommitFragment {
             ToastUtils.showShort("recognition is null");
             return false;
         }
+        if(!FileUtils.isFileExists(mLeftPath1)){
+            ToastUtils.showShort("file 1 is null");
+            return false;
+        }
+        if(!FileUtils.isFileExists(mRightPath2)){
+            ToastUtils.showShort("file 2 is null");
+            return false;
+        }
+        if(!FileUtils.isFileExists(mRecognitionPath)){
+            ToastUtils.showShort("recognition file is null");
+            return false;
+        }
         return true;
     }
 
     private void uploadContact() {
         JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
-            jsonObject.put("access_token", Constant.mToken);
-            jsonObject.put("account_id", Constant.mAccountId + "");
+            jsonObject.put("account_id", Constant.mAccountId);
             jsonObject.put("name", etName.getText().trim());
             jsonObject.put("father_name", etFatherName.getText().trim());
             //身份证号
             jsonObject.put("identity", etCnicNum.getText().trim());
-            jsonObject.put("gender", genderCheckBox.getCurPos());
+            jsonObject.put("gender", genderCheckBox.getCurPos() + "");
             jsonObject.put("birthday", mBirthDate);
             //证件 正面照片
 //            jsonObject.put("identity_photo_front", mLeftPath1);
@@ -272,7 +283,7 @@ public class PersonProfile3Fragment extends BaseCommitFragment {
                     public void onSuccess(Response<String> response) {
                         PhaseBean phaseBean = checkResponseSuccess(response, PhaseBean.class);
                         if (phaseBean == null) {
-                            Log.e(TAG, " upload contact error ." + response.body().toString());
+                            Log.e(TAG, " upload contact error ." + response.body());
                             return;
                         }
                         if (getActivity() instanceof CommitProfileActivity) {

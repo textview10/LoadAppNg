@@ -94,7 +94,6 @@ public class CommitProfileActivity extends BaseActivity {
     private void getProfile() {
         JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
-            jsonObject.put("access_token", Constant.mToken);
             jsonObject.put("account_id", Constant.mAccountId);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -106,7 +105,7 @@ public class CommitProfileActivity extends BaseActivity {
                     public void onSuccess(Response<String> response) {
                         AccountProfileBean profileBean = checkResponseSuccess(response, AccountProfileBean.class);
                         if (profileBean == null) {
-                            Log.e(TAG, " get profile error ." + response.body().toString());
+                            Log.e(TAG, " get profile error ." + response.body());
                             return;
                         }
                         mProfileBean = profileBean;
@@ -121,7 +120,7 @@ public class CommitProfileActivity extends BaseActivity {
                     @Override
                     public void onError(Response<String> response) {
                         super.onError(response);
-                        Log.e(TAG, "get profile failure = " + response.body().toString());
+                        Log.e(TAG, "get profile failure = " + response.body());
                     }
                 });
     }

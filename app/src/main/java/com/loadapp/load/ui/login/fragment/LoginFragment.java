@@ -145,7 +145,7 @@ public class LoginFragment extends BaseFragment {
                         Constant.mToken = loginBean.getAccess_token();
                         SPUtils.getInstance().put(KEY_PHONE_NUM, phoneNum);
                         SPUtils.getInstance().put(KEY_PASS_CODE, password);
-                        Log.i(TAG, "login success = " + response.body().toString());
+                        Log.i(TAG, "login success = " + response.body());
 //                        modifyPassword("aa123456", "ab123456", "ab123456");
                         if (getActivity() instanceof SignInActivity) {
                             ((SignInActivity) getActivity()).toHomePage();
@@ -155,7 +155,7 @@ public class LoginFragment extends BaseFragment {
                     @Override
                     public void onError(Response<String> response) {
                         super.onError(response);
-                        Log.e(TAG, "login failure = " + response.body().toString());
+                        Log.e(TAG, "login failure = " + response.body());
                     }
                 });
     }

@@ -298,7 +298,7 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
                     public void onSuccess(Response<String> response) {
                         PhaseBean phaseBean = checkResponseSuccess(response, PhaseBean.class);
                         if (phaseBean == null) {
-                            Log.e(TAG, " upload contact error ." + response.body().toString());
+                            Log.e(TAG, " upload contact error ." + response.body());
                             return;
                         }
                         if (getActivity() instanceof CommitProfileActivity) {

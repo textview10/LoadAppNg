@@ -57,7 +57,7 @@
             android:screenOrientation="portrait" />
 
         <activity android:name=".ui.profile.CommitProfileActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
 
         <activity

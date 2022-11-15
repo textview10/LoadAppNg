@@ -103,7 +103,7 @@ public class InputPhoneNumFragment extends BaseFragment {
                     @Override
                     public void onError(Response<String> response) {
                         super.onError(response);
-                        Log.e(TAG, "check mobile response error = " + response.body().toString());
+                        Log.e(TAG, "check mobile response error = " + response.body());
                     }
                 });
     }
@@ -136,7 +136,7 @@ public class InputPhoneNumFragment extends BaseFragment {
                     @Override
                     public void onError(Response<String> response) {
                         super.onError(response);
-                        Log.e(TAG, "send sms request error = " + response.body().toString());
+                        Log.e(TAG, "send sms request error = " + response.body());
                     }
                 });
     }

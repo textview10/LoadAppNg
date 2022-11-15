@@ -41,7 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected String checkResponseSuccess(Response<String> response) {
-        BaseResponseBean responseBean = gson.fromJson(response.body().toString(), BaseResponseBean.class);
+        BaseResponseBean responseBean = gson.fromJson(response.body(), BaseResponseBean.class);
         if (responseBean == null) {
             ToastUtils.showShort("request failure.");
             return null;

@@ -46,7 +46,7 @@ public class ConfigMgr {
                     @Override
                     public void onSuccess(Response<String> response) {
                         Gson gson = new Gson();
-                        BaseResponseBean responseBean = gson.fromJson(response.body().toString(), BaseResponseBean.class);
+                        BaseResponseBean responseBean = gson.fromJson(response.body(), BaseResponseBean.class);
                         if (responseBean != null && responseBean.isRequestSuccess()) {
                             ConfigBean configBean = gson.fromJson(responseBean.getBodyStr(), ConfigBean.class);
                             if (configBean != null) {
@@ -66,7 +66,7 @@ public class ConfigMgr {
                     @Override
                     public void onError(Response<String> response) {
                         super.onError(response);
-                        Log.e(TAG, "get config failure = " + response.body().toString());
+                        Log.e(TAG, "get config failure = " + response.body());
                     }
                 });
     }

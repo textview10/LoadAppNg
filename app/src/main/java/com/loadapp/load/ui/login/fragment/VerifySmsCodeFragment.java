@@ -144,7 +144,7 @@ public class VerifySmsCodeFragment extends BaseFragment {
                     @Override
                     public void onError(Response<String> response) {
                         super.onError(response);
-                        Log.e(TAG, "verify sms failure = " + response.body().toString());
+                        Log.e(TAG, "verify sms failure = " + response.body());
                     }
                 });
     }

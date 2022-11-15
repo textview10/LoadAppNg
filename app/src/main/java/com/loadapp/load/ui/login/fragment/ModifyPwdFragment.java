@@ -60,7 +60,7 @@ public class ModifyPwdFragment extends BaseFragment {
                             return;
                         }
 
-                        Log.e(TAG, "modify password success = " + response.body().toString());
+                        Log.e(TAG, "modify password success = " + response.body());
                     }
 
                     @Override
