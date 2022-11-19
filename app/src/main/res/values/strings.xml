@@ -75,4 +75,12 @@
     <string name="request_permission_calendar_title">Calendar</string>
     <string name="request_permission_cancel">CANCEL</string>
     <string name="request_permission_agree">AGREE</string>
+
+    <string name="me_information">My infomation</string>
+    <string name="me_bank_card">My bank card</string>
+    <string name="me_message">Message</string>
+    <string name="me_help">Help</string>
+    <string name="me_logout">logout</string>
+
+
 </resources>
