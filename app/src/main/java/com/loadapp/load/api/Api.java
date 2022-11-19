@@ -29,6 +29,12 @@ public class Api {
     public static final String UPLOAD_BASE = HOST + "/api/v1/account/upload_base";
     //上传联系人信息
     public static final String UPLOAD_CONTACT = HOST + "/api/v1/account/upload_contact";
-
+    //上传证件相关信息
     public static final String UPLOAD_IDENTITY = HOST + "/api/v1/account/upload_identity";
+    //获取银行列表
+    public static final String GET_BANK_LIST = HOST + "/api/v1/account/get_bank_list";
+    //上传银行账号信息
+    public static final String UPLOAD_BANK = HOST + "/api/v1/account/upload_bank";
+
+
 }

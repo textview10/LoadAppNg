@@ -264,19 +264,16 @@ public class PersonProfile3Fragment extends BaseCommitFragment {
             jsonObject.put("identity", etCnicNum.getText().trim());
             jsonObject.put("gender", genderCheckBox.getCurPos() + "");
             jsonObject.put("birthday", mBirthDate);
-            //证件 正面照片
-//            jsonObject.put("identity_photo_front", mLeftPath1);
-//            //证件 背面照片
-//            jsonObject.put("identity_photo_back", mRightPath2);
-//            //自拍照
-//            jsonObject.put("photo_self", mRecognitionPath);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         OkGo.<String>post(Api.UPLOAD_IDENTITY).tag(TAG)
                 .params("data", jsonObject.toString())
+                //证件 正面照片
                 .params("identity_photo_front", new File(mLeftPath1))
+                //证件 背面照片
                 .params("identity_photo_back", new File(mRightPath2))
+                //自拍照
                 .params("photo_self", new File(mRecognitionPath))
                 .execute(new StringCallback() {
                     @Override

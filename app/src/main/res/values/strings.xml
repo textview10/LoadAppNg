@@ -61,4 +61,11 @@
     <string name="load_person_profile_male">Male</string>
     <string name="load_person_profile_family">Family</string>
 
+    <string name="load_person_profile_bank_name_title">Your Bank Account Details</string>
+    <string name="load_person_profile_bank_veriy_name">Bank Verification Number (BVN)</string>
+    <string name="load_person_profile_bank_bank_name">Bank Name</string>
+    <string name="load_person_profile_bank_account_num">Account Number</string>
+
+
+
 </resources>

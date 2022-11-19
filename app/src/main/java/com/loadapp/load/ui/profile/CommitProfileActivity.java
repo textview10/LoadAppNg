@@ -16,6 +16,7 @@ import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
 import com.loadapp.load.bean.AccountProfileBean;
 import com.loadapp.load.global.Constant;
+import com.loadapp.load.ui.profile.fragment.BankInfoFragment;
 import com.loadapp.load.ui.profile.fragment.BaseCommitFragment;
 import com.loadapp.load.ui.profile.fragment.PersonProfile2Fragment;
 import com.loadapp.load.ui.profile.fragment.PersonProfile3Fragment;
@@ -52,7 +53,7 @@ public class CommitProfileActivity extends BaseActivity {
             }
         });
         getProfile();
-        switchFragment(2);
+        switchFragment(3);
     }
 
     @Override
@@ -79,6 +80,9 @@ public class CommitProfileActivity extends BaseActivity {
                 mCurFragment = new PersonProfile3Fragment();
                 break;
             case 3:
+                mCurFragment = new BankInfoFragment();
+                break;
+            case 4:
                 ToastUtils.showShort("modify success");
                 finish();
                 return;
