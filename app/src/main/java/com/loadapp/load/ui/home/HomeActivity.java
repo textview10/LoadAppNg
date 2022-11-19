@@ -2,6 +2,7 @@ package com.loadapp.load.ui.home;
 
 import static androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -11,12 +12,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.blankj.utilcode.constant.PermissionConstants;
+import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
 import com.loadapp.load.bean.BaseConfigBean;
 import com.loadapp.load.bean.LoginResponseBean;
+import com.loadapp.load.collect.CollectDataManager;
+import com.loadapp.load.dialog.requestpermission.RequestPermissionDialog;
 import com.loadapp.load.global.ConfigMgr;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.home.widget.BottomTabLayout;
@@ -42,9 +48,9 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         initializeView();
         initializeData();
+        requestPermission();
         ConfigMgr.getAllConfig();
     }
-
 
     private void initializeView() {
         mBottomLayout = findViewById(R.id.main_bottom_tablayout);
@@ -63,6 +69,43 @@ public class HomeActivity extends BaseActivity {
         meFragment = new MeFragment();
 
         vpMain.setCurrentItem(0,false);
+    }
+
+    private void requestPermission() {
+        boolean hasPermission = PermissionUtils.isGranted(PermissionConstants.LOCATION,PermissionConstants.CAMERA,
+                PermissionConstants.SMS, PermissionConstants.CALENDAR, PermissionConstants.CONTACTS);
+        if (hasPermission) {
+            executeNext();
+        } else {
+            requestPermissionInternal();
+        }
+    }
+
+    private void requestPermissionInternal(){
+        RequestPermissionDialog dialog = new RequestPermissionDialog(this);
+        dialog.setOnItemClickListener(new RequestPermissionDialog.OnItemClickListener() {
+            @Override
+            public void onClickAgree() {
+                PermissionUtils.permission(Manifest.permission.READ_CALENDAR, Manifest.permission.READ_CONTACTS,
+                        Manifest.permission.READ_SMS, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA).callback(new PermissionUtils.SimpleCallback() {
+                    @Override
+                    public void onGranted() {
+                        executeNext();
+                    }
+
+                    @Override
+                    public void onDenied() {
+                        ToastUtils.showShort("please allow permission.");
+                    }
+                }).request();
+            }
+        });
+        dialog.show();
+    }
+
+    private void executeNext() {
+
     }
 
     private void updateSelectFragment(int index) {

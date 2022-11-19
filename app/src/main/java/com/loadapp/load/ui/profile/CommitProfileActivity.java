@@ -15,6 +15,7 @@ import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
 import com.loadapp.load.bean.AccountProfileBean;
+import com.loadapp.load.collect.CollectDataManager;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.profile.fragment.BankInfoFragment;
 import com.loadapp.load.ui.profile.fragment.BaseCommitFragment;
@@ -83,8 +84,20 @@ public class CommitProfileActivity extends BaseActivity {
                 mCurFragment = new BankInfoFragment();
                 break;
             case 4:
-                ToastUtils.showShort("modify success");
-                finish();
+                // 收集信息.
+                CollectDataManager.getInstance().collectAuthData(this, new CollectDataManager.Observer() {
+                    @Override
+                    public void success(Response<String> response) {
+                        Log.e(TAG, " upload client info success .");
+                        ToastUtils.showShort("modify success");
+                        finish();
+                    }
+
+                    @Override
+                    public void failure(Response<String> response) {
+                        Log.e(TAG, " upload client info failure .");
+                    }
+                });
                 return;
         }
         if (mCurFragment != null) {
@@ -134,7 +147,7 @@ public class CommitProfileActivity extends BaseActivity {
         onBackInternal();
     }
 
-    private void onBackInternal(){
+    private void onBackInternal() {
         finish();
     }
 

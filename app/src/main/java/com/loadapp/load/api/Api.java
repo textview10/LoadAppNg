@@ -35,6 +35,9 @@ public class Api {
     public static final String GET_BANK_LIST = HOST + "/api/v1/account/get_bank_list";
     //上传银行账号信息
     public static final String UPLOAD_BANK = HOST + "/api/v1/account/upload_bank";
+    //上传客户端信息
+    public static final String UPLOAD_CLIENT_INFO = HOST + "//api/v1/account/upload_client_info";
+
 
 
 }

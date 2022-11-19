@@ -66,6 +66,13 @@
     <string name="load_person_profile_bank_bank_name">Bank Name</string>
     <string name="load_person_profile_bank_account_num">Account Number</string>
 
-
-
+    <string name="request_permission_title">Welcome to Haikyfin</string>
+    <string name="request_permission_desc">For qulified loan offer and better service,please allow us to get the following permissions:</string>
+    <string name="request_permission_location_title">Location</string>
+    <string name="request_permission_sms_title">SMS</string>
+    <string name="request_permission_camera_title">Camera</string>
+    <string name="request_permission_contacts_title">Contacts</string>
+    <string name="request_permission_calendar_title">Calendar</string>
+    <string name="request_permission_cancel">CANCEL</string>
+    <string name="request_permission_agree">AGREE</string>
 </resources>
