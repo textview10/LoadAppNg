@@ -81,6 +81,7 @@
     <string name="me_message">Message</string>
     <string name="me_help">Help</string>
     <string name="me_logout">logout</string>
-
+    <string name="home_loan_status_processing">We are processing your loan application. Please Make sure your phone is action</string>
+    <string name="home_loan_status_refuse">Sorry You are not qualifed this time. Please come back to apply for a loan after x days</string>
 
 </resources>
