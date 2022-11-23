@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,7 @@ public class LoginFragment extends BaseFragment {
     private PhoneNumPresenter mPresenter;
     private boolean passwordMode = true;
     private ImageView ivBack;
+    private ProgressBar pbLoading;
 
     @Nullable
     @Override
@@ -63,6 +65,8 @@ public class LoginFragment extends BaseFragment {
         ivPwdShow = view.findViewById(R.id.iv_signin_set_pwd_show);
         spinner = view.findViewById(R.id.spinner_signin_input);
         ivBack = view.findViewById(R.id.iv_verify_back);
+
+        pbLoading = view.findViewById(R.id.pb_login_loading);
 
         String phoneNum = SPUtils.getInstance().getString(KEY_PHONE_NUM);
         String passCode = SPUtils.getInstance().getString(KEY_PASS_CODE);
@@ -120,6 +124,9 @@ public class LoginFragment extends BaseFragment {
     }
 
     private void login(String phoneNum, String password) {
+        if (pbLoading != null){
+            pbLoading.setVisibility(View.VISIBLE);
+        }
         JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
             String prefix = mPresenter.getSelectString(spinner.getSelectedItemPosition());
@@ -136,6 +143,9 @@ public class LoginFragment extends BaseFragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
+                        if (pbLoading != null){
+                            pbLoading.setVisibility(View.GONE);
+                        }
                         LoginResponseBean loginBean = checkResponseSuccess(response, LoginResponseBean.class);
                         if (loginBean == null) {
                             Log.e(TAG,"login error");
@@ -155,6 +165,9 @@ public class LoginFragment extends BaseFragment {
                     @Override
                     public void onError(Response<String> response) {
                         super.onError(response);
+                        if (pbLoading != null){
+                            pbLoading.setVisibility(View.GONE);
+                        }
                         Log.e(TAG, "login failure = " + response.body());
                     }
                 });

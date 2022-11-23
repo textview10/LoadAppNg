@@ -15,4 +15,6 @@
     <color name="custom_dialog_check_text_color_light">#666666</color>
 
     <color name="blue">#0077f4</color>
+    <color name="grey_50">#fffafafa</color>
+    <color name="grey_600">#ff757575</color>
 </resources>

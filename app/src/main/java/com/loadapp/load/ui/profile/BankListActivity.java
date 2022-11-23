@@ -1,6 +1,7 @@
 package com.loadapp.load.ui.profile;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -14,23 +15,23 @@ import com.blankj.utilcode.util.GsonUtils;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
-import com.loadapp.load.bean.AccountProfileBean;
 import com.loadapp.load.bean.BankNameBean;
 import com.loadapp.load.bean.event.BankListEvent;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.profile.banklist.BankListsAdapter;
 import com.loadapp.load.util.BuildRequestJsonUtil;
+import com.loadapp.load.view.WaveSideBar;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
 import org.greenrobot.eventbus.EventBus;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class BankListActivity extends BaseActivity {
@@ -40,6 +41,7 @@ public class BankListActivity extends BaseActivity {
     private ImageView ivBack;
     private ArrayList<Pair<String, String>> mBankList = new ArrayList<>();
     private BankListsAdapter mAdapter;
+    private WaveSideBar sideBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class BankListActivity extends BaseActivity {
     private void initializeView() {
         rvBankList = findViewById(R.id.rv_bank_list);
         ivBack = findViewById(R.id.iv_bank_list_back);
+        sideBar = findViewById(R.id.sidebar_bank_list);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +73,12 @@ public class BankListActivity extends BaseActivity {
             }
         });
         rvBankList.setAdapter(mAdapter);
+        sideBar.setOnSelectIndexItemListener(new WaveSideBar.OnSelectIndexItemListener() {
+            @Override
+            public void onSelectIndexItem(String index) {
+                Log.e(TAG, " test index ...");
+            }
+        });
     }
 
     private void getBankList() {
@@ -90,8 +99,23 @@ public class BankListActivity extends BaseActivity {
                             return;
                         }
                         ArrayList<Pair<String, String>> list = parseCityList(bankNameBean.getBank_name());
+                        Collections.sort(list, new Comparator<Pair<String, String>>() {
+                            @Override
+                            public int compare(Pair<String, String> pair1, Pair<String, String> pair2) {
+                                if (TextUtils.isEmpty(pair1.second)){
+                                    return -1;
+                                }
+                                if (TextUtils.isEmpty(pair2.second)){
+                                    return 1;
+                                }
+                                char c1 = pair1.second.charAt(0);
+                                char c2 = pair2.second.charAt(0);
+                                return c1 - c2;
+                            }
+                        });
                         mBankList.clear();
                         mBankList.addAll(list);
+
                         if (mAdapter != null){
                             mAdapter.notifyDataSetChanged();
                         }

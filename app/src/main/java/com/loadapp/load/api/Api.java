@@ -36,8 +36,13 @@ public class Api {
     //上传银行账号信息
     public static final String UPLOAD_BANK = HOST + "/api/v1/account/upload_bank";
     //上传客户端信息
-    public static final String UPLOAD_CLIENT_INFO = HOST + "//api/v1/account/upload_client_info";
-
+    public static final String UPLOAD_CLIENT_INFO = HOST + "/api/v1/account/upload_client_info";
+    //产品试算
+    public static final String PRODUCT_CALCUTE = HOST + "/api/v1/account/upload_client_info";
+    //产品列表
+    public static final String GET_PRODUCT_LIST = HOST + "/api/v1/product/list";
+    //获取订单详情
+    public static final String GET_ORDER_INFO = HOST + "/api/v1/order/info";
 
 
 }
