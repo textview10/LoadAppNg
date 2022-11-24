@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_item_load_apply_name"
+        android:layout_width="wrap_content"
+        android:text="Loan offer"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_item_load_apply_amount"
+        android:layout_width="wrap_content"
+        android:text="5000"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_item_load_apply_count"
+        android:layout_width="wrap_content"
+        android:text="分期次数"
+        android:textSize="18sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_item_load_apply_count2"
+        android:layout_width="wrap_content"
+        android:text="分期期限"
+        android:textSize="18sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

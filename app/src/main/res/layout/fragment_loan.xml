@@ -12,6 +12,13 @@
         android:id="@+id/btn_loan_profile_test"
         android:layout_width="wrap_content"
         android:text="to profile test"
+        android:visibility="gone"
+        android:layout_height="wrap_content"/>
+
+    <ProgressBar
+        android:id="@+id/pb_main_loading"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"/>
 
 </FrameLayout>
