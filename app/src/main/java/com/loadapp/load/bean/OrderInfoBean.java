@@ -1,5 +1,7 @@
 package com.loadapp.load.bean;
 
+import java.util.List;
+
 public class OrderInfoBean {
     //订单ID
     private int order_id;
@@ -14,7 +16,7 @@ public class OrderInfoBean {
     //首借，复借， 0 首借 1复借
     private boolean is_reloan;
     //（分期信息）
-    private Stage stages;
+    private List<Stage> stages;
 
     public int getOrder_id() {
         return order_id;
@@ -64,11 +66,11 @@ public class OrderInfoBean {
         this.is_reloan = is_reloan;
     }
 
-    public Stage getStages() {
+    public List<Stage> getStages() {
         return stages;
     }
 
-    public void setStages(Stage stages) {
+    public void setStages(List<Stage> stages) {
         this.stages = stages;
     }
 

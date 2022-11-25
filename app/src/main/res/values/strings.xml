@@ -3,6 +3,7 @@
     <string name="main_click_me">click me</string>
     <string name="main_loan">Loan</string>
     <string name="main_me">Me</string>
+    <string name="main_haikyfun">Haikyfun</string>
     <string name="spalish_welcome">Welcome to Haikyfun</string>
     <string name="spalish_sign_in">Sign in</string>
     <string name="spalish_sign_up">Sign up</string>
@@ -76,12 +77,17 @@
     <string name="request_permission_cancel">CANCEL</string>
     <string name="request_permission_agree">AGREE</string>
 
-    <string name="me_information">My infomation</string>
+    <string name="me_information">My information</string>
     <string name="me_bank_card">My bank card</string>
     <string name="me_message">Message</string>
     <string name="me_help">Help</string>
     <string name="me_logout">logout</string>
-    <string name="home_loan_status_processing">We are processing your loan application. Please Make sure your phone is action</string>
-    <string name="home_loan_status_refuse">Sorry You are not qualifed this time. Please come back to apply for a loan after x days</string>
+    <string name="home_loan_status_processing">We are estimating your loan,Please pay attention to the review results on the App. </string>
+    <string name="home_loan_status_refuse">Sorry, You did not pass the review, please try again after 7 days</string>
+    <string name="home_loan_status_need_comfire">The system has detected that your bank card information is incorrectly filled, please upload it again.</string>
+    <string name="home_loan_success">The system has detected that your bank card information is incorrectly filled, please upload it again.</string>
+
+    <string name="home_loan_success_desc1">Provide 24th repayment</string>
+    <string name="home_loan_success_desc2">Online or offline payment</string>
 
 </resources>

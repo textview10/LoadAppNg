@@ -25,6 +25,7 @@ import com.loadapp.load.bean.OrderInfoBean;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.home.status.loanapply.LoanApplyFragment;
 import com.loadapp.load.ui.home.status.LoanProcessingFragment;
+import com.loadapp.load.ui.home.status.repaydue.RepayDueFragment;
 import com.loadapp.load.ui.profile.CommitProfileActivity;
 import com.loadapp.load.util.BuildRequestJsonUtil;
 import com.lzy.okgo.OkGo;
@@ -141,32 +142,24 @@ public class LoanFragment extends BaseFragment {
             case 5: //放款中
             case 6: //放款失败
                 LoanProcessingFragment processingFragment = new LoanProcessingFragment();
+                processingFragment.setOrderInfo(checkStatus, orderInfoBean);
                 toFragment(processingFragment);
                 break;
-
             case 7: //等待还款
-
-                break;
-            case 8: //已结清
-
-                break;
             case 9: //逾期
-
+                RepayDueFragment repayDueFragment = new RepayDueFragment();
+                repayDueFragment.setData(orderInfoBean.getStages());
+                toFragment(repayDueFragment);
+                break;
+            case 8: //已结清,可以再次贷款.
+                LoanApplyFragment loanApplyFragment = new LoanApplyFragment();
+                toFragment(loanApplyFragment);
                 break;
             case 10: //还款中
-
-                break;
             case 11: //等待展期
-
-                break;
             case 12: //展期结清
-
-                break;
             case 13: //展期申请中
-
-                break;
             case 14: //展期失效
-
                 break;
         }
     }
