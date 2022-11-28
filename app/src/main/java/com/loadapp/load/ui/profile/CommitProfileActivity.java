@@ -54,7 +54,7 @@ public class CommitProfileActivity extends BaseActivity {
             }
         });
         getProfile();
-        switchFragment(3);
+        switchFragment(0);
     }
 
     @Override

@@ -90,4 +90,7 @@
     <string name="home_loan_success_desc1">Provide 24th repayment</string>
     <string name="home_loan_success_desc2">Online or offline payment</string>
 
+    <string name="home_loan_product_trial_title">Loan Confirmation</string>
+
+
 </resources>

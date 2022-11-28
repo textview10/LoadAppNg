@@ -1,5 +1,6 @@
 package com.loadapp.load.ui.home.status.loanapply;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,9 +18,11 @@ import com.loadapp.load.api.Api;
 import com.loadapp.load.bean.CommitLoanBean;
 import com.loadapp.load.bean.LoanApplyBean;
 import com.loadapp.load.bean.OrderInfoBean;
+import com.loadapp.load.dialog.producttrial.ProductTrialDialog;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.home.status.BaseStatusFragment;
 import com.loadapp.load.ui.home.status.loanapply.adapter.LoanApplyAdapter;
+import com.loadapp.load.ui.profile.CommitProfileActivity;
 import com.loadapp.load.util.BuildRequestJsonUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -55,10 +58,21 @@ public class LoanApplyFragment extends BaseStatusFragment {
         adapter = new LoanApplyAdapter();
         rvLoanApply.setAdapter(adapter);
         adapter.setItemClickListener((product, pos) -> {
-            if (checkClickFast()){
+            if (checkClickFast()) {
                 return;
             }
-            commitLoanApply(product.getProduct_id());
+            String productId = product.getProduct_id();
+            String amount = product.getAmount();
+            String period = product.getPeriod();
+            ProductTrialDialog dialog = new ProductTrialDialog(getActivity(), productId,
+                    amount, period);
+            dialog.setOnDialogClickListener(new ProductTrialDialog.OnDialogClickListener() {
+                @Override
+                public void onClickAgree() {
+                    commitLoanApply(product.getProduct_id());
+                }
+            });
+            dialog.show();
         });
     }
 
@@ -101,7 +115,7 @@ public class LoanApplyFragment extends BaseStatusFragment {
                 });
     }
 
-    private void commitLoanApply(String productId){
+    private void commitLoanApply(String productId) {
         JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
 //        JSONObject jsonObject = new JSONObject();
         try {
@@ -110,8 +124,8 @@ public class LoanApplyFragment extends BaseStatusFragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.e(TAG, "access_token = " +  Constant.mToken);
-        Log.e(TAG, "account_id = " +  Constant.mAccountId);
+        Log.e(TAG, "access_token = " + Constant.mToken);
+        Log.e(TAG, "account_id = " + Constant.mAccountId);
         OkGo.<String>post(Api.CHECK_CAN_ORDER).tag(TAG)
                 .params("data", jsonObject.toString())
                 .execute(new StringCallback() {
@@ -125,8 +139,11 @@ public class LoanApplyFragment extends BaseStatusFragment {
                             Log.e(TAG, " commit loan error ." + response.body());
                             return;
                         }
-                        if (commitLoan.getOrder_id() != 0){
+                        if (commitLoan.getOrder_id() != 0) {
                             ToastUtils.showShort("check order success");
+                        } else {
+                            Intent intent = new Intent(getContext(), CommitProfileActivity.class);
+                            startActivity(intent);
                         }
                     }
 
