@@ -1,6 +1,11 @@
 package com.loadapp.load.bean;
 
 import com.blankj.utilcode.util.GsonUtils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.LongSerializationPolicy;
+
+import org.json.JSONObject;
 
 public class BaseResponseBean {
     private int code;
@@ -36,6 +41,10 @@ public class BaseResponseBean {
     }
 
     public String getBodyStr(){
-        return GsonUtils.toJson(data);
+        Gson gson = new GsonBuilder()
+//             # 将DEFAULT改为STRING
+                .setLongSerializationPolicy(LongSerializationPolicy.STRING)
+                .serializeNulls().create();;
+        return gson.toJson(data);
     }
 }

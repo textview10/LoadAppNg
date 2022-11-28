@@ -43,6 +43,10 @@ public class Api {
     public static final String GET_PRODUCT_LIST = HOST + "/api/v1/product/list";
     //获取订单详情
     public static final String GET_ORDER_INFO = HOST + "/api/v1/order/info";
+    //验证客户是否可以借贷
+    public static final String CHECK_CAN_ORDER = HOST + "/api/v1/order/check";
+    //申请订单
+    public static final String ORDER_APPLY = HOST + "/api/v1/order/apply";
 
 
 }

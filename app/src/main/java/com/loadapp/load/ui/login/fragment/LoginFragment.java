@@ -34,6 +34,8 @@ import com.lzy.okgo.model.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+
 public class LoginFragment extends BaseFragment {
     private static final String TAG = "LoginFragment";
 
@@ -146,6 +148,7 @@ public class LoginFragment extends BaseFragment {
                         if (pbLoading != null){
                             pbLoading.setVisibility(View.GONE);
                         }
+
                         LoginResponseBean loginBean = checkResponseSuccess(response, LoginResponseBean.class);
                         if (loginBean == null) {
                             Log.e(TAG,"login error");
@@ -155,7 +158,9 @@ public class LoginFragment extends BaseFragment {
                         Constant.mToken = loginBean.getAccess_token();
                         SPUtils.getInstance().put(KEY_PHONE_NUM, phoneNum);
                         SPUtils.getInstance().put(KEY_PASS_CODE, password);
-                        Log.i(TAG, "login success = " + response.body());
+                        Log.e(TAG, "login success = " + response.body());
+                        Log.e(TAG, "login success 1 = " + Constant.mToken);
+                        Log.e(TAG, "login success 2 = " + Constant.mAccountId);
 //                        modifyPassword("aa123456", "ab123456", "ab123456");
                         if (getActivity() instanceof SignInActivity) {
                             ((SignInActivity) getActivity()).toHomePage();

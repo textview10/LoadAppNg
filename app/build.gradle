@@ -81,4 +81,5 @@ dependencies {
     implementation  'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
     implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
 
+    implementation 'com.alibaba:fastjson:1.2.76'
 }

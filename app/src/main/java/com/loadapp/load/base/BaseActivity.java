@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.LongSerializationPolicy;
 import com.loadapp.load.R;
 import com.loadapp.load.bean.BaseResponseBean;
 import com.loadapp.load.global.AppManager;
@@ -18,7 +20,10 @@ import com.lzy.okgo.model.Response;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected final Gson gson = new Gson();
+    protected final Gson gson =  new GsonBuilder()
+//             # 将DEFAULT改为STRING
+            .setLongSerializationPolicy(LongSerializationPolicy.STRING)
+            .serializeNulls().create();;;
 
     public void toFragment(BaseFragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -54,7 +59,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             ToastUtils.showShort("request failure 2.");
             return null;
         }
-        return responseBean.getBodyStr();
+        return gson.toJson(responseBean);
     }
 
     @Override

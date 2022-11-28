@@ -1,48 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginEnd="20dp"
+    android:background="@drawable/shape_round_load_success"
     android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_item_load_apply_name"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
         android:text="Loan offer"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content"/>
+        android:textColor="#9B999F"
+        android:textSize="16sp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_item_load_apply_amount"
         android:layout_width="wrap_content"
-        android:text="5000"
-        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="10500"
+        android:textColor="#333333"
         android:textSize="32sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/black"
-        android:layout_height="wrap_content"/>
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="分期次数"
+        android:textColor="#9B999F"
+        android:textSize="16sp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_item_load_apply_count"
         android:layout_width="wrap_content"
-        android:text="分期次数"
-        android:textSize="18sp"
-        android:layout_marginStart="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="21-10-2020"
+        android:textColor="#333333"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:textColor="@color/black"
-        android:layout_height="wrap_content"/>
+        android:text="分期期限"
+        android:textColor="#9B999F"
+        android:textSize="16sp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_item_load_apply_count2"
         android:layout_width="wrap_content"
-        android:text="分期期限"
-        android:textSize="18sp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
+        android:text="分期期限"
         android:textColor="@color/black"
-        android:layout_height="wrap_content"/>
+        android:textSize="28sp" />
+
+    <FrameLayout
+        android:id="@+id/fl_item_loan_apply_commit"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_round_green">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="APPLY LOAN"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+
+            android:textSize="20sp" />
+
+    </FrameLayout>
+
 
 </LinearLayout>
+
+
+
+
+
+

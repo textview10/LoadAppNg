@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
+import com.loadapp.load.bean.CommitLoanBean;
 import com.loadapp.load.bean.LoanApplyBean;
 import com.loadapp.load.bean.OrderInfoBean;
 import com.loadapp.load.global.Constant;
@@ -53,6 +54,12 @@ public class LoanApplyFragment extends BaseStatusFragment {
         rvLoanApply.setLayoutManager(manager);
         adapter = new LoanApplyAdapter();
         rvLoanApply.setAdapter(adapter);
+        adapter.setItemClickListener((product, pos) -> {
+            if (checkClickFast()){
+                return;
+            }
+            commitLoanApply(product.getProduct_id());
+        });
     }
 
     private void canLoanApply() {
@@ -90,6 +97,47 @@ public class LoanApplyFragment extends BaseStatusFragment {
                         }
                         Log.e(TAG, "loan apply  failure = " + response.body());
                         ToastUtils.showShort("loan apply  failure");
+                    }
+                });
+    }
+
+    private void commitLoanApply(String productId){
+        JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
+//        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("account_id", Constant.mAccountId);
+            jsonObject.put("access_token", Constant.mToken);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e(TAG, "access_token = " +  Constant.mToken);
+        Log.e(TAG, "account_id = " +  Constant.mAccountId);
+        OkGo.<String>post(Api.CHECK_CAN_ORDER).tag(TAG)
+                .params("data", jsonObject.toString())
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        if (getActivity().isFinishing() || getActivity().isDestroyed()) {
+                            return;
+                        }
+                        CommitLoanBean commitLoan = checkResponseSuccess(response, CommitLoanBean.class);
+                        if (commitLoan == null) {
+                            Log.e(TAG, " commit loan error ." + response.body());
+                            return;
+                        }
+                        if (commitLoan.getOrder_id() != 0){
+                            ToastUtils.showShort("check order success");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        if (getActivity().isFinishing() || getActivity().isDestroyed()) {
+                            return;
+                        }
+                        Log.e(TAG, "commit loan  failure = " + response.body());
+                        ToastUtils.showShort("commit loan failure");
                     }
                 });
     }

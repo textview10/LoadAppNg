@@ -51,17 +51,6 @@ public class LoanFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         pbLoading = view.findViewById(R.id.pb_main_loading);
         pbLoading.setVisibility(View.VISIBLE);
-        if (BuildConfig.DEBUG) {
-            Button btnProfile = view.findViewById(R.id.btn_loan_profile_test);
-            btnProfile.setVisibility(View.VISIBLE);
-            btnProfile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getContext(), CommitProfileActivity.class);
-                    startActivity(intent);
-                }
-            });
-        }
         new Thread(){
             @Override
             public void run() {
@@ -127,8 +116,8 @@ public class LoanFragment extends BaseFragment {
 
     private void updatePageByStatus(OrderInfoBean orderInfoBean){
         //可以借款
-//        if (orderInfoBean.isCan_apply() && orderInfoBean.getOrder_id() == 0){
-        if (true){
+        if (orderInfoBean.isCan_apply() || orderInfoBean.getOrder_id() == 0){
+//        if (true){
             LoanApplyFragment loanApplyFragment = new LoanApplyFragment();
             toFragment(loanApplyFragment);
             return;
@@ -148,7 +137,7 @@ public class LoanFragment extends BaseFragment {
             case 7: //等待还款
             case 9: //逾期
                 RepayDueFragment repayDueFragment = new RepayDueFragment();
-                repayDueFragment.setData(orderInfoBean.getStages());
+                repayDueFragment.setData(orderInfoBean.getStages(), checkStatus == 9);
                 toFragment(repayDueFragment);
                 break;
             case 8: //已结清,可以再次贷款.

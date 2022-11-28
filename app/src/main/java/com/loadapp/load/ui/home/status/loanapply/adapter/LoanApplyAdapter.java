@@ -18,6 +18,8 @@ public class LoanApplyAdapter extends RecyclerView.Adapter<LoanApplyHolder> {
 
     private List<LoanApplyBean.Product> mLists;
 
+    private OnItemClickListener mListener;
+
     public LoanApplyAdapter() {
 
     }
@@ -50,12 +52,24 @@ public class LoanApplyAdapter extends RecyclerView.Adapter<LoanApplyHolder> {
                 holder.tvCount2.setText(product.getStage());
             }
         }
-
+        holder.itemView.setOnClickListener(view -> {
+            if (mListener != null) {
+                mListener.onClick(product, position);
+            }
+        });
     }
 
 
     @Override
     public int getItemCount() {
         return mLists == null ? 0 : mLists.size();
+    }
+
+    public void setItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onClick(LoanApplyBean.Product product, int pos);
     }
 }

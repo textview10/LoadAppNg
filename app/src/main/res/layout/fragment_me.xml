@@ -116,6 +116,24 @@
                 android:src="@drawable/ic_me_arrow" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/ll_me_test_to_profile"
+            android:visibility="gone"
+            style="@style/me_container">
+
+            <ImageView
+                style="@style/me_lef_icon"
+                android:src="@drawable/ic_me_help" />
+
+            <TextView
+                style="@style/me_middle_text"
+                android:text="测试去添加个人信息界面" />
+
+            <ImageView
+                style="@style/me_right_arrow"
+                android:src="@drawable/ic_me_arrow" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <FrameLayout

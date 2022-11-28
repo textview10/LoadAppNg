@@ -26,6 +26,7 @@ public class RepayDueFragment extends BaseStatusFragment {
     private RecyclerView rvContent;
     private List<OrderInfoBean.Stage> mStages = new ArrayList<>();
     private RepayDueAdapter mAdapter;
+    private boolean mIsDelay;
 
     @Nullable
     @Override
@@ -55,13 +56,13 @@ public class RepayDueFragment extends BaseStatusFragment {
         });
     }
 
-    public void setData(List<OrderInfoBean.Stage> stages){
+    public void setData(List<OrderInfoBean.Stage> stages, boolean isDelay){
         if (stages != null) {
             mStages.clear();
             mStages.addAll(stages);
             updateDataInternal();
         }
-
+        mIsDelay = isDelay;
     }
 
     private void updateDataInternal(){
@@ -70,6 +71,7 @@ public class RepayDueFragment extends BaseStatusFragment {
             tvAmount.setText(String.valueOf(stage.getAmount()));
             tvDate.setText(String.valueOf(stage.getRepay_date()));
         }
+        mAdapter.setIsDelay(mIsDelay);
         mAdapter.notifyDataSetChanged();
     }
 }

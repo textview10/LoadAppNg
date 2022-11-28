@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.loadapp.load.BuildConfig;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseFragment;
@@ -20,6 +21,7 @@ import com.loadapp.load.bean.AccountProfileBean;
 import com.loadapp.load.bean.LogoutBean;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.SplashActivity;
+import com.loadapp.load.ui.profile.CommitProfileActivity;
 import com.loadapp.load.util.BuildRequestJsonUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -32,7 +34,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
 
     private static final String TAG = "MeFragment";
 
-    private LinearLayout llInfo, llBankCard, llMsg, llHelp;
+    private LinearLayout llInfo, llBankCard, llMsg, llHelp, llTestProfile;
     private FrameLayout flLogout;
 
     @Nullable
@@ -50,11 +52,17 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         llHelp = view.findViewById(R.id.ll_me_help);
         flLogout = view.findViewById(R.id.fl_me_logout);
 
+        llTestProfile = view.findViewById(R.id.ll_me_test_to_profile);
+        if (BuildConfig.DEBUG) {
+            llTestProfile.setVisibility(View.VISIBLE);
+        }
         llInfo.setOnClickListener(this);
         llBankCard.setOnClickListener(this);
         llMsg.setOnClickListener(this);
         llHelp.setOnClickListener(this);
         flLogout.setOnClickListener(this);
+
+        llTestProfile.setOnClickListener(this);
     }
 
     @Override
@@ -74,6 +82,10 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.fl_me_logout:
                 logOut();
+                break;
+            case R.id.ll_me_test_to_profile:
+                Intent intent = new Intent(getContext(), CommitProfileActivity.class);
+                startActivity(intent);
                 break;
         }
     }

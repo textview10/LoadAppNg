@@ -15,6 +15,7 @@ import java.util.List;
 public class RepayDueAdapter extends RecyclerView.Adapter<RepayDueHolder> {
 
     private List<OrderInfoBean.Stage> mStages;
+    private boolean mIsDelay;
 
     public RepayDueAdapter(List<OrderInfoBean.Stage> stages) {
         mStages = stages;
@@ -51,5 +52,9 @@ public class RepayDueAdapter extends RecyclerView.Adapter<RepayDueHolder> {
     @Override
     public int getItemCount() {
         return mStages == null ? 0 :mStages.size();
+    }
+
+    public void setIsDelay(boolean isDelay) {
+        mIsDelay = isDelay;
     }
 }
