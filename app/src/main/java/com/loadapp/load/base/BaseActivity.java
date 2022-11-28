@@ -16,6 +16,7 @@ import com.google.gson.LongSerializationPolicy;
 import com.loadapp.load.R;
 import com.loadapp.load.bean.BaseResponseBean;
 import com.loadapp.load.global.AppManager;
+import com.loadapp.load.util.CheckResponseUtils;
 import com.lzy.okgo.model.Response;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -38,28 +39,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected <T> T checkResponseSuccess(Response<String> response, Class<T> clazz) {
-        String body = checkResponseSuccess(response);
-        if (TextUtils.isEmpty(body)){
-            return null;
-        }
-        return gson.fromJson(body, clazz);
+        return CheckResponseUtils.checkResponseSuccess(response, clazz);
     }
 
     protected String checkResponseSuccess(Response<String> response) {
-        BaseResponseBean responseBean = gson.fromJson(response.body(), BaseResponseBean.class);
-        if (responseBean == null) {
-            ToastUtils.showShort("request failure.");
-            return null;
-        }
-        if (!responseBean.isRequestSuccess()) {
-            ToastUtils.showShort(responseBean.getMessage());
-            return null;
-        }
-        if (responseBean.getData() == null){
-            ToastUtils.showShort("request failure 2.");
-            return null;
-        }
-        return gson.toJson(responseBean);
+        return CheckResponseUtils.checkResponseSuccess(response);
     }
 
     @Override

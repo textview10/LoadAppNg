@@ -72,6 +72,9 @@ public class BankInfoFragment extends BaseCommitFragment{
         selectBackName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (checkClickFast()){
+                    return;
+                }
                 Intent intent = new Intent(getActivity(), BankListActivity.class);
                 startActivity(intent);
             }
@@ -122,7 +125,7 @@ public class BankInfoFragment extends BaseCommitFragment{
             //银行名字
             jsonObject.put("bank_name", selectBackName.getData());
             //银行分支结构代码
-            jsonObject.put("branch_code", Constant.mAccountId);
+            jsonObject.put("branch_code", selectBackName.getData());
             //银行账号
             jsonObject.put("bank_account", etAccountNum.getText().trim());
             //确认银行账号

@@ -74,6 +74,7 @@
             android:screenOrientation="portrait" />
 
         <activity android:name=".ui.profile.BankListActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 
         <provider

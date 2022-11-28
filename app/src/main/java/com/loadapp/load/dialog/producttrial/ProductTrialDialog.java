@@ -12,12 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ScreenUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
-import com.loadapp.load.bean.LoanApplyBean;
 import com.loadapp.load.bean.ProductTrialBean;
-import com.loadapp.load.dialog.requestpermission.RequestPermissionDialog;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.util.BuildRequestJsonUtil;
 import com.loadapp.load.util.CheckResponseUtils;

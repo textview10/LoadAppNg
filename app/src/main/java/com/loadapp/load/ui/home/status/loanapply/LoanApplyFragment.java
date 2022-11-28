@@ -17,7 +17,6 @@ import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.bean.CommitLoanBean;
 import com.loadapp.load.bean.LoanApplyBean;
-import com.loadapp.load.bean.OrderInfoBean;
 import com.loadapp.load.dialog.producttrial.ProductTrialDialog;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.home.status.BaseStatusFragment;
@@ -139,11 +138,14 @@ public class LoanApplyFragment extends BaseStatusFragment {
                             Log.e(TAG, " commit loan error ." + response.body());
                             return;
                         }
+                        if (commitLoan.getNext_phase() == 0){
+                            ToastUtils.showShort("get next phase error");
+                            return;
+                        }
                         if (commitLoan.getOrder_id() != 0) {
                             ToastUtils.showShort("check order success");
                         } else {
-                            Intent intent = new Intent(getContext(), CommitProfileActivity.class);
-                            startActivity(intent);
+                            CommitProfileActivity.startActivity(getActivity(), commitLoan.getNext_phase());
                         }
                     }
 

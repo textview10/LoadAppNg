@@ -7,5 +7,6 @@ public class Constant {
 
     public static String mToken = "";
 
-    public static BaseConfigBean mBaseConfig;
+
+
 }

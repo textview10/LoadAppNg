@@ -1,5 +1,6 @@
 package com.loadapp.load.ui.profile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +38,15 @@ public class CommitProfileActivity extends BaseActivity {
 
     private static final String TAG = "CommitProfileActivity";
 
+    public static final String INTENT_PHASE = "intent_phase";
+
+    public static final int PHASE_1 = 101;
+    public static final int PHASE_2 = 102;
+    public static final int PHASE_3 = 103;
+    public static final int PHASE_4 = 104;
+    public static final int PHASE_5 = 105;
+    public static final int PHASE_COLLECT_DATA = 106;
+
     private AccountProfileBean mProfileBean;
     private BaseCommitFragment mCurFragment;
 
@@ -53,8 +63,25 @@ public class CommitProfileActivity extends BaseActivity {
                 onBackInternal();
             }
         });
+        initPage();
+    }
+
+    public static void startActivity(Context context , int phaseIndex){
+        Intent intent = new Intent(context, CommitProfileActivity.class);
+        intent.putExtra(INTENT_PHASE, phaseIndex);
+        context.startActivity(intent);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        initPage();
+    }
+
+    private void initPage(){
         getProfile();
-        switchFragment(0);
+        int phaseIndex = getIntent().getIntExtra(INTENT_PHASE, PHASE_1);
+        switchFragment(phaseIndex);
     }
 
     @Override
@@ -71,19 +98,22 @@ public class CommitProfileActivity extends BaseActivity {
 
     public void switchFragment(int index) {
         switch (index) {
-            case 0:
+            case PHASE_1:
                 mCurFragment = new PersonProfileFragment();
                 break;
-            case 1:
+            case PHASE_2:
                 mCurFragment = new PersonProfile2Fragment();
                 break;
-            case 2:
+            case PHASE_3:
                 mCurFragment = new PersonProfile3Fragment();
                 break;
-            case 3:
+            case PHASE_4:
                 mCurFragment = new BankInfoFragment();
                 break;
-            case 4:
+            case PHASE_5:
+
+                break;
+            case PHASE_COLLECT_DATA:
                 // 收集信息.
                 CollectDataManager.getInstance().collectAuthData(this, new CollectDataManager.Observer() {
                     @Override

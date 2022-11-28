@@ -284,7 +284,7 @@ public class PersonProfile3Fragment extends BaseCommitFragment {
                             return;
                         }
                         if (getActivity() instanceof CommitProfileActivity) {
-                            ((CommitProfileActivity) getActivity()).switchFragment(3);
+                            ((CommitProfileActivity) getActivity()).switchFragment(CommitProfileActivity.PHASE_4);
                         }
                     }
 
