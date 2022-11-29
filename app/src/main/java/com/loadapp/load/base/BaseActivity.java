@@ -21,11 +21,6 @@ import com.lzy.okgo.model.Response;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected final Gson gson =  new GsonBuilder()
-//             # 将DEFAULT改为STRING
-            .setLongSerializationPolicy(LongSerializationPolicy.STRING)
-            .serializeNulls().create();;;
-
     public void toFragment(BaseFragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();   // 开启一个事务

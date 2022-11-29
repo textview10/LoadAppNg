@@ -2,6 +2,9 @@ package com.loadapp.load.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,6 +43,27 @@ public class LoanFragment extends BaseFragment {
     private static final String TAG = "LoanFragment";
     private ProgressBar pbLoading;
 
+    private static final int TYPE_DELAY = 111;
+
+    private Handler mHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message message) {
+            switch (message.what){
+                case TYPE_DELAY:
+                    if (Constant.mLaunchOrderInfo != null){
+                        if (pbLoading != null){
+                            pbLoading.setVisibility(View.GONE);
+                        }
+                        updatePageByStatus(Constant.mLaunchOrderInfo);
+                    } else {
+                        getOrderInfo();
+                    }
+                    break;
+            }
+            return false;
+        }
+    });
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,14 +75,7 @@ public class LoanFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         pbLoading = view.findViewById(R.id.pb_main_loading);
         pbLoading.setVisibility(View.VISIBLE);
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                SystemClock.sleep(1000);
-                getOrderInfo();
-            }
-        }.start();
+        mHandler.sendEmptyMessageDelayed(TYPE_DELAY, 500);
 //        PersonProfileFragment personProfileFragment = new PersonProfileFragment();
 //        toFragment(personProfileFragment);
     }

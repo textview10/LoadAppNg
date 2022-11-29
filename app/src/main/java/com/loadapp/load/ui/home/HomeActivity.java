@@ -69,6 +69,9 @@ public class HomeActivity extends BaseActivity {
         meFragment = new MeFragment();
 
         vpMain.setCurrentItem(0,false);
+
+        SPUtils.getInstance().put(Constant.KEY_ACCOUNT_ID, Constant.mAccountId);
+        SPUtils.getInstance().put(Constant.KEY_TOKEN, Constant.mToken);
     }
 
     private void requestPermission() {

@@ -45,6 +45,7 @@ public class LoginFragment extends BaseFragment {
 
     public static final String KEY_PHONE_NUM = "key_sign_in_phone_num";
     public static final String KEY_PASS_CODE = "key_sign_in_pass_code";
+
     private Spinner spinner;
     private PhoneNumPresenter mPresenter;
     private boolean passwordMode = true;
@@ -159,8 +160,8 @@ public class LoginFragment extends BaseFragment {
                         SPUtils.getInstance().put(KEY_PHONE_NUM, phoneNum);
                         SPUtils.getInstance().put(KEY_PASS_CODE, password);
                         Log.e(TAG, "login success = " + response.body());
-                        Log.e(TAG, "login success 1 = " + Constant.mToken);
-                        Log.e(TAG, "login success 2 = " + Constant.mAccountId);
+//                        Log.e(TAG, "login success 1 = " + Constant.mToken);
+//                        Log.e(TAG, "login success 2 = " + Constant.mAccountId);
 //                        modifyPassword("aa123456", "ab123456", "ab123456");
                         if (getActivity() instanceof SignInActivity) {
                             ((SignInActivity) getActivity()).toHomePage();
