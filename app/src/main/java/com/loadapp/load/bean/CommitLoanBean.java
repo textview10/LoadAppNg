@@ -2,7 +2,7 @@ package com.loadapp.load.bean;
 
 public class CommitLoanBean {
     //订单ID，验证通过会有订单号，不通过为0
-    private int order_id;
+    private long order_id;
     //资料未完成时返回  当前步骤
     private int current_phase;
     //资料未完成时返回  下一步骤
@@ -11,11 +11,11 @@ public class CommitLoanBean {
     private int progress;
 
 
-    public int getOrder_id() {
+    public long getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(int order_id) {
+    public void setOrder_id(long order_id) {
         this.order_id = order_id;
     }
 

@@ -16,6 +16,7 @@ import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
 import com.loadapp.load.bean.AccountProfileBean;
+import com.loadapp.load.bean.event.PhaseAllEvent;
 import com.loadapp.load.collect.CollectDataManager;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.profile.fragment.BankInfoFragment;
@@ -28,6 +29,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -46,6 +48,7 @@ public class CommitProfileActivity extends BaseActivity {
     public static final int PHASE_4 = 104;
     public static final int PHASE_5 = 105;
     public static final int PHASE_COLLECT_DATA = 106;
+    public static final int PHASE_ALL = 110;
 
     private AccountProfileBean mProfileBean;
     private BaseCommitFragment mCurFragment;
@@ -112,6 +115,9 @@ public class CommitProfileActivity extends BaseActivity {
                 break;
             case PHASE_5:
 
+                break;
+            case PHASE_ALL:
+                EventBus.getDefault().post(new PhaseAllEvent());
                 break;
             case PHASE_COLLECT_DATA:
                 // 收集信息.

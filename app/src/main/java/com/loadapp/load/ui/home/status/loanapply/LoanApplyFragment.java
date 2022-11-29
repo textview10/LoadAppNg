@@ -1,7 +1,7 @@
 package com.loadapp.load.ui.home.status.loanapply;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
+import com.loadapp.load.bean.ApplyResultBean;
 import com.loadapp.load.bean.CommitLoanBean;
 import com.loadapp.load.bean.LoanApplyBean;
+import com.loadapp.load.bean.event.PhaseAllEvent;
+import com.loadapp.load.bean.event.UpdateOrderInfo;
 import com.loadapp.load.dialog.producttrial.ProductTrialDialog;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.home.status.BaseStatusFragment;
@@ -27,6 +30,9 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,6 +41,8 @@ public class LoanApplyFragment extends BaseStatusFragment {
     private static final String TAG = "LoanApplyFragment";
     private RecyclerView rvLoanApply;
     private LoanApplyAdapter adapter;
+
+    private String curProductId;
 
     @Nullable
     @Override
@@ -48,7 +56,10 @@ public class LoanApplyFragment extends BaseStatusFragment {
         super.onViewCreated(view, savedInstanceState);
         rvLoanApply = view.findViewById(R.id.rv_loan_apply);
         initializeView();
-        canLoanApply();
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+        requestLoanApplyType();
     }
 
     private void initializeView() {
@@ -68,14 +79,16 @@ public class LoanApplyFragment extends BaseStatusFragment {
             dialog.setOnDialogClickListener(new ProductTrialDialog.OnDialogClickListener() {
                 @Override
                 public void onClickAgree() {
-                    commitLoanApply(product.getProduct_id());
+                    curProductId = product.getProduct_id();
+                    checkCanLoanApply();
                 }
             });
             dialog.show();
         });
     }
 
-    private void canLoanApply() {
+    //请求有几种借贷
+    private void requestLoanApplyType() {
         JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
             jsonObject.put("account_id", Constant.mAccountId);
@@ -114,17 +127,14 @@ public class LoanApplyFragment extends BaseStatusFragment {
                 });
     }
 
-    private void commitLoanApply(String productId) {
+    private void checkCanLoanApply() {
         JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
-//        JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("account_id", Constant.mAccountId);
             jsonObject.put("access_token", Constant.mToken);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.e(TAG, "access_token = " + Constant.mToken);
-        Log.e(TAG, "account_id = " + Constant.mAccountId);
         OkGo.<String>post(Api.CHECK_CAN_ORDER).tag(TAG)
                 .params("data", jsonObject.toString())
                 .execute(new StringCallback() {
@@ -138,15 +148,24 @@ public class LoanApplyFragment extends BaseStatusFragment {
                             Log.e(TAG, " commit loan error ." + response.body());
                             return;
                         }
-                        if (commitLoan.getNext_phase() == 0){
-                            ToastUtils.showShort("get next phase error");
-                            return;
-                        }
                         if (commitLoan.getOrder_id() != 0) {
-                            ToastUtils.showShort("check order success");
+                            //正式开始申请贷款
+                            new Thread(){
+                                @Override
+                                public void run() {
+                                    super.run();
+                                    SystemClock.sleep(3000);
+                                    applyLoad(commitLoan.getOrder_id());
+                                }
+                            }.start();
                         } else {
-                            CommitProfileActivity.startActivity(getActivity(), commitLoan.getNext_phase());
+                            if (commitLoan.getCurrent_phase() == CommitProfileActivity.PHASE_ALL) {
+                                ToastUtils.showShort("orderId is null");
+                            } else {
+                                CommitProfileActivity.startActivity(getActivity(), commitLoan.getCurrent_phase());
+                            }
                         }
+
                     }
 
                     @Override
@@ -161,9 +180,62 @@ public class LoanApplyFragment extends BaseStatusFragment {
                 });
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = false)
+    public void onEvent(PhaseAllEvent event) {
+        checkCanLoanApply();
+    }
+
+    private void applyLoad(long orderId) {
+        JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
+        try {
+            jsonObject.put("account_id", Constant.mAccountId);
+            jsonObject.put("access_token", Constant.mToken);
+            //订单ID
+            jsonObject.put("order_id", orderId + "");
+            //申请的产品ID
+            jsonObject.put("product_id", curProductId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        OkGo.<String>post(Api.ORDER_APPLY).tag(TAG)
+                .params("data", jsonObject.toString())
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        if (getActivity().isFinishing() || getActivity().isDestroyed()) {
+                            return;
+                        }
+                        ApplyResultBean applyResult = checkResponseSuccess(response, ApplyResultBean.class);
+                        if (applyResult == null) {
+                            Log.e(TAG, " apply result error ." + response.body());
+                            return;
+                        }
+                        if (applyResult.getOrder_create() == 1) {
+                            ToastUtils.showShort("order create success");
+                            EventBus.getDefault().post(new UpdateOrderInfo());
+                        } else {
+                            ToastUtils.showShort("order create failure");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        if (getActivity().isFinishing() || getActivity().isDestroyed()) {
+                            return;
+                        }
+                        Log.e(TAG, "apply result  failure = " + response.body());
+                        ToastUtils.showShort("apply result failure");
+                    }
+                });
+    }
+
     @Override
     public void onDestroy() {
         OkGo.getInstance().cancelTag(TAG);
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
         super.onDestroy();
     }
 }

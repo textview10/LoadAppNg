@@ -25,6 +25,8 @@ import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseFragment;
 import com.loadapp.load.bean.OrderInfoBean;
+import com.loadapp.load.bean.event.PhaseAllEvent;
+import com.loadapp.load.bean.event.UpdateOrderInfo;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.home.status.loanapply.LoanApplyFragment;
 import com.loadapp.load.ui.home.status.LoanProcessingFragment;
@@ -35,6 +37,9 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -78,6 +83,9 @@ public class LoanFragment extends BaseFragment {
         mHandler.sendEmptyMessageDelayed(TYPE_DELAY, 500);
 //        PersonProfileFragment personProfileFragment = new PersonProfileFragment();
 //        toFragment(personProfileFragment);
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
     }
 
     public void toFragment(BaseFragment fragment) {
@@ -170,8 +178,22 @@ public class LoanFragment extends BaseFragment {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = false)
+    public void onEvent(UpdateOrderInfo event) {
+        getOrderInfo();
+    }
+
     protected @IdRes
     int getFragmentContainerRes() {
         return R.id.fl_loan_container;
+    }
+
+    @Override
+    public void onDestroy() {
+        OkGo.getInstance().cancelTag(TAG);
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
+        super.onDestroy();
     }
 }
