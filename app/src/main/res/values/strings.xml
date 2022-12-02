@@ -8,6 +8,8 @@
     <string name="spalish_sign_in">Sign in</string>
     <string name="spalish_sign_up">Sign up</string>
 
+    <string name="default_notification_channel_id" >Haikyfun</string>
+
     <string name="spalish_Input_your_phone_number">Input your phone number</string>
     <string name="spalish_Next">Next</string>
     <string name="spalish_Please_enter">Please input your phone num:</string>

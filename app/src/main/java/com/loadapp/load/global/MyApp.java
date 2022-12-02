@@ -5,6 +5,10 @@ import android.content.Context;
 
 //import com.google.firebase.FirebaseApp;
 
+import androidx.multidex.MultiDex;
+
+import com.google.firebase.FirebaseApp;
+import com.loadapp.load.collect.FireBaseMgr;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.DBCookieStore;
@@ -50,7 +54,7 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-//        FirebaseApp.initializeApp(this);
+        FirebaseApp.initializeApp(this);
         initOkGo();
 //        CrashHandler.getInstance().init(this);  //捕获异常, 并杀掉app
         initializeData();
@@ -89,7 +93,7 @@ public class MyApp extends Application {
     private void initializeData() {
 //        LocationMgr.getInstance().init(this);
 //
-//        FireBaseMgr.getInstance().getToken();
+        FireBaseMgr.getInstance().getToken();
     }
 
     @Override

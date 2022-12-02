@@ -15,4 +15,9 @@ public class Constant {
 
     public static OrderInfoBean mLaunchOrderInfo;
 
+    public static String mFirebaseToken;
+
+    public static boolean isNewToken;
+
+    public static String mAdvertId;
 }

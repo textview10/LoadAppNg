@@ -22,6 +22,7 @@ import com.loadapp.load.base.BaseActivity;
 import com.loadapp.load.bean.BaseConfigBean;
 import com.loadapp.load.bean.LoginResponseBean;
 import com.loadapp.load.collect.CollectDataManager;
+import com.loadapp.load.collect.FireBaseMgr;
 import com.loadapp.load.dialog.requestpermission.RequestPermissionDialog;
 import com.loadapp.load.global.ConfigMgr;
 import com.loadapp.load.global.Constant;
@@ -72,6 +73,8 @@ public class HomeActivity extends BaseActivity {
 
         SPUtils.getInstance().put(Constant.KEY_ACCOUNT_ID, Constant.mAccountId);
         SPUtils.getInstance().put(Constant.KEY_TOKEN, Constant.mToken);
+
+        FireBaseMgr.getInstance().reportFcmToken(this);
     }
 
     private void requestPermission() {

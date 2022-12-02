@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "754799285172",
+    "project_id": "haikyfin-d43f2",
+    "storage_bucket": "haikyfin-d43f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754799285172:android:5770a3bee607e5f658d8e1",
+        "android_client_info": {
+          "package_name": "com.loadapp.load"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754799285172-7rjfdu0142hjov8928q94cf1shfci23g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3RVIoI5uX4riCRPPHpFoFAFdOTQNTxb4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754799285172-7rjfdu0142hjov8928q94cf1shfci23g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
