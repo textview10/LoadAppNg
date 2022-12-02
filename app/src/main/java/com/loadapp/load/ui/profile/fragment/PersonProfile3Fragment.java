@@ -283,9 +283,7 @@ public class PersonProfile3Fragment extends BaseCommitFragment {
                             Log.e(TAG, " upload contact error ." + response.body());
                             return;
                         }
-                        if (getActivity() instanceof CommitProfileActivity) {
-                            ((CommitProfileActivity) getActivity()).switchFragment(CommitProfileActivity.PHASE_4);
-                        }
+                        checkAndToPageByPhaseCode(phaseBean.getCurrent_phase());
                     }
 
                     @Override

@@ -12,10 +12,10 @@ import com.lzy.okgo.model.Response;
 
 public class CheckResponseUtils {
 
-    public static final Gson gson = new GsonBuilder()
-////             # 将DEFAULT改为STRING
-            .setLongSerializationPolicy(LongSerializationPolicy.STRING)
-            .create();
+//    public static final Gson gson = new GsonBuilder()
+//////             # 将DEFAULT改为STRING
+//            .setLongSerializationPolicy(LongSerializationPolicy.STRING)
+//            .create();
     ;
 
     public static <T> T checkResponseSuccess(Response<String> response, Class<T> clazz) {
@@ -41,6 +41,6 @@ public class CheckResponseUtils {
             ToastUtils.showShort("request failure 2.");
             return null;
         }
-        return gson.toJson(responseBean.getData());
+        return JSONObject.toJSONString(responseBean.getData());
     }
 }

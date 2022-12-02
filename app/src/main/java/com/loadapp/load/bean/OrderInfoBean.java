@@ -3,75 +3,90 @@ package com.loadapp.load.bean;
 import java.util.List;
 
 public class OrderInfoBean {
-    //订单ID
-    private int order_id;
-    //订单状态， 状态内容请查看 sheet 订单状态说明
-    private int check_status;
-    //拒绝消息
-    private String reject_message;
-    //拒绝之后，剩余多少天可以申请
-    private int limit_day;
-    //是否可以申请
-    private boolean can_apply;
-    //首借，复借， 0 首借 1复借
-    private boolean is_reloan;
-    //（分期信息）
-    private List<Stage> stages;
 
-    public int getOrder_id() {
-        return order_id;
+    private OrderDetail order_detail;
+
+    public OrderDetail getOrder_detail() {
+        return order_detail;
     }
 
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
+    public void setOrder_detail(OrderDetail order_detail) {
+        this.order_detail = order_detail;
     }
 
-    public int getCheck_status() {
-        return check_status;
-    }
+    public static class OrderDetail {
+        //订单ID
+        private String order_id;
+        //订单状态， 状态内容请查看 sheet 订单状态说明
+        private int check_status;
+        //拒绝消息
+        private String reject_message;
+        //拒绝之后，剩余多少天可以申请
+        private int limit_day;
+        //是否可以申请
+        private boolean can_apply;
+        //首借，复借， 0 首借 1复借
+        private boolean is_reloan;
+        //（分期信息）
+        private List<Stage> stages;
 
-    public void setCheck_status(int check_status) {
-        this.check_status = check_status;
-    }
+        public String getOrder_id() {
+            return order_id;
+        }
 
-    public String getReject_message() {
-        return reject_message;
-    }
+        public void setOrder_id(String order_id) {
+            this.order_id = order_id;
+        }
 
-    public void setReject_message(String reject_message) {
-        this.reject_message = reject_message;
-    }
+        public int getCheck_status() {
+            return check_status;
+        }
 
-    public int getLimit_day() {
-        return limit_day;
-    }
+        public void setCheck_status(int check_status) {
+            this.check_status = check_status;
+        }
 
-    public void setLimit_day(int limit_day) {
-        this.limit_day = limit_day;
-    }
+        public String getReject_message() {
+            return reject_message;
+        }
 
-    public boolean isCan_apply() {
-        return can_apply;
-    }
+        public void setReject_message(String reject_message) {
+            this.reject_message = reject_message;
+        }
 
-    public void setCan_apply(boolean can_apply) {
-        this.can_apply = can_apply;
-    }
+        public int getLimit_day() {
+            return limit_day;
+        }
 
-    public boolean isIs_reloan() {
-        return is_reloan;
-    }
+        public void setLimit_day(int limit_day) {
+            this.limit_day = limit_day;
+        }
 
-    public void setIs_reloan(boolean is_reloan) {
-        this.is_reloan = is_reloan;
-    }
+        public boolean isCan_apply() {
+            return can_apply;
+        }
 
-    public List<Stage> getStages() {
-        return stages;
-    }
+        public void setCan_apply(boolean can_apply) {
+            this.can_apply = can_apply;
+        }
 
-    public void setStages(List<Stage> stages) {
-        this.stages = stages;
+        public boolean isIs_reloan() {
+            return is_reloan;
+        }
+
+        public void setIs_reloan(boolean is_reloan) {
+            this.is_reloan = is_reloan;
+        }
+
+        public List<Stage> getStages() {
+            return stages;
+        }
+
+        public void setStages(List<Stage> stages) {
+            this.stages = stages;
+        }
+
+
     }
 
     public static class Stage {

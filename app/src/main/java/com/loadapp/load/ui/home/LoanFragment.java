@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,11 +56,12 @@ public class LoanFragment extends BaseFragment {
         public boolean handleMessage(@NonNull Message message) {
             switch (message.what){
                 case TYPE_DELAY:
-                    if (Constant.mLaunchOrderInfo != null){
+                    if (Constant.mLaunchOrderInfo != null &&
+                            Constant.mLaunchOrderInfo.getOrder_detail() != null){
                         if (pbLoading != null){
                             pbLoading.setVisibility(View.GONE);
                         }
-                        updatePageByStatus(Constant.mLaunchOrderInfo);
+                        updatePageByStatus(Constant.mLaunchOrderInfo.getOrder_detail());
                     } else {
                         getOrderInfo();
                     }
@@ -121,7 +123,7 @@ public class LoanFragment extends BaseFragment {
                             Log.e(TAG, " order info error ." + response.body());
                             return;
                         }
-                       updatePageByStatus(orderInfo);
+                       updatePageByStatus(orderInfo.getOrder_detail());
                     }
 
                     @Override
@@ -139,15 +141,16 @@ public class LoanFragment extends BaseFragment {
                 });
     }
 
-    private void updatePageByStatus(OrderInfoBean orderInfoBean){
+    private void updatePageByStatus(OrderInfoBean.OrderDetail orderInfoBean){
         //可以借款
-        if (orderInfoBean.isCan_apply() || orderInfoBean.getOrder_id() == 0){
+        if (orderInfoBean.isCan_apply() && TextUtils.equals(orderInfoBean.getOrder_id(), "0")){
 //        if (true){
             LoanApplyFragment loanApplyFragment = new LoanApplyFragment();
             toFragment(loanApplyFragment);
             return;
         }
         int checkStatus = orderInfoBean.getCheck_status();
+        Log.e("Test","check status == " + checkStatus);
         switch (checkStatus){
             case 1: //已提交待审核
             case 2: //审核拒绝

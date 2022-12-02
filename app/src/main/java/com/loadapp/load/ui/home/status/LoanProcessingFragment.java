@@ -23,7 +23,7 @@ public class LoanProcessingFragment extends BaseStatusFragment{
     private TextView tvStatus;
 
     private int mCheckStatus = -1;
-    private OrderInfoBean mOrderInfo;
+    private OrderInfoBean.OrderDetail mOrderInfo;
 
     @Nullable
     @Override
@@ -40,7 +40,7 @@ public class LoanProcessingFragment extends BaseStatusFragment{
         updateInfoInternal();
     }
 
-    public void setOrderInfo(int checkStatus, OrderInfoBean orderInfoBean){
+    public void setOrderInfo(int checkStatus, OrderInfoBean.OrderDetail orderInfoBean){
         mCheckStatus = checkStatus;
         mOrderInfo = orderInfoBean;
         updateInfoInternal();

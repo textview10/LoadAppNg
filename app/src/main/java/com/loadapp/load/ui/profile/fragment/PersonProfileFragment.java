@@ -123,7 +123,7 @@ public class PersonProfileFragment extends BaseCommitFragment {
     }
 
     @Override
-    public void setProfileBean(AccountProfileBean profileBean) {
+    public void setProfileBean(AccountProfileBean.AccountProfile profileBean) {
         super.setProfileBean(profileBean);
         if (emailEditText != null && !TextUtils.isEmpty(profileBean.getEmail())){
             emailEditText.setEditTextAndSelection(profileBean.getEmail());
@@ -277,9 +277,7 @@ public class PersonProfileFragment extends BaseCommitFragment {
                             Log.e(TAG, " upload base error ." + response.body());
                             return;
                         }
-                        if (getActivity() instanceof CommitProfileActivity) {
-                            ((CommitProfileActivity) getActivity()).switchFragment(CommitProfileActivity.PHASE_2);
-                        }
+                        checkAndToPageByPhaseCode(phaseBean.getCurrent_phase());
                     }
 
                     @Override

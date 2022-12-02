@@ -90,7 +90,7 @@ public class BankInfoFragment extends BaseCommitFragment{
     }
 
     @Override
-    public void setProfileBean(AccountProfileBean profileBean) {
+    public void setProfileBean(AccountProfileBean.AccountProfile profileBean) {
         super.setProfileBean(profileBean);
     }
 
@@ -143,9 +143,7 @@ public class BankInfoFragment extends BaseCommitFragment{
                             Log.e(TAG, " upload bank info ." + response.body());
                             return;
                         }
-                        if (getActivity() instanceof CommitProfileActivity) {
-                            ((CommitProfileActivity) getActivity()).switchFragment(4);
-                        }
+                        checkAndToPageByPhaseCode(phaseBean.getCurrent_phase());
                     }
 
                     @Override

@@ -50,7 +50,7 @@ public class CommitProfileActivity extends BaseActivity {
     public static final int PHASE_COLLECT_DATA = 106;
     public static final int PHASE_ALL = 110;
 
-    private AccountProfileBean mProfileBean;
+    private AccountProfileBean.AccountProfile mProfileBean;
     private BaseCommitFragment mCurFragment;
 
     @Override
@@ -157,11 +157,11 @@ public class CommitProfileActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Response<String> response) {
                         AccountProfileBean profileBean = checkResponseSuccess(response, AccountProfileBean.class);
-                        if (profileBean == null) {
+                        if (profileBean == null || profileBean.getAccount_profile() == null) {
                             Log.e(TAG, " get profile error ." + response.body());
                             return;
                         }
-                        mProfileBean = profileBean;
+                        mProfileBean = profileBean.getAccount_profile();
                         if (mCurFragment != null) {
                             if (mProfileBean != null) {
                                 mCurFragment.setProfileBean(mProfileBean);
