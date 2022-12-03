@@ -23,6 +23,7 @@ import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
+import com.loadapp.load.bean.AccountProfileBean;
 import com.loadapp.load.bean.ContactBean;
 import com.loadapp.load.bean.PhaseBean;
 import com.loadapp.load.dialog.CustomDialog;
@@ -170,7 +171,7 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
                     String number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                     String photoUri = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_URI));
                     String ringtone = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CUSTOM_RINGTONE));
-                    Log.e(TAG, " number = " + number + "  displayName = " + displayName);
+//                    Log.e(TAG, " number = " + number + "  displayName = " + displayName);
 
                     mContactList.add(new ContactBean(id, number, displayName, photoUri, ringtone));
                 }
@@ -310,5 +311,23 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
                         Log.e(TAG, "upload contact failure = " + response.body());
                     }
                 });
+    }
+
+    @Override
+    public void setProfileBean(AccountProfileBean.AccountProfile profileBean) {
+        super.setProfileBean(profileBean);
+//        private SelectContainer selectRelationShip1, selectRelationShip2
+        if (editSelectMobile1 != null && !TextUtils.isEmpty(profileBean.getContact1_mobile())){
+            editSelectMobile1.setEditTextAndSelection(profileBean.getContact1_mobile());
+        }
+        if (editSelectMobile2 != null && !TextUtils.isEmpty(profileBean.getContact2_mobile())){
+            editSelectMobile2.setEditTextAndSelection(profileBean.getContact2_mobile());
+        }
+        if (editTextName1 != null && !TextUtils.isEmpty(profileBean.getContact1_name())){
+            editTextName1.setEditTextAndSelection(profileBean.getContact1_name());
+        }
+        if (editTextName2 != null && !TextUtils.isEmpty(profileBean.getContact2_name())){
+            editTextName2.setEditTextAndSelection(profileBean.getContact2_name());
+        }
     }
 }

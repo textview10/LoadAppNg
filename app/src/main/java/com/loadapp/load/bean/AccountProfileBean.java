@@ -33,6 +33,8 @@ public class AccountProfileBean {
         private int month_salary;
         private String contact1_name;
         private String contact1_mobile;
+        private String contact2_name;
+        private String contact2_mobile;
         private int contact1_relationship;
         private int contact2_relationship;
         private String home_state;
@@ -255,6 +257,22 @@ public class AccountProfileBean {
 
         public void setCtime(long ctime) {
             this.ctime = ctime;
+        }
+
+        public String getContact2_name() {
+            return contact2_name;
+        }
+
+        public void setContact2_name(String contact2_name) {
+            this.contact2_name = contact2_name;
+        }
+
+        public String getContact2_mobile() {
+            return contact2_mobile;
+        }
+
+        public void setContact2_mobile(String contact2_mobile) {
+            this.contact2_mobile = contact2_mobile;
         }
     }
 

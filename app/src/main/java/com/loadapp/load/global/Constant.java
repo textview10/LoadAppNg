@@ -20,4 +20,6 @@ public class Constant {
     public static boolean isNewToken;
 
     public static String mAdvertId;
+
+    public static final boolean IS_TEST = true;
 }

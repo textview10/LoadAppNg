@@ -35,14 +35,14 @@ android {
         pickFirst "androidsupportmultidexversion.txt"
     }
 
-//    signingConfigs {
-//        release {
-//            storeFile file('../loanapp.jks');
-//            storePassword "123456"
-//            keyAlias "loanapp"
-//            keyPassword "123456"
-//        }
-//    }
+    signingConfigs {
+        release {
+            storeFile file('../loanapp.jks');
+            storePassword "123456"
+            keyAlias "loanapp"
+            keyPassword "123456"
+        }
+    }
 }
 
 dependencies {

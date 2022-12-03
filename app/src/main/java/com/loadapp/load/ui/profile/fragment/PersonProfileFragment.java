@@ -123,7 +123,7 @@ public class PersonProfileFragment extends BaseCommitFragment {
     }
 
     @Override
-    public void setProfileBean(AccountProfileBean.AccountProfile profileBean) {
+    public void setProfileBean(AccountProfileBean.AccountProfile      profileBean) {
         super.setProfileBean(profileBean);
         if (emailEditText != null && !TextUtils.isEmpty(profileBean.getEmail())){
             emailEditText.setEditTextAndSelection(profileBean.getEmail());

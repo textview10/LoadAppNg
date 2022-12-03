@@ -53,7 +53,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         flLogout = view.findViewById(R.id.fl_me_logout);
 
         llTestProfile = view.findViewById(R.id.ll_me_test_to_profile);
-        if (BuildConfig.DEBUG) {
+        if (Constant.IS_TEST) {
             llTestProfile.setVisibility(View.VISIBLE);
         }
         llInfo.setOnClickListener(this);
@@ -84,8 +84,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 logOut();
                 break;
             case R.id.ll_me_test_to_profile:
-                Intent intent = new Intent(getContext(), CommitProfileActivity.class);
-                startActivity(intent);
+                CommitProfileActivity.startActivity(getContext(), CommitProfileActivity.PHASE_2);
                 break;
         }
     }
