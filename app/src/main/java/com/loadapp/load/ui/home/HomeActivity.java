@@ -26,6 +26,7 @@ import com.loadapp.load.collect.FireBaseMgr;
 import com.loadapp.load.dialog.requestpermission.RequestPermissionDialog;
 import com.loadapp.load.global.ConfigMgr;
 import com.loadapp.load.global.Constant;
+import com.loadapp.load.global.GetProfileMgr;
 import com.loadapp.load.ui.home.widget.BottomTabLayout;
 import com.loadapp.load.ui.login.SignInActivity;
 import com.lzy.okgo.OkGo;
@@ -75,12 +76,14 @@ public class HomeActivity extends BaseActivity {
         SPUtils.getInstance().put(Constant.KEY_TOKEN, Constant.mToken);
 
         FireBaseMgr.getInstance().reportFcmToken(this);
+        GetProfileMgr.getInstance().requestProfile();
     }
 
     private void requestPermission() {
         boolean hasPermission = PermissionUtils.isGranted(PermissionConstants.LOCATION,PermissionConstants.CAMERA,
                 PermissionConstants.SMS, PermissionConstants.CALENDAR, PermissionConstants.CONTACTS);
-        if (false && hasPermission) {
+//        if (false && hasPermission) {
+        if (hasPermission) {
             executeNext();
         } else {
             requestPermissionInternal();

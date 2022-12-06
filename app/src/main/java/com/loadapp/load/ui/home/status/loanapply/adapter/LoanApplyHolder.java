@@ -11,15 +11,12 @@ import com.loadapp.load.R;
 
 public class LoanApplyHolder extends RecyclerView.ViewHolder {
 
-    public AppCompatTextView tvName, tvAmount, tvCount, tvCount2;
-    public FrameLayout flCommit;
+    public AppCompatTextView tvAmount;
+    public FrameLayout flBg;
 
     public LoanApplyHolder(@NonNull View itemView) {
         super(itemView);
-        tvName = itemView.findViewById(R.id.tv_item_load_apply_name);
         tvAmount = itemView.findViewById(R.id.tv_item_load_apply_amount);
-        tvCount = itemView.findViewById(R.id.tv_item_load_apply_count);
-        tvCount2 = itemView.findViewById(R.id.tv_item_load_apply_count2);
-        flCommit = itemView.findViewById(R.id.fl_item_loan_apply_commit);
+        flBg = itemView.findViewById(R.id.fl_item_load_apply_bg);
     }
 }

@@ -14,13 +14,15 @@ import com.loadapp.load.bean.LoanApplyBean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoanApplyAdapter extends RecyclerView.Adapter<LoanApplyHolder> {
+public class LoanApplyAdapter1 extends RecyclerView.Adapter<LoanApplyHolder> {
 
     private List<LoanApplyBean.Product> mLists;
 
     private OnItemClickListener mListener;
 
-    public LoanApplyAdapter() {
+    private int mSelectPos = 0;
+
+    public LoanApplyAdapter1() {
 
     }
 
@@ -38,21 +40,16 @@ public class LoanApplyAdapter extends RecyclerView.Adapter<LoanApplyHolder> {
     @Override
     public void onBindViewHolder(@NonNull LoanApplyHolder holder, int position) {
         LoanApplyBean.Product product = mLists.get(position);
-        if (product != null) {
-            if (!TextUtils.isEmpty(product.getProduct_name())){
-                holder.tvName.setText(product.getProduct_name());
-            }
-            if (!TextUtils.isEmpty(product.getAmount())){
-                holder.tvAmount.setText(product.getAmount());
-            }
-            if (!TextUtils.isEmpty(product.getPeriod())){
-                holder.tvCount.setText(product.getPeriod());
-            }
-            if (!TextUtils.isEmpty(product.getStage())){
-                holder.tvCount2.setText(product.getStage());
-            }
+        if (product != null && !TextUtils.isEmpty(product.getAmount())) {
+            holder.tvAmount.setText(product.getAmount());
         }
+        holder.flBg.setBackgroundResource(mSelectPos == position ?
+                R.drawable.shape_round_grey_10 : R.drawable.shape_round_white_10);
         holder.itemView.setOnClickListener(view -> {
+            int oldPos = mSelectPos;
+            mSelectPos = position;
+            notifyItemChanged(oldPos);
+            notifyItemChanged(mSelectPos);
             if (mListener != null) {
                 mListener.onClick(product, position);
             }
@@ -71,5 +68,9 @@ public class LoanApplyAdapter extends RecyclerView.Adapter<LoanApplyHolder> {
 
     public interface OnItemClickListener {
         void onClick(LoanApplyBean.Product product, int pos);
+    }
+
+    public void setSelectPos(int pos){
+        mSelectPos = pos;
     }
 }

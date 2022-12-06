@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import com.loadapp.load.base.BaseFragment;
 import com.loadapp.load.bean.AccountProfileBean;
 import com.loadapp.load.bean.LogoutBean;
 import com.loadapp.load.global.Constant;
+import com.loadapp.load.global.GetProfileMgr;
 import com.loadapp.load.ui.SplashActivity;
 import com.loadapp.load.ui.profile.CommitProfileActivity;
 import com.loadapp.load.util.BuildRequestJsonUtil;
@@ -36,6 +38,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
 
     private LinearLayout llInfo, llBankCard, llMsg, llHelp, llTestProfile;
     private FrameLayout flLogout;
+    private TextView tvName;
 
     @Nullable
     @Override
@@ -46,6 +49,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        tvName = view.findViewById(R.id.tv_me_avatar_name);
         llInfo = view.findViewById(R.id.ll_me_infomation);
         llBankCard = view.findViewById(R.id.ll_me_bank_card);
         llMsg = view.findViewById(R.id.ll_me_message);
@@ -63,6 +67,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         flLogout.setOnClickListener(this);
 
         llTestProfile.setOnClickListener(this);
+
+        GetProfileMgr.getInstance().addObserver(observer);
+
     }
 
     @Override
@@ -88,6 +95,15 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 break;
         }
     }
+
+    private GetProfileMgr.Observer observer = new GetProfileMgr.Observer() {
+        @Override
+        public void onGetData(AccountProfileBean.AccountProfile profileBean) {
+            if (tvName != null){
+                tvName.setText(String.valueOf(profileBean.getName()));
+            }
+        }
+    };
 
     private void logOut() {
         JSONObject jsonObject = new JSONObject();
@@ -131,6 +147,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onDestroyView() {
         OkGo.getInstance().cancelTag(TAG);
+        GetProfileMgr.getInstance().removeObserver(observer);
         super.onDestroyView();
     }
 }

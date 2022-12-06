@@ -77,8 +77,8 @@ public class LauncherActivity extends BaseActivity {
 //        }
         long accountId = SPUtils.getInstance().getLong(Constant.KEY_ACCOUNT_ID, 0);
         String token = SPUtils.getInstance().getString(Constant.KEY_TOKEN);
-//        if (accountId == 0 || TextUtils.isEmpty(token)) {
-        if (BuildConfig.DEBUG || accountId == 0 || TextUtils.isEmpty(token)) {
+        if (accountId == 0 || TextUtils.isEmpty(token)) {
+//        if (BuildConfig.DEBUG || accountId == 0 || TextUtils.isEmpty(token)) {
             if (mHandler != null) {
                 mHandler.sendEmptyMessageDelayed(TO_WELCOME_PAGE, 1000);
             }
