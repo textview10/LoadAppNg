@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +22,7 @@ import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
+import com.loadapp.load.base.BaseActivity;
 import com.loadapp.load.bean.AccountProfileBean;
 import com.loadapp.load.bean.PhaseBean;
 import com.loadapp.load.dialog.SelectDataDialog;
@@ -28,6 +31,7 @@ import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.profile.CommitProfileActivity;
 import com.loadapp.load.ui.profile.widget.EditTextContainer;
 import com.loadapp.load.ui.profile.widget.SelectContainer;
+import com.loadapp.load.ui.webview.WebViewFragment;
 import com.loadapp.load.util.BuildRequestJsonUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -51,6 +55,11 @@ public class PersonProfileFragment extends BaseCommitFragment {
 
     private Pair<String, String> mMonthSalary;
     private Pair<String, String> mWorkYear;
+    private ImageView checkAgree;
+    private TextView tvTerms;
+    private WebViewFragment webViewFragment;
+    private boolean isAgree = true;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,6 +80,10 @@ public class PersonProfileFragment extends BaseCommitFragment {
         selectCity = view.findViewById(R.id.select_view_person_profile_province);
         streetEditText = view.findViewById(R.id.edittext_view_person_profile_address);
         flCommit = view.findViewById(R.id.fl_person_profile_commit);
+
+        checkAgree = view.findViewById(R.id.iv_person_profile_agree);
+        tvTerms = view.findViewById(R.id.tv_person_profile_term);
+
         initializeListener();
     }
 
@@ -103,6 +116,26 @@ public class PersonProfileFragment extends BaseCommitFragment {
             @Override
             public void onClick(View view) {
                 showAreaPicker();
+            }
+        });
+
+        tvTerms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BaseActivity baseActivity = (BaseActivity) getActivity();
+                if (webViewFragment == null){
+                    webViewFragment = new WebViewFragment();
+                }
+                webViewFragment.setUrl(Api.WEB_VIEW_POLICY);
+                baseActivity.addFragment(webViewFragment, "term");
+            }
+        });
+
+        checkAgree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isAgree = !isAgree;
+                updateAgreeState();
             }
         });
 
@@ -286,5 +319,11 @@ public class PersonProfileFragment extends BaseCommitFragment {
                         Log.e(TAG, "upload base failure = " + response.body());
                     }
                 });
+    }
+
+    private void updateAgreeState(){
+        if (checkAgree != null){
+            checkAgree.setImageResource(isAgree ? R.drawable.ic_selected : R.drawable.ic_unselected);
+        }
     }
 }

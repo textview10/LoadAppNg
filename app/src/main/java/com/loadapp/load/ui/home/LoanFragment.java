@@ -143,7 +143,7 @@ public class LoanFragment extends BaseFragment {
 
     private void updatePageByStatus(OrderInfoBean.OrderDetail orderInfoBean){
         //可以借款
-        if (orderInfoBean.isCan_apply() && TextUtils.equals(orderInfoBean.getOrder_id(), "0")){
+        if (orderInfoBean.isCan_apply() || TextUtils.equals(orderInfoBean.getOrder_id(), "0")){
 //        if (true){
             LoanApplyFragment loanApplyFragment = new LoanApplyFragment();
             toFragment(loanApplyFragment);

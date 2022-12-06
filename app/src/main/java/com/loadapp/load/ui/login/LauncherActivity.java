@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.loadapp.load.BuildConfig;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
@@ -77,7 +78,7 @@ public class LauncherActivity extends BaseActivity {
         long accountId = SPUtils.getInstance().getLong(Constant.KEY_ACCOUNT_ID, 0);
         String token = SPUtils.getInstance().getString(Constant.KEY_TOKEN);
 //        if (accountId == 0 || TextUtils.isEmpty(token)) {
-        if (true || accountId == 0 || TextUtils.isEmpty(token)) {
+        if (BuildConfig.DEBUG || accountId == 0 || TextUtils.isEmpty(token)) {
             if (mHandler != null) {
                 mHandler.sendEmptyMessageDelayed(TO_WELCOME_PAGE, 1000);
             }

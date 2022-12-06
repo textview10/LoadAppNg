@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.loadapp.load.BuildConfig;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseActivity;
@@ -64,16 +65,17 @@ public class SplashActivity extends BaseActivity {
             }
         });
 
-        Button btn = new Button(SplashActivity.this);
-        btn.setText("测试进入首页");
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-            }
-        });
-        rlContainer.addView(btn);
-
+        if (BuildConfig.DEBUG) {
+            Button btn = new Button(SplashActivity.this);
+            btn.setText("测试进入首页");
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+                }
+            });
+            rlContainer.addView(btn);
+        }
 
     }
 

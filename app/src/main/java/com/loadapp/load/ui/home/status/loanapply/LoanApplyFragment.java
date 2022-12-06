@@ -106,7 +106,7 @@ public class LoanApplyFragment extends BaseStatusFragment {
                         }
                         LoanApplyBean loanApply = checkResponseSuccess(response, LoanApplyBean.class);
                         if (loanApply == null) {
-                            Log.e(TAG, " loan apply error ." + response.body());
+                            Log.e(TAG, " get product list error ." + response.body());
                             return;
                         }
                         if (adapter != null) {
@@ -121,8 +121,8 @@ public class LoanApplyFragment extends BaseStatusFragment {
                         if (getActivity().isFinishing() || getActivity().isDestroyed()) {
                             return;
                         }
-                        Log.e(TAG, "loan apply  failure = " + response.body());
-                        ToastUtils.showShort("loan apply  failure");
+                        Log.e(TAG, " get product list failure = " + response.body());
+                        ToastUtils.showShort(" get product list failure");
                     }
                 });
     }

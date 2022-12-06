@@ -52,4 +52,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         AppManager.getAppManager().finishActivity(this);
         super.onDestroy();
     }
+
+    public void addFragment(BaseFragment fragment, String tag){
+        FragmentTransaction beginTransaction = getSupportFragmentManager().beginTransaction();
+        beginTransaction.replace(getFragmentContainerRes(), fragment, tag);
+        beginTransaction.addToBackStack(tag);
+        beginTransaction.commitAllowingStateLoss();
+    }
 }

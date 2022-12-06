@@ -23,7 +23,7 @@ public class BaseCommitFragment extends BaseFragment {
 
     private void toPageByPhaseCode(int curPhase){
         if (getActivity() instanceof CommitProfileActivity) {
-            ((CommitProfileActivity) getActivity()).switchFragment(CommitProfileActivity.PHASE_2);
+            ((CommitProfileActivity) getActivity()).switchFragment(curPhase);
         }
     }
 }

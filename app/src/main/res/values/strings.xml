@@ -94,5 +94,8 @@
 
     <string name="home_loan_product_trial_title">Loan Confirmation</string>
 
-
+    <string name="sign_up_cancel">CANCEL</string>
+    <string name="sign_up_agree">AGREE</string>
+    <string name="load_confirmation_term_1">I agree to the</string>
+    <string name="load_confirmation_term_2">terms &amp; condition</string>
 </resources>

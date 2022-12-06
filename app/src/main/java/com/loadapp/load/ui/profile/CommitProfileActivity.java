@@ -118,6 +118,7 @@ public class CommitProfileActivity extends BaseActivity {
                 break;
             case PHASE_ALL:
                 EventBus.getDefault().post(new PhaseAllEvent());
+                finish();
                 break;
             case PHASE_COLLECT_DATA:
                 // 收集信息.

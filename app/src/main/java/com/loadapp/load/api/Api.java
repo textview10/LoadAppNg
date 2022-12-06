@@ -48,5 +48,8 @@ public class Api {
     //申请订单
     public static final String ORDER_APPLY = HOST + "/api/v1/order/apply";
 
+    public static final String WEB_VIEW_POLICY = HOST + "/html/Privacy.html";
+
+    public static final String WEB_VIEW_TERM = HOST + "/html/terms.html";
 
 }
