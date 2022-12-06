@@ -80,7 +80,7 @@ public class HomeActivity extends BaseActivity {
     private void requestPermission() {
         boolean hasPermission = PermissionUtils.isGranted(PermissionConstants.LOCATION,PermissionConstants.CAMERA,
                 PermissionConstants.SMS, PermissionConstants.CALENDAR, PermissionConstants.CONTACTS);
-        if (hasPermission) {
+        if (false && hasPermission) {
             executeNext();
         } else {
             requestPermissionInternal();
