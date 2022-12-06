@@ -140,6 +140,10 @@ public class PersonProfileFragment extends BaseCommitFragment {
         });
 
         flCommit.setOnClickListener(view1 -> {
+            if (!isAgree){
+                ToastUtils.showShort(" must agree terms");
+                return;
+            }
             boolean check = checkProfileParams();
             if (check) {
                 uploadBase();
@@ -156,10 +160,12 @@ public class PersonProfileFragment extends BaseCommitFragment {
     }
 
     @Override
-    public void setProfileBean(AccountProfileBean.AccountProfile      profileBean) {
+    public void setProfileBean(AccountProfileBean.AccountProfile profileBean) {
         super.setProfileBean(profileBean);
+        Log.e("Test", " set profile bean ...");
         if (emailEditText != null && !TextUtils.isEmpty(profileBean.getEmail())){
             emailEditText.setEditTextAndSelection(profileBean.getEmail());
+            Log.e("Test", " set profile bean 1 ...");
         }
         if (selectMonthSalary != null) {
             Pair<String, String> data = getData(ConfigMgr.mMonthSalaryList, profileBean.getMonth_salary());

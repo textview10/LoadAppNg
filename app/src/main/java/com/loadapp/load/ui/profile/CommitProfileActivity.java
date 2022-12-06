@@ -39,7 +39,6 @@ public class CommitProfileActivity extends BaseActivity {
     private TextView tvTitle;
 
     private static final String TAG = "CommitProfileActivity";
-
     public static final String INTENT_PHASE = "intent_phase";
 
     public static final int PHASE_1 = 101;
@@ -49,9 +48,7 @@ public class CommitProfileActivity extends BaseActivity {
     public static final int PHASE_5 = 105;
     public static final int PHASE_COLLECT_DATA = 106;
     public static final int PHASE_ALL = 110;
-
-    private AccountProfileBean.AccountProfile mProfileBean;
-    private BaseCommitFragment mCurFragment;
+    private CommitProfileFragment commitProfileFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,10 +78,17 @@ public class CommitProfileActivity extends BaseActivity {
         initPage();
     }
 
-    private void initPage(){
-        getProfile();
+    private void initPage() {
         int phaseIndex = getIntent().getIntExtra(INTENT_PHASE, PHASE_1);
-        switchFragment(phaseIndex);
+        commitProfileFragment = new CommitProfileFragment();
+        addFragment(commitProfileFragment, "commitProfile");
+        commitProfileFragment.switchFragment(phaseIndex);
+    }
+
+    public void switchFragment(int curPhase){
+        if (commitProfileFragment != null) {
+            commitProfileFragment.switchFragment(curPhase);
+        }
     }
 
     @Override
@@ -96,87 +100,6 @@ public class CommitProfileActivity extends BaseActivity {
         if (tvTitle != null) {
             tvTitle.setText(strRes);
         }
-
-    }
-
-    public void switchFragment(int index) {
-        switch (index) {
-            case PHASE_1:
-                mCurFragment = new PersonProfileFragment();
-                break;
-            case PHASE_2:
-                mCurFragment = new PersonProfile2Fragment();
-                break;
-            case PHASE_3:
-                mCurFragment = new PersonProfile3Fragment();
-                break;
-            case PHASE_4:
-                mCurFragment = new BankInfoFragment();
-                break;
-            case PHASE_5:
-
-                break;
-            case PHASE_ALL:
-                EventBus.getDefault().post(new PhaseAllEvent());
-                finish();
-                break;
-            case PHASE_COLLECT_DATA:
-                // 收集信息.
-                CollectDataManager.getInstance().collectAuthData(this, new CollectDataManager.Observer() {
-                    @Override
-                    public void success(Response<String> response) {
-                        Log.e(TAG, " upload client info success .");
-                        ToastUtils.showShort("modify success");
-                        finish();
-                    }
-
-                    @Override
-                    public void failure(Response<String> response) {
-                        Log.e(TAG, " upload client info failure .");
-                    }
-                });
-                return;
-        }
-        if (mCurFragment != null) {
-            if (mProfileBean != null) {
-                mCurFragment.setProfileBean(mProfileBean);
-            }
-            toFragment(mCurFragment);
-        }
-    }
-
-    private void getProfile() {
-        JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
-        try {
-            jsonObject.put("account_id", Constant.mAccountId);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        OkGo.<String>post(Api.GET_PROFILE).tag(TAG)
-                .params("data", jsonObject.toString())
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        AccountProfileBean profileBean = checkResponseSuccess(response, AccountProfileBean.class);
-                        if (profileBean == null || profileBean.getAccount_profile() == null) {
-                            Log.e(TAG, " get profile error ." + response.body());
-                            return;
-                        }
-                        mProfileBean = profileBean.getAccount_profile();
-                        if (mCurFragment != null) {
-                            if (mProfileBean != null) {
-                                mCurFragment.setProfileBean(mProfileBean);
-                            }
-                            toFragment(mCurFragment);
-                        }
-                    }
-
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                        Log.e(TAG, "get profile failure = " + response.body());
-                    }
-                });
     }
 
     @Override
@@ -185,14 +108,23 @@ public class CommitProfileActivity extends BaseActivity {
     }
 
     private void onBackInternal() {
-        finish();
+        int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+        if (backStackEntryCount > 1) {
+            if (tvTitle != null){
+                tvTitle.setText(R.string.loan_person_profile_title);
+            }
+            getSupportFragmentManager().popBackStackImmediate();
+        } else {
+            finish();
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (mCurFragment != null && mCurFragment instanceof PersonProfile3Fragment) {
-            ((PersonProfile3Fragment) mCurFragment).OnActivityResultInternal(requestCode, data);
+        if (commitProfileFragment != null && commitProfileFragment instanceof CommitProfileFragment) {
+            ( commitProfileFragment).onActivityResultInternal(requestCode,
+                    resultCode, data);
         }
     }
 }
