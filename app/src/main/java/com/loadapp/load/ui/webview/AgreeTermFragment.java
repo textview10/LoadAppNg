@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
 import com.loadapp.load.base.BaseFragment;
+import com.loadapp.load.ui.login.SignUpActivity;
 
 public class AgreeTermFragment extends BaseFragment {
 
@@ -44,11 +45,11 @@ public class AgreeTermFragment extends BaseFragment {
         });
 
         tvAgree.setOnClickListener(view1 -> {
-//            if (getActivity() instanceof SignUpActivity) {
-//                showOrHideTopContainer(true);
-//                SignUpActivity signUpActivity = (SignUpActivity) getActivity();
-//                signUpActivity.toVerificationFragment();
-//            }
+            if (getActivity() instanceof SignUpActivity) {
+                showOrHideTopContainer(true);
+                SignUpActivity signUpActivity = (SignUpActivity) getActivity();
+                signUpActivity.toInputPhoneNum();
+            }
 
         });
         showOrHideTopContainer(false);
