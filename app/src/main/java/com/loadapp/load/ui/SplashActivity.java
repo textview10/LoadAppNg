@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.loadapp.load.BuildConfig;
 import com.loadapp.load.R;
@@ -38,6 +39,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BarUtils.setStatusBarVisibility(this, false);
         setContentView(R.layout.activity_welcome);
         rlContainer = findViewById(R.id.rl_welcome_container);
         findViewById(R.id.rl_welcome_signin).setOnClickListener(new View.OnClickListener() {

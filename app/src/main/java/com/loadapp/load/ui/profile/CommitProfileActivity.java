@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
@@ -53,8 +54,9 @@ public class CommitProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_commit_profile);
+        BarUtils.setStatusBarVisibility(this, false);
 
+        setContentView(R.layout.activity_commit_profile);
         ivBack = findViewById(R.id.iv_commit_profile_back);
         tvTitle = findViewById(R.id.tv_commit_profile_title);
         ivBack.setOnClickListener(new View.OnClickListener() {

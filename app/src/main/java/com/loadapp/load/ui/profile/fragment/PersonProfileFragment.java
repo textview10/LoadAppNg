@@ -85,6 +85,9 @@ public class PersonProfileFragment extends BaseCommitFragment {
         tvTerms = view.findViewById(R.id.tv_person_profile_term);
 
         initializeListener();
+        if (mProfileBean != null){
+            updateText(mProfileBean);
+        }
     }
 
     private void initializeListener(){
@@ -162,6 +165,10 @@ public class PersonProfileFragment extends BaseCommitFragment {
     @Override
     public void setProfileBean(AccountProfileBean.AccountProfile profileBean) {
         super.setProfileBean(profileBean);
+        updateText(profileBean);
+    }
+
+    private void updateText(AccountProfileBean.AccountProfile profileBean) {
         if (emailEditText != null && !TextUtils.isEmpty(profileBean.getEmail())){
             emailEditText.setEditTextAndSelection(profileBean.getEmail());
         }
@@ -179,7 +186,7 @@ public class PersonProfileFragment extends BaseCommitFragment {
                 selectWorkYear.setData(data.first);
             }
         }
-        if (selectCity != null && mHomeState != null) {
+        if (selectCity != null) {
             mHomeCity = profileBean.getHome_city();
             mHomeState = profileBean.getHome_state();
             selectCity.setData(mHomeCity + "-" + mHomeState);

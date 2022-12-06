@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
@@ -46,6 +47,7 @@ public class BankListActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BarUtils.setStatusBarVisibility(this, false);
         setContentView(R.layout.activity_bank_list);
         initializeView();
         getBankList();

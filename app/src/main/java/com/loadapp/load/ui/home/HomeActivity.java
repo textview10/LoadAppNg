@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.blankj.utilcode.constant.PermissionConstants;
+import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -47,11 +48,15 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BarUtils.setStatusBarVisibility(this, false);
         setContentView(R.layout.activity_home);
         initializeView();
         initializeData();
         requestPermission();
+
         ConfigMgr.getAllConfig();
+        FireBaseMgr.getInstance().reportFcmToken(this);
+        GetProfileMgr.getInstance().requestProfile();
     }
 
     private void initializeView() {
@@ -75,8 +80,6 @@ public class HomeActivity extends BaseActivity {
         SPUtils.getInstance().put(Constant.KEY_ACCOUNT_ID, Constant.mAccountId);
         SPUtils.getInstance().put(Constant.KEY_TOKEN, Constant.mToken);
 
-        FireBaseMgr.getInstance().reportFcmToken(this);
-        GetProfileMgr.getInstance().requestProfile();
     }
 
     private void requestPermission() {

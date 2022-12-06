@@ -150,7 +150,7 @@ public class LoanFragment extends BaseFragment {
             return;
         }
         int checkStatus = orderInfoBean.getCheck_status();
-        Log.e("Test","check status == " + checkStatus);
+//        Log.e("Test","check status == " + checkStatus);
         switch (checkStatus){
             case 1: //已提交待审核
             case 2: //审核拒绝
