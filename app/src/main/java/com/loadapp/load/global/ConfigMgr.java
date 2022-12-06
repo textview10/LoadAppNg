@@ -20,6 +20,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -27,10 +29,10 @@ import java.util.Iterator;
 public class ConfigMgr {
     private static final String TAG = "ConfigMgr";
 
-    public final static HashSet<Pair<String, String>> mMonthSalaryList = new HashSet<>();
-    public final static HashSet<Pair<String, String>> mRelativeShipList = new HashSet<>();
-    public final static HashSet<Pair<String, String>> mWorkingYearList = new HashSet<>();
-    public final static HashMap<String, HashSet<String>> mStateCityList = new HashMap<>();
+    public final static ArrayList<Pair<String, String>> mMonthSalaryList = new ArrayList<>();
+    public final static ArrayList<Pair<String, String>> mRelativeShipList = new ArrayList<>();
+    public final static ArrayList<Pair<String, String>> mWorkingYearList = new ArrayList<>();
+    public final static HashMap<String, ArrayList<String>> mStateCityList = new HashMap<>();
 
     public static void getAllConfig() {
         JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
@@ -71,8 +73,8 @@ public class ConfigMgr {
                 });
     }
 
-    private static HashSet<Pair<String, String>> parseItem(Object obj) {
-        HashSet<Pair<String, String>> set = new HashSet<>();
+    private static ArrayList<Pair<String, String>> parseItem(Object obj) {
+        ArrayList<Pair<String, String>> list = new ArrayList();
         try {
             JSONObject jsonObject = new JSONObject(GsonUtils.toJson(obj));
             Iterator<String> iterator = jsonObject.keys();
@@ -80,30 +82,51 @@ public class ConfigMgr {
                 String key = iterator.next();
                 String str = jsonObject.optString(key);
                 if (!TextUtils.isEmpty(str)) {
-                    set.add(new Pair<>(str, key));
+                    list.add(new Pair<>(str, key));
                 }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return set;
+
+        Collections.sort(list, new Comparator<Pair<String, String>>() {
+            @Override
+            public int compare(Pair<String, String> t1, Pair<String, String> t2) {
+                String first = t1.second;
+                String second = t2.second;
+                int firstInt = 0;
+                int secondInt = 0;
+                try {
+                    if (!TextUtils.isEmpty(first)) {
+                        firstInt = Integer.parseInt(first);
+                    }
+                    if (!TextUtils.isEmpty(second)) {
+                        secondInt = Integer.parseInt(second);
+                    }
+                } catch (Exception e){
+
+                }
+                return firstInt - secondInt;
+            }
+        });
+        return list;
     }
 
-    private static HashMap<String, HashSet<String>> parseCityItem(Object obj) {
-        HashMap<String, HashSet<String>> map = new HashMap<>();
+    private static HashMap<String, ArrayList<String>> parseCityItem(Object obj) {
+        HashMap<String, ArrayList<String>> map = new HashMap<>();
         try {
             JSONObject jsonObject = new JSONObject(GsonUtils.toJson(obj));
             Iterator<String> iterator = jsonObject.keys();
             while (iterator.hasNext()) {
                 String cityKey = iterator.next();
                 JSONArray array = jsonObject.optJSONArray(cityKey);
-                HashSet<String> set = new HashSet<>();
+                ArrayList<String> list = new ArrayList<>();
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject temp = array.optJSONObject(i);
                     String city = temp.optString("City");
-                    set.add(city);
+                    list.add(city);
                 }
-                map.put(cityKey, set);
+                map.put(cityKey, list);
             }
         } catch (JSONException e) {
             e.printStackTrace();

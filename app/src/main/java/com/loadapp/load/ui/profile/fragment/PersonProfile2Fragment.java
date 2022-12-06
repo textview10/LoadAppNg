@@ -186,7 +186,7 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
         }
     }
 
-    private void showListDialog(HashSet<Pair<String, String>> set, SelectDataDialog.Observer observer){
+    private void showListDialog(ArrayList<Pair<String, String>> set, SelectDataDialog.Observer observer){
         SelectDataDialog dialog = new SelectDataDialog(getContext());
         ArrayList<Pair<String, String>> list = new ArrayList<>();
         list.addAll(set);

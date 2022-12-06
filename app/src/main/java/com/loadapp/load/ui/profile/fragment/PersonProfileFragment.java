@@ -151,7 +151,7 @@ public class PersonProfileFragment extends BaseCommitFragment {
         });
     }
 
-    private void showListDialog(HashSet<Pair<String, String>> set, SelectDataDialog.Observer observer){
+    private void showListDialog(ArrayList<Pair<String, String>> set, SelectDataDialog.Observer observer){
         SelectDataDialog dialog = new SelectDataDialog(getContext());
         ArrayList<Pair<String, String>> list = new ArrayList<>();
         list.addAll(set);
@@ -189,7 +189,7 @@ public class PersonProfileFragment extends BaseCommitFragment {
         }
     }
 
-    private Pair<String, String> getData(HashSet<Pair<String, String>> set, int key){
+    private Pair<String, String> getData(ArrayList<Pair<String, String>> set, int key){
         Iterator<Pair<String, String>> iterator = set.iterator();
         while (iterator.hasNext()) {
             Pair<String, String> pair = iterator.next();
@@ -231,10 +231,10 @@ public class PersonProfileFragment extends BaseCommitFragment {
     private void initAreaPickerData() {
         provinceList.clear();
         stateList.clear();
-        HashMap<String, HashSet<String>> areaData = ConfigMgr.mStateCityList;
-        Iterator<Map.Entry<String, HashSet<String>>> iterator = areaData.entrySet().iterator();
+        HashMap<String, ArrayList<String>> areaData = ConfigMgr.mStateCityList;
+        Iterator<Map.Entry<String, ArrayList<String>>> iterator = areaData.entrySet().iterator();
         while (iterator.hasNext()){
-            Map.Entry<String, HashSet<String>> entry = iterator.next();
+            Map.Entry<String, ArrayList<String>> entry = iterator.next();
             provinceList.add(entry.getKey());
             ArrayList<String> stateItemList = new ArrayList<>();
             stateItemList.addAll(entry.getValue());
