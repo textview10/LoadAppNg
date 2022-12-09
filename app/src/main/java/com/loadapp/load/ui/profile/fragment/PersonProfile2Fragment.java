@@ -292,6 +292,7 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.e(TAG, jsonObject.toString());
         OkGo.<String>post(Api.UPLOAD_CONTACT).tag(TAG)
                 .params("data", jsonObject.toString())
                 .execute(new StringCallback() {

@@ -16,7 +16,7 @@ public class PhoneNumPresenter {
 
     private final HashMap<String, Integer> mPhoneNumMap = new HashMap<>();
 
-    private final String[] mItems = {"254"};
+    private final String[] mItems = {"92"};
 
     public PhoneNumPresenter(Context context) {
         this.mContext = context;

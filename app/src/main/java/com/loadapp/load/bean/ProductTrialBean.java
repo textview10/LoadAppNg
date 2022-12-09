@@ -24,19 +24,19 @@ public class ProductTrialBean {
         //还款日期
         private long repay_date;
         //应还款总金额
-        private int total;
+        private long total;
         //本金
-        private int amount;
+        private long amount;
         //放款金额
-        private int disburse_amount;
+        private long disburse_amount;
         //服务费
-        private int service_fee;
+        private long service_fee;
         //砍头服务费，非砍头产品为0
-        private int service_fee_prepaid;
+        private long service_fee_prepaid;
         //利息
-        private int interest;
+        private long interest;
         //砍头利息，非砍头产品为0
-        private int interest_prepaid;
+        private long interest_prepaid;
 
         public int getStage_no() {
             return stage_no;
@@ -70,15 +70,15 @@ public class ProductTrialBean {
             this.repay_date = repay_date;
         }
 
-        public int getTotal() {
+        public long getTotal() {
             return total;
         }
 
-        public void setTotal(int total) {
+        public void setTotal(long total) {
             this.total = total;
         }
 
-        public int getAmount() {
+        public long getAmount() {
             return amount;
         }
 
@@ -86,7 +86,7 @@ public class ProductTrialBean {
             this.amount = amount;
         }
 
-        public int getDisburse_amount() {
+        public long getDisburse_amount() {
             return disburse_amount;
         }
 
@@ -94,7 +94,7 @@ public class ProductTrialBean {
             this.disburse_amount = disburse_amount;
         }
 
-        public int getService_fee() {
+        public long getService_fee() {
             return service_fee;
         }
 
@@ -102,7 +102,7 @@ public class ProductTrialBean {
             this.service_fee = service_fee;
         }
 
-        public int getService_fee_prepaid() {
+        public long getService_fee_prepaid() {
             return service_fee_prepaid;
         }
 
@@ -110,19 +110,19 @@ public class ProductTrialBean {
             this.service_fee_prepaid = service_fee_prepaid;
         }
 
-        public int getInterest() {
+        public long getInterest() {
             return interest;
         }
 
-        public void setInterest(int interest) {
+        public void setInterest(long interest) {
             this.interest = interest;
         }
 
-        public int getInterest_prepaid() {
+        public long getInterest_prepaid() {
             return interest_prepaid;
         }
 
-        public void setInterest_prepaid(int interest_prepaid) {
+        public void setInterest_prepaid(long interest_prepaid) {
             this.interest_prepaid = interest_prepaid;
         }
     }
