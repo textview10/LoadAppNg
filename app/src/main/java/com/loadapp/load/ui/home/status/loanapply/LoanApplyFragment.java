@@ -201,7 +201,13 @@ public class LoanApplyFragment extends BaseStatusFragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-                        ProductTrialBean productTrial = CheckResponseUtils.checkResponseSuccess(response, ProductTrialBean.class);
+                        ProductTrialBean productTrial = null;
+                        try {
+                            productTrial = CheckResponseUtils.checkResponseSuccess(response, ProductTrialBean.class);
+                        } catch (Exception e){
+
+                        }
+
                         if (productTrial == null) {
                             Log.e(TAG, " product trial error ." + response.body());
                             return;
