@@ -43,12 +43,12 @@ public class LoanApplyAdapter2 extends RecyclerView.Adapter<LoanApplyHolder> {
     public void onBindViewHolder(@NonNull LoanApplyHolder holder, int position) {
         ProductTrialBean.Trial trial = mLists.get(position);
 
-        if (trial != null && trial.getRepay_date() != 0) {
-            Date date = new Date(trial.getRepay_date());
+        if (trial != null && !TextUtils.isEmpty(trial.getRepay_date())) {
+//            Date date = new Date(trial.getRepay_date());
 //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String dateString = formatter.format(date);
-            holder.tvAmount.setText(dateString);
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//            String dateString = formatter.format(date);
+            holder.tvAmount.setText(trial.getRepay_date());
         }
         holder.flBg.setBackgroundResource(mSelectPos == position ?
                 R.drawable.shape_round_grey_10 : R.drawable.shape_round_white_10);

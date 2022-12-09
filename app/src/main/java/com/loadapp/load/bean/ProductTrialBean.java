@@ -22,7 +22,7 @@ public class ProductTrialBean {
         //产品名字
         private String name;
         //还款日期
-        private long repay_date;
+        private String repay_date;
         //应还款总金额
         private long total;
         //本金
@@ -62,11 +62,11 @@ public class ProductTrialBean {
             this.name = name;
         }
 
-        public long getRepay_date() {
+        public String getRepay_date() {
             return repay_date;
         }
 
-        public void setRepay_date(long repay_date) {
+        public void setRepay_date(String repay_date) {
             this.repay_date = repay_date;
         }
 
