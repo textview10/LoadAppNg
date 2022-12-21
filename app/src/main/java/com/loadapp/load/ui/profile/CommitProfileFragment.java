@@ -141,7 +141,7 @@ public class CommitProfileFragment extends BaseFragment {
                 break;
             case CommitProfileActivity.PHASE_ALL:
                 EventBus.getDefault().post(new PhaseAllEvent());
-//                finish();
+                getActivity().finish();
                 break;
             case CommitProfileActivity.PHASE_COLLECT_DATA:
                 // 收集信息.

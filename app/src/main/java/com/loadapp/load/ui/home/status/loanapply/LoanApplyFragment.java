@@ -310,7 +310,7 @@ public class LoanApplyFragment extends BaseStatusFragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-                        if (getActivity().isFinishing() || getActivity().isDestroyed()) {
+                        if (getActivity() == null || getActivity().isFinishing() || getActivity().isDestroyed()) {
                             return;
                         }
                         ApplyResultBean applyResult = checkResponseSuccess(response, ApplyResultBean.class);

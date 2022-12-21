@@ -7,6 +7,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.LongSerializationPolicy;
+import com.loadapp.load.BuildConfig;
 import com.loadapp.load.bean.BaseResponseBean;
 import com.lzy.okgo.model.Response;
 
@@ -27,7 +28,14 @@ public class CheckResponseUtils {
     }
 
     public static String checkResponseSuccess(Response<String> response) {
-        BaseResponseBean responseBean = JSONObject.parseObject(response.body().toString(), BaseResponseBean.class);
+        BaseResponseBean responseBean = null;
+        try {
+            responseBean = JSONObject.parseObject(response.body().toString(), BaseResponseBean.class);
+        }catch (Exception e){
+            if (BuildConfig.DEBUG){
+                throw e;
+            }
+        }
 //        BaseResponseBean responseBean = gson.fromJson(response.body().toString(), BaseResponseBean.class);
         if (responseBean == null) {
             ToastUtils.showShort("request failure.");

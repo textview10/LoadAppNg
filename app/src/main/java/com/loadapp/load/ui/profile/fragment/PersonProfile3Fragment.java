@@ -162,7 +162,9 @@ public class PersonProfile3Fragment extends BaseCommitFragment {
                     Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA).callback(new PermissionUtils.SimpleCallback() {
                 @Override
                 public void onGranted() {
-
+                    if (callBack != null){
+                        callBack.success();
+                    }
                 }
 
                 @Override
