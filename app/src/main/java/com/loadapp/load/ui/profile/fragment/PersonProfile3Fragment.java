@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +27,13 @@ import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.PermissionUtils;
+import com.blankj.utilcode.util.ThreadUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.loadapp.load.BuildConfig;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
+import com.loadapp.load.bean.AccountProfileBean;
 import com.loadapp.load.bean.PhaseBean;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.profile.CommitProfileActivity;
@@ -47,7 +50,13 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 public class PersonProfile3Fragment extends BaseCommitFragment {
     private static final String TAG = "PersonProfile3Fragment";
@@ -269,31 +278,83 @@ public class PersonProfile3Fragment extends BaseCommitFragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        OkGo.<String>post(Api.UPLOAD_IDENTITY).tag(TAG)
-                .params("data", jsonObject.toString())
-                //证件 正面照片
-                .params("identity_photo_front", new File(mLeftPath1))
-                //证件 背面照片
-                .params("identity_photo_back", new File(mRightPath2))
-                //自拍照
-                .params("photo_self", new File(mRecognitionPath))
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        PhaseBean phaseBean = checkResponseSuccess(response, PhaseBean.class);
-                        if (phaseBean == null) {
-                            Log.e(TAG, " upload contact error ." + response.body());
-                            return;
-                        }
-                        checkAndToPageByPhaseCode(phaseBean.getCurrent_phase());
-                    }
+        ThreadUtils.executeByCached(new ThreadUtils.SimpleTask<List<File>>() {
+            @Override
+            public List<File> doInBackground() throws Throwable {
+                ArrayList<File> lists = new ArrayList<>();
+                lists.add(new File(mLeftPath1));
+                lists.add(new File(mRightPath2));
+                lists.add(new File(mRecognitionPath));
+                for (int i = 0; i < lists.size(); i++){
+                    Log.i(TAG, " compress start = " + lists.get(i).getPath() +
+                            " size = " +  FileUtils.getSize(lists.get(i)));
+                }
+                List<File> results = Luban.with(getContext()).load(lists).get();
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                        Log.e(TAG, "upload contact failure = " + response.body());
-                    }
-                });
+                ArrayList<File> temp = new ArrayList<>();
+                temp.addAll(results);
+                return temp;
+            }
+
+            @Override
+            public void onSuccess(List<File> result) {
+                if (result.size() < 3){
+                    ToastUtils.showShort("compress failure .");
+                    return;
+                }
+                for (int i = 0; i < result.size(); i++){
+                    Log.i(TAG, " compress result = " + result.get(i).getPath() +
+                            " size = " +  FileUtils.getSize(result.get(i)));
+                }
+                OkGo.<String>post(Api.UPLOAD_IDENTITY).tag(TAG)
+                        .params("data", jsonObject.toString())
+                        //证件 正面照片
+                        .params("identity_photo_front", result.get(0))
+                        //证件 背面照片
+                        .params("identity_photo_back", result.get(1))
+                        //自拍照
+                        .params("photo_self", result.get(2))
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onSuccess(Response<String> response) {
+                                PhaseBean phaseBean = checkResponseSuccess(response, PhaseBean.class);
+                                if (phaseBean == null) {
+                                    Log.e(TAG, " upload contact error ." + response.body());
+                                    return;
+                                }
+                                checkAndToPageByPhaseCode(phaseBean.getCurrent_phase());
+                            }
+
+                            @Override
+                            public void onError(Response<String> response) {
+                                super.onError(response);
+                                Log.e(TAG, "upload contact failure = " + response.body());
+                            }
+                        });
+            }
+        });
+    }
+
+    @Override
+    public void setProfileBean(AccountProfileBean.AccountProfile profileBean) {
+        super.setProfileBean(profileBean);
+        if (etName != null && !TextUtils.isEmpty(profileBean.getName())){
+            etName.setEditTextAndSelection(profileBean.getName());
+        }
+        if (etFatherName != null && !TextUtils.isEmpty(profileBean.getFather_name())){
+            etFatherName.setEditTextAndSelection(profileBean.getFather_name());
+        }
+        if (genderCheckBox != null && (profileBean.getGender() == 1
+                || profileBean.getGender() == 2)){
+            genderCheckBox.setPos(profileBean.getGender());
+        }
+//        if (etCnicNum != null && !TextUtils.isEmpty(profileBean.getN())) {
+//            etCnicNum.setEditTextAndSelection();
+//        }
+        if (selectBirth != null && !TextUtils.isEmpty(profileBean.getBirthday())) {
+            Log.e(TAG, " select birthday = " + profileBean.getBirthday());
+//            selectBirth.setData();
+        }
     }
 
     protected void showTimePicker(OnTimeSelectListener listener) {

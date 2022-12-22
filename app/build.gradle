@@ -82,4 +82,5 @@ dependencies {
     implementation  'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
 
     implementation 'com.alibaba:fastjson:1.2.76'
+    implementation 'top.zibin:Luban:1.1.8'
 }

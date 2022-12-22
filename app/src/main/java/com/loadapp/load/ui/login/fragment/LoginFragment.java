@@ -141,6 +141,7 @@ public class LoginFragment extends BaseFragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.i("okhttp", jsonObject.toString());
         OkGo.<String>post(Api.LOGIN).tag(TAG)
                 .params("data", jsonObject.toString())
                 .execute(new StringCallback() {

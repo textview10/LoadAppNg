@@ -63,4 +63,11 @@ public class GenderCheckBox extends LinearLayout {
     public int getCurPos(){
         return mCurPos;
     }
+
+    public void setPos(int pos){
+        if (pos == 1 || pos == 2) {
+            mCurPos = pos;
+            updateState();
+        }
+    }
 }

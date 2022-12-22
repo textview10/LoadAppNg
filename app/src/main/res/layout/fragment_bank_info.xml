@@ -15,6 +15,7 @@
             android:id="@+id/edittext_container_bank_verify_num"
             android:layout_width="match_parent"
             android:layout_height="62dp"
+            android:visibility="gone"
             android:layout_marginTop="10dp"
             app:select_view_hint="@string/load_person_profile_bank_veriy_name" />
 
