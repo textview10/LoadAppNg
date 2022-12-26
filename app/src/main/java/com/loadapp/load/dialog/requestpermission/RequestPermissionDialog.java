@@ -15,9 +15,13 @@ public class RequestPermissionDialog extends Dialog {
 
     public RequestPermissionDialog(@NonNull Context context) {
         super(context);
+        getWindow().getDecorView().setPadding(0, 0, 0, 0);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.width = (int)(ScreenUtils.getAppScreenWidth() * 3 / 4); //设置宽度
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT; //设置宽度
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;    //设置高度
+        lp.horizontalMargin = 0;
+        lp.verticalMargin = 0;
         getWindow().setAttributes(lp);
 
         setContentView(R.layout.dialog_request_permission);
