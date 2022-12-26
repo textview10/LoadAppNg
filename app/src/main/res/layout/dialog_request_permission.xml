@@ -3,32 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:background="@drawable/request_permission_bg"
-        android:paddingBottom="20dp"
-        android:layout_height="wrap_content">
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_marginTop="25dp"
+            android:gravity="center"
             android:text="@string/request_permission_title"
             android:textSize="21sp"
             android:textStyle="bold" />
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_height="100dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:text="@string/request_permission_desc"
                 android:textSize="16sp" />
@@ -36,8 +37,8 @@
         </ScrollView>
 
         <LinearLayout
-            android:layout_marginTop="20dp"
-            style="@style/request_permission_container">
+            style="@style/request_permission_container"
+            android:layout_marginTop="20dp">
 
             <ImageView
                 style="@style/request_permission_iv"
@@ -49,8 +50,13 @@
                     style="@style/request_permission_tv_top"
                     android:text="@string/request_permission_location_title" />
 
-                <TextView
-                    style="@style/request_permission_tv_bottom" />
+                <ScrollView style="@style/request_permission_sc_container">
+
+                    <TextView
+                        style="@style/request_permission_tv_bottom"
+                        android:text="@string/request_permission_location_desc" />
+
+                </ScrollView>
 
             </LinearLayout>
 
@@ -68,8 +74,13 @@
                     style="@style/request_permission_tv_top"
                     android:text="@string/request_permission_sms_title" />
 
-                <TextView
-                    style="@style/request_permission_tv_bottom" />
+                <ScrollView style="@style/request_permission_sc_container">
+
+                    <TextView
+                        style="@style/request_permission_tv_bottom"
+                        android:text="@string/request_permission_sms_desc" />
+
+                </ScrollView>
 
             </LinearLayout>
 
@@ -87,8 +98,13 @@
                     style="@style/request_permission_tv_top"
                     android:text="@string/request_permission_camera_title" />
 
-                <TextView
-                    style="@style/request_permission_tv_bottom" />
+                <ScrollView style="@style/request_permission_sc_container">
+
+                    <TextView
+                        style="@style/request_permission_tv_bottom"
+                        android:text="@string/request_permission_camera_desc" />
+
+                </ScrollView>
 
             </LinearLayout>
 
@@ -106,8 +122,13 @@
                     style="@style/request_permission_tv_top"
                     android:text="@string/request_permission_contacts_title" />
 
-                <TextView
-                    style="@style/request_permission_tv_bottom" />
+                <ScrollView style="@style/request_permission_sc_container">
+
+                    <TextView
+                        style="@style/request_permission_tv_bottom"
+                        android:text="@string/request_permission_contacts_desc" />
+
+                </ScrollView>
 
             </LinearLayout>
 
@@ -125,8 +146,13 @@
                     style="@style/request_permission_tv_top"
                     android:text="@string/request_permission_calendar_title" />
 
-                <TextView
-                    style="@style/request_permission_tv_bottom" />
+                <ScrollView style="@style/request_permission_sc_container">
+
+                    <TextView
+                        style="@style/request_permission_tv_bottom"
+                        android:text="@string/request_permission_calendar_desc" />
+
+                </ScrollView>
 
             </LinearLayout>
 
@@ -137,32 +163,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="60dp">
+        android:layout_height="60dp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_request_permission_cancel"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="@string/request_permission_cancel"
-            android:textSize="18sp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="#0EC6A2"
+            android:layout_weight="1"
             android:background="@drawable/request_permission_cancel"
-            android:layout_height="match_parent"/>
+            android:gravity="center"
+            android:text="@string/request_permission_cancel"
+            android:textColor="#0EC6A2"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_request_permission_agree"
             android:layout_width="0dp"
-            android:text="@string/request_permission_agree"
-            android:layout_weight="1"
-            android:textSize="18sp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="#0EC6A2"
+            android:layout_weight="1"
             android:background="@drawable/request_permission_comfire"
-            android:layout_height="match_parent"/>
+            android:gravity="center"
+            android:text="@string/request_permission_agree"
+            android:textColor="#0EC6A2"
+            android:textSize="18sp" />
 
     </LinearLayout>
 </LinearLayout>

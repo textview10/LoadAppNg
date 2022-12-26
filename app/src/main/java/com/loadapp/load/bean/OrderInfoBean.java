@@ -95,7 +95,7 @@ public class OrderInfoBean {
         //应还总额
         private int total_amount;
         //还款日期
-        private int repay_date;
+        private String repay_date;
         //应还本金
         private int amount;
         //利息
@@ -125,11 +125,11 @@ public class OrderInfoBean {
             this.total_amount = total_amount;
         }
 
-        public int getRepay_date() {
+        public String getRepay_date() {
             return repay_date;
         }
 
-        public void setRepay_date(int repay_date) {
+        public void setRepay_date(String repay_date) {
             this.repay_date = repay_date;
         }
 

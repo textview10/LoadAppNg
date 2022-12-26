@@ -101,10 +101,10 @@ public class BankInfoFragment extends BaseCommitFragment{
     }
 
     private boolean checkCommitAvailable(){
-        if (etVerifyNum == null || etVerifyNum.isEmptyText()) {
-            ToastUtils.showShort(" verify num null");
-            return false;
-        }
+//        if (etVerifyNum == null || etVerifyNum.isEmptyText()) {
+//            ToastUtils.showShort(" verify num null");
+//            return false;
+//        }
         if (etAccountNum == null || etAccountNum.isEmptyText()) {
             ToastUtils.showShort("account name is null");
             return false;

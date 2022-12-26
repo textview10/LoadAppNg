@@ -109,6 +109,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("account_id", Constant.mAccountId + "");
+            jsonObject.put("access_token", Constant.mToken + "");
             jsonObject.put("request_time", System.currentTimeMillis());
         } catch (JSONException e) {
             e.printStackTrace();
