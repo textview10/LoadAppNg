@@ -3,6 +3,7 @@ package com.loadapp.load.ui.home.status.loanapply;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,8 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -28,6 +29,7 @@ import com.loadapp.load.ui.home.status.BaseStatusFragment;
 import com.loadapp.load.ui.home.status.loanapply.adapter.HomeItemDecoration;
 import com.loadapp.load.ui.home.status.loanapply.adapter.LoanApplyAdapter1;
 import com.loadapp.load.ui.home.status.loanapply.adapter.LoanApplyAdapter2;
+import com.loadapp.load.ui.home.status.loanapply.adapter.LoanApplyAdapter3;
 import com.loadapp.load.ui.profile.CommitProfileActivity;
 import com.loadapp.load.util.BuildRequestJsonUtil;
 import com.loadapp.load.util.CheckResponseUtils;
@@ -42,17 +44,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class LoanApplyFragment extends BaseStatusFragment {
 
     private static final String TAG = "LoanApplyFragment";
-    private RecyclerView rvLoanApply, rvLoanApplyDate;
+    private RecyclerView rvLoanApply, rvLoanApplyDate, rvDetail;
     private LoanApplyAdapter1 adapter1;
     private LoanApplyAdapter2 adapter2;
+    private LoanApplyAdapter3 adapter3;
 
-    private AppCompatTextView tvLoanApply1, tvLoanApply2, tvLoanApply3, tvLoanApply4, tvLoanApply5, tvLoanApply6;
-    private LoanApplyBean.Product curProduct;
     private FrameLayout flCommit;
+    private ArrayList<Pair<String, ArrayList<LoanApplyBean.Product>>> mList;
+    private LoanApplyBean.Product curProduct;
 
     @Nullable
     @Override
@@ -66,36 +72,29 @@ public class LoanApplyFragment extends BaseStatusFragment {
         super.onViewCreated(view, savedInstanceState);
         rvLoanApply = view.findViewById(R.id.rv_loan_apply);
         rvLoanApplyDate = view.findViewById(R.id.rv_loan_apply_date);
-
-        tvLoanApply1 = view.findViewById(R.id.tv_loan_apply_1);
-        tvLoanApply2 = view.findViewById(R.id.tv_loan_apply_2);
-        tvLoanApply3 = view.findViewById(R.id.tv_loan_apply_3);
-        tvLoanApply4 = view.findViewById(R.id.tv_loan_apply_4);
-        tvLoanApply5 = view.findViewById(R.id.tv_loan_apply_5);
-        tvLoanApply6 = view.findViewById(R.id.tv_loan_apply_6);
+        rvDetail = view.findViewById(R.id.rv_loan_apply_detail);
 
         flCommit = view.findViewById(R.id.fl_item_loan_apply_commit);
 
         initializeView();
-        if (!EventBus.getDefault().isRegistered(this)){
+        if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
         requestLoanProductList();
     }
 
     private void initializeView() {
-        GridLayoutManager manager1 = new GridLayoutManager(getActivity(), 2);
+        GridLayoutManager manager1 = new GridLayoutManager(getActivity(), 3);
         rvLoanApply.setLayoutManager(manager1);
         adapter1 = new LoanApplyAdapter1();
         adapter1.setSelectPos(0);
         rvLoanApply.setAdapter(adapter1);
         rvLoanApply.addItemDecoration(new HomeItemDecoration());
-        adapter1.setItemClickListener((product, pos) -> {
-            if (checkClickFast()) {
+        adapter1.setItemClickListener((products, pos) -> {
+            if (checkShortClickFast()) {
                 return;
             }
-            curProduct = product;
-            requestItemProductTrial(curProduct);
+            updateAdapter2(products);
 //            ProductTrialDialog dialog = new ProductTrialDialog(getActivity(), productId,
 //                    amount, period);
 //            dialog.setOnDialogClickListener(new ProductTrialDialog.OnDialogClickListener() {
@@ -108,7 +107,7 @@ public class LoanApplyFragment extends BaseStatusFragment {
 //            dialog.show();
         });
 
-        GridLayoutManager manager2 = new GridLayoutManager(getActivity(), 2);
+        GridLayoutManager manager2 = new GridLayoutManager(getActivity(), 3);
         rvLoanApplyDate.setLayoutManager(manager2);
         adapter2 = new LoanApplyAdapter2();
         rvLoanApplyDate.setAdapter(adapter2);
@@ -116,21 +115,38 @@ public class LoanApplyFragment extends BaseStatusFragment {
         rvLoanApplyDate.addItemDecoration(new HomeItemDecoration());
         adapter2.setItemClickListener(new LoanApplyAdapter2.OnItemClickListener() {
             @Override
-            public void onClick(ProductTrialBean.Trial trial, int pos) {
-                updateTextView(trial);
+            public void onClick(LoanApplyBean.Product product, int pos) {
+                if (checkShortClickFast()) {
+                    return;
+                }
+                requestItemProductTrial(product);
             }
         });
+
+        LinearLayoutManager manager3 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        rvDetail.setLayoutManager(manager3);
+        adapter3 = new LoanApplyAdapter3(getContext());
+        rvDetail.setAdapter(adapter3);
 
         flCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (curProduct == null){
+                if (curProduct == null) {
                     ToastUtils.showShort("not choice product");
                     return;
                 }
                 checkCanLoanApply();
             }
         });
+    }
+
+    private void updateAdapter3(ArrayList<ProductTrialBean.Trial> trial) {
+        ArrayList<ProductTrialBean.Trial> tempList = new ArrayList<>();
+        tempList.addAll(trial);
+        if (adapter3 != null) {
+            adapter3.setList(tempList);
+            adapter3.notifyDataSetChanged();
+        }
     }
 
     //请求有几种借贷
@@ -155,19 +171,16 @@ public class LoanApplyFragment extends BaseStatusFragment {
                             Log.e(TAG, " get product list error ." + response.body());
                             return;
                         }
+                        mList = convertData(loanApply);
 
-                        ArrayList<LoanApplyBean.Product> list = new ArrayList();
-                        list.addAll(loanApply.getProducts());
                         if (adapter1 != null) {
-                            adapter1.setList(list);
+                            adapter1.setList(mList);
                             adapter1.notifyDataSetChanged();
                         }
-                        if (list != null && list.size() > 0) {
-                            LoanApplyBean.Product product = list.get(0);
-                            curProduct = product;
-                            requestItemProductTrial(product);
+                        if (mList != null && mList.size() > 0) {
+                            Pair<String, ArrayList<LoanApplyBean.Product>> pair = mList.get(0);
+                            updateAdapter2(pair.second);
                         }
-
                     }
 
                     @Override
@@ -182,7 +195,43 @@ public class LoanApplyFragment extends BaseStatusFragment {
                 });
     }
 
+    private ArrayList<Pair<String, ArrayList<LoanApplyBean.Product>>> convertData(LoanApplyBean loanApply) {
+        HashMap<String, ArrayList<LoanApplyBean.Product>> mMap = new HashMap<>();
+        for (int i = 0; i < loanApply.getProducts().size(); i++) {
+            LoanApplyBean.Product product = loanApply.getProducts().get(i);
+            ArrayList<LoanApplyBean.Product> itemList;
+            if (mMap.containsKey(product.getAmount())) {
+                itemList = mMap.get(product.getAmount());
+            } else {
+                itemList = new ArrayList<>();
+                mMap.put(product.getAmount(), itemList);
+            }
+            itemList.add(product);
+        }
+
+        ArrayList<Pair<String, ArrayList<LoanApplyBean.Product>>> list = new ArrayList<>();
+        Iterator<Map.Entry<String, ArrayList<LoanApplyBean.Product>>> iterator = mMap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, ArrayList<LoanApplyBean.Product>> next = iterator.next();
+            Pair<String, ArrayList<LoanApplyBean.Product>> pair = new Pair<>(next.getKey(), next.getValue());
+            list.add(pair);
+        }
+        return list;
+    }
+
+    private void updateAdapter2(ArrayList<LoanApplyBean.Product> list) {
+        if (adapter2 != null) {
+            adapter2.setList(list);
+            adapter2.notifyDataSetChanged();
+            if (list != null && list.size() > 0) {
+                LoanApplyBean.Product product = list.get(0);
+                requestItemProductTrial(product);
+            }
+        }
+    }
+
     private void requestItemProductTrial(LoanApplyBean.Product product) {
+        curProduct = product;
         String productId = product.getProduct_id();
         String amount = product.getAmount();
         String period = product.getPeriod();
@@ -204,7 +253,7 @@ public class LoanApplyFragment extends BaseStatusFragment {
                         ProductTrialBean productTrial = null;
                         try {
                             productTrial = CheckResponseUtils.checkResponseSuccess(response, ProductTrialBean.class);
-                        } catch (Exception e){
+                        } catch (Exception e) {
 
                         }
 
@@ -215,13 +264,8 @@ public class LoanApplyFragment extends BaseStatusFragment {
                         if (productTrial.getTrials() != null) {
                             ArrayList<ProductTrialBean.Trial> list = new ArrayList();
                             list.addAll(productTrial.getTrials());
-                            if (adapter2 != null) {
-                                adapter2.setList(list);
-                                adapter2.notifyDataSetChanged();
-                            }
-                            if (list.size() > 0){
-                                ProductTrialBean.Trial trial = list.get(0);
-                                updateTextView(trial);
+                            if (list.size() > 0) {
+                                updateAdapter3(list);
                             }
                         }
                     }
@@ -258,7 +302,7 @@ public class LoanApplyFragment extends BaseStatusFragment {
                         }
                         if (commitLoan.getOrder_id() != 0) {
                             //正式开始申请贷款
-                            new Thread(){
+                            new Thread() {
                                 @Override
                                 public void run() {
                                     super.run();
@@ -338,36 +382,10 @@ public class LoanApplyFragment extends BaseStatusFragment {
                 });
     }
 
-    private void updateTextView(ProductTrialBean.Trial trial) {
-
-        if (tvLoanApply1 != null) {   //应还款总金额
-            tvLoanApply1.setText(String.valueOf(trial.getTotal()));
-        }
-        if (tvLoanApply2 != null) {  //本金
-            tvLoanApply2.setText(String.valueOf(trial.getAmount()));
-        }
-        if (tvLoanApply3 != null) {    //利息
-            tvLoanApply3.setText(String.valueOf(trial.getInterest()));
-        }
-        if (tvLoanApply4 != null) {       //服务费
-            tvLoanApply4.setText(String.valueOf(trial.getService_fee()));
-        }
-        if (tvLoanApply5 != null) {        //砍头服务费，非砍头产品为0
-            tvLoanApply5.setText(String.valueOf(trial.getInterest_prepaid()));
-        }
-        if (tvLoanApply6 != null) {    //放款金额
-            tvLoanApply6.setText(String.valueOf(trial.getInterest_prepaid()));
-        }
-//        if (tvDisburse != null) {    //放款金额
-//            tvDisburse.setText(String.valueOf(trial.getDisburse_amount()));
-//        }
-        //砍头利息，非砍头产品为0
-    }
-
     @Override
     public void onDestroy() {
         OkGo.getInstance().cancelTag(TAG);
-        if (EventBus.getDefault().isRegistered(this)){
+        if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
         super.onDestroy();

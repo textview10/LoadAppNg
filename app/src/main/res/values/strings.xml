@@ -105,12 +105,12 @@
     <string name="load_confirmation_term_2">terms &amp; condition</string>
 
     <string name="load_apply_amount_title">Loan Amount</string>
-    <string name="load_apply_date_title">Repayment Date</string>
-    <string name="load_apply_date_desc_total">Loan Total</string>
+    <string name="load_apply_date_title">Repayment Term</string>
+    <string name="load_apply_index">%d nd installment</string>
+    <string name="load_apply_date_desc_total">Total payment</string>
     <string name="load_apply_date_desc1">Loan Amount</string>
-    <string name="load_apply_date_desc2">Interest</string>
-    <string name="load_apply_date_desc3">Processing fee</string>
-    <string name="load_apply_date_desc4">Service charge</string>
-    <string name="load_apply_date_desc5">Service disburse</string>
+    <string name="load_apply_date_desc2">Service fee</string>
+    <string name="load_apply_date_desc3">Interest</string>
+    <string name="load_apply_date_desc4">Due date</string>
 
 </resources>

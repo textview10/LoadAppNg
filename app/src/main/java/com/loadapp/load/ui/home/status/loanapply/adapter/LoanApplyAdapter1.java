@@ -1,22 +1,25 @@
 package com.loadapp.load.ui.home.status.loanapply.adapter;
 
+import android.annotation.SuppressLint;
 import android.text.TextUtils;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ColorUtils;
 import com.loadapp.load.R;
 import com.loadapp.load.bean.LoanApplyBean;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class LoanApplyAdapter1 extends RecyclerView.Adapter<LoanApplyHolder> {
 
-    private List<LoanApplyBean.Product> mLists;
+    private ArrayList<Pair<String, ArrayList<LoanApplyBean.Product>>> mList ;
 
     private OnItemClickListener mListener;
 
@@ -26,8 +29,8 @@ public class LoanApplyAdapter1 extends RecyclerView.Adapter<LoanApplyHolder> {
 
     }
 
-    public void setList(List<LoanApplyBean.Product> lists){
-        mLists = lists;
+    public void setList(ArrayList<Pair<String, ArrayList<LoanApplyBean.Product>>> list){
+        mList = list;
     }
 
     @NonNull
@@ -38,20 +41,22 @@ public class LoanApplyAdapter1 extends RecyclerView.Adapter<LoanApplyHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LoanApplyHolder holder, int position) {
-        LoanApplyBean.Product product = mLists.get(position);
-        if (product != null && !TextUtils.isEmpty(product.getAmount())) {
-            holder.tvAmount.setText(product.getAmount());
+    public void onBindViewHolder(@NonNull LoanApplyHolder holder, @SuppressLint("RecyclerView") int position) {
+        Pair<String, ArrayList<LoanApplyBean.Product>> pair = mList.get(position);
+        if (pair != null && !TextUtils.isEmpty(pair.first)) {
+            holder.tvAmount.setText(pair.first);
         }
         holder.flBg.setBackgroundResource(mSelectPos == position ?
                 R.drawable.shape_round_grey_10 : R.drawable.shape_round_white_10);
+        @ColorRes int res = mSelectPos == position ? R.color.white : R.color.black;
+        holder.tvAmount.setTextColor(ColorUtils.getColor(res));
         holder.itemView.setOnClickListener(view -> {
             int oldPos = mSelectPos;
             mSelectPos = position;
             notifyItemChanged(oldPos);
             notifyItemChanged(mSelectPos);
             if (mListener != null) {
-                mListener.onClick(product, position);
+                mListener.onClick(pair.second, position);
             }
         });
     }
@@ -59,7 +64,7 @@ public class LoanApplyAdapter1 extends RecyclerView.Adapter<LoanApplyHolder> {
 
     @Override
     public int getItemCount() {
-        return mLists == null ? 0 : mLists.size();
+        return mList == null ? 0 : mList.size();
     }
 
     public void setItemClickListener(OnItemClickListener listener){
@@ -67,7 +72,7 @@ public class LoanApplyAdapter1 extends RecyclerView.Adapter<LoanApplyHolder> {
     }
 
     public interface OnItemClickListener {
-        void onClick(LoanApplyBean.Product product, int pos);
+        void onClick(ArrayList<LoanApplyBean.Product> products, int pos);
     }
 
     public void setSelectPos(int pos){

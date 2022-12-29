@@ -39,4 +39,13 @@ public abstract class BaseFragment extends Fragment {
         return false;
     }
 
+    protected boolean checkShortClickFast(){
+        long delay = (System.currentTimeMillis() - lastClickMillions);
+        if ( delay < 500){
+            ToastUtils.showShort("click too fast. please wait a monment");
+            return true;
+        }
+        lastClickMillions = System.currentTimeMillis();
+        return false;
+    }
 }

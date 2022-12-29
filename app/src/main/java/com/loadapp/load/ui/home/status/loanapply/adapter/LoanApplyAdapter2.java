@@ -1,5 +1,6 @@
 package com.loadapp.load.ui.home.status.loanapply.adapter;
 
+import android.annotation.SuppressLint;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +13,12 @@ import com.loadapp.load.R;
 import com.loadapp.load.bean.LoanApplyBean;
 import com.loadapp.load.bean.ProductTrialBean;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoanApplyAdapter2 extends RecyclerView.Adapter<LoanApplyHolder> {
 
-    private List<ProductTrialBean.Trial> mLists;
+    private List<LoanApplyBean.Product> mLists;
 
     private OnItemClickListener mListener;
 
@@ -28,7 +28,7 @@ public class LoanApplyAdapter2 extends RecyclerView.Adapter<LoanApplyHolder> {
 
     }
 
-    public void setList(List<ProductTrialBean.Trial> lists) {
+    public void setList(ArrayList<LoanApplyBean.Product> lists) {
         mLists = lists;
     }
 
@@ -40,15 +40,14 @@ public class LoanApplyAdapter2 extends RecyclerView.Adapter<LoanApplyHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LoanApplyHolder holder, int position) {
-        ProductTrialBean.Trial trial = mLists.get(position);
-
-        if (trial != null && !TextUtils.isEmpty(trial.getRepay_date())) {
+    public void onBindViewHolder(@NonNull LoanApplyHolder holder, @SuppressLint("RecyclerView") int position) {
+        LoanApplyBean.Product product = mLists.get(position);
+        if (product != null && !TextUtils.isEmpty(product.getPeriod())) {
 //            Date date = new Date(trial.getRepay_date());
 //        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 //            String dateString = formatter.format(date);
-            holder.tvAmount.setText(trial.getRepay_date());
+            holder.tvAmount.setText(product.getPeriod());
         }
         holder.flBg.setBackgroundResource(mSelectPos == position ?
                 R.drawable.shape_round_grey_10 : R.drawable.shape_round_white_10);
@@ -58,7 +57,7 @@ public class LoanApplyAdapter2 extends RecyclerView.Adapter<LoanApplyHolder> {
             notifyItemChanged(oldPos);
             notifyItemChanged(mSelectPos);
             if (mListener != null) {
-                mListener.onClick(trial, position);
+                mListener.onClick(product, position);
             }
         });
     }
@@ -74,7 +73,7 @@ public class LoanApplyAdapter2 extends RecyclerView.Adapter<LoanApplyHolder> {
     }
 
     public interface OnItemClickListener {
-        void onClick(ProductTrialBean.Trial trial, int pos);
+        void onClick(LoanApplyBean.Product product, int pos);
     }
 
     public void setSelectPos(int pos) {

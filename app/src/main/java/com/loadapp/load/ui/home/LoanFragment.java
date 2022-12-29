@@ -105,8 +105,8 @@ public class LoanFragment extends BaseFragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.e(TAG, "111 id = " + Constant.mAccountId);
-        Log.e(TAG, "111 token = " + Constant.mToken);
+//        Log.e(TAG, "111 id = " + Constant.mAccountId);
+//        Log.e(TAG, "111 token = " + Constant.mToken);
         OkGo.<String>post(Api.GET_ORDER_INFO).tag(TAG)
                 .params("data", jsonObject.toString())
                 .execute(new StringCallback() {
