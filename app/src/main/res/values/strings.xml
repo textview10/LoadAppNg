@@ -59,6 +59,8 @@
     <string name="loan_person_profile_cnic_num">CNIC Number</string>
     <string name="loan_person_profile_birth">Date of Birth</string>
     <string name="loan_person_profile_next">Next</string>
+    <string name="loan_person_profile3_font">Front</string>
+    <string name="loan_person_profile3_back">Back</string>
     <string name="loan_person_profile3_click">Click here</string>
 
     <string name="load_person_profile_male">Male</string>

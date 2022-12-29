@@ -65,7 +65,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="120dp"
                     android:orientation="horizontal">
 
                     <FrameLayout
@@ -76,16 +76,20 @@
 
                         <ImageView
                             android:id="@+id/iv_person_profile3_left_cnic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center" />
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="@string/loan_person_profile3_click" />
+                            android:text="@string/loan_person_profile3_font" />
                     </FrameLayout>
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent" />
 
                     <FrameLayout
                         android:id="@+id/fl_person_profile3_right_cnic"
@@ -95,15 +99,15 @@
 
                         <ImageView
                             android:id="@+id/iv_person_profile3_right_cnic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center" />
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="@string/loan_person_profile3_click" />
+                            android:text="@string/loan_person_profile3_back" />
 
                     </FrameLayout>
 
@@ -134,8 +138,8 @@
                 android:id="@+id/gender_container_profile3_gender"
                 layout="@layout/gender_checkbox"
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_height="62dp" />
+                android:layout_height="62dp"
+                android:layout_marginTop="10dp" />
 
             <View style="@style/view_divide" />
 
@@ -168,19 +172,19 @@
             <FrameLayout
                 android:id="@+id/fl_person_profile3_recognition"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="120dp">
 
                 <ImageView
                     android:id="@+id/iv_person_profile3_recognition"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="face recognition"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    android:text="face recognition" />
 
             </FrameLayout>
 
