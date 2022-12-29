@@ -5,9 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-   <FrameLayout
-       android:id="@+id/fl_sign_up_container"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"/>
+    <FrameLayout
+        android:id="@+id/fl_sign_up_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/fl_sign_up_container2"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent" />
 
 </FrameLayout>

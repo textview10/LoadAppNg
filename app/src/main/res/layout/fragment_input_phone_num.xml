@@ -66,26 +66,71 @@
 
         />
 
-    <RelativeLayout
-        android:id="@+id/rl_signup_input_commit"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="373dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/source2">
+        android:orientation="vertical"
+        android:layout_marginTop="400dp"
+        android:layout_height="wrap_content">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="@string/spalish_Next"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp" />
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_signup_agree"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_unselected" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="center"
+                android:text="@string/load_confirmation_term_1"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_signup_term"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_gravity="center"
+                android:text="@string/load_confirmation_term_2"
+                android:textColor="@color/bg_color"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_signup_input_commit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+           android:layout_marginTop="10dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/source2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/spalish_Next"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>
