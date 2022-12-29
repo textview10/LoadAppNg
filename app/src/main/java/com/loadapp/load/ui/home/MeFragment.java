@@ -127,6 +127,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                             Log.e(TAG, " logout error ." + response.body());
                             return;
                         }
+                        Constant.mLaunchOrderInfo = null;
+                        Constant.mToken = null;
+                        Constant.mAccountId = 0;
                         Intent intent = new Intent(getContext(), SplashActivity.class);
                         startActivity(intent);
                         getActivity().finish();

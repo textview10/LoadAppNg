@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.loadapp.load.R;
 import com.loadapp.load.api.Api;
@@ -133,8 +134,13 @@ public class SetPwdFragment extends BaseFragment {
                             Log.e(TAG,"register error");
                             return;
                         }
+                        SPUtils.getInstance().put(LoginFragment.KEY_PHONE_NUM, phoneNum);
+                        SPUtils.getInstance().put(LoginFragment.KEY_PASS_CODE, password);
                         Constant.mAccountId = loginBean.getAccount_id();
                         Constant.mToken = loginBean.getAccess_token();
+                        Log.i("LoanFragment", "token = " + Constant.mToken +
+                                " accountId = " + Constant.mAccountId);
+                        Constant.mLaunchOrderInfo = null;
                         if (getActivity() instanceof SignUpActivity) {
                             ((SignUpActivity) getActivity()).toHomePage();
                         }
