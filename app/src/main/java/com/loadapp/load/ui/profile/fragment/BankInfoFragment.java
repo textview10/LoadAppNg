@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,7 @@ import com.loadapp.load.bean.event.BankListEvent;
 import com.loadapp.load.global.Constant;
 import com.loadapp.load.ui.profile.BankListActivity;
 import com.loadapp.load.ui.profile.CommitProfileActivity;
+import com.loadapp.load.ui.profile.fragment.popupwindow.SelectTypePopUp;
 import com.loadapp.load.ui.profile.widget.EditTextContainer;
 import com.loadapp.load.ui.profile.widget.SelectContainer;
 import com.loadapp.load.util.BuildRequestJsonUtil;
@@ -45,8 +47,14 @@ public class BankInfoFragment extends BaseCommitFragment{
     private static final String TAG = "BankInfoFragment";
 
     private EditTextContainer etVerifyNum, etAccountNum;
-    private SelectContainer selectBackName;
+    private SelectContainer selectBackName, selectType;
     private FrameLayout flCommit;
+
+    public static final int TYPE_BANK = 1;
+    public static final int TYPE_WALLET = 2;
+    private int mCurType = TYPE_BANK;
+    private LinearLayout llBank, llWallet;
+    private EditTextContainer etWalletAccount, etWalletAccountConfirm;
 
     @Nullable
     @Override
@@ -65,9 +73,29 @@ public class BankInfoFragment extends BaseCommitFragment{
             ((CommitProfileActivity) getActivity()).setTitle(R.string.load_person_profile_bank_name_title);
         }
         etVerifyNum = view.findViewById(R.id.edittext_container_bank_verify_num);
+        selectType = view.findViewById(R.id.select_container_type);
+        llBank = view.findViewById(R.id.ll_bank_info_bank);
+        llWallet = view.findViewById(R.id.ll_bank_info_wallet);
+
+        etWalletAccount = view.findViewById(R.id.edittext_container_bank_wallet_account);
+        etWalletAccountConfirm = view.findViewById(R.id.edittext_container_bank_wallet_account_confirm);
         selectBackName = view.findViewById(R.id.select_container_bank_name);
         etAccountNum = view.findViewById(R.id.edittext_container_bank_account_num);
         flCommit = view.findViewById(R.id.fl_bank_info_commit);
+
+        selectType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SelectTypePopUp popUp = new SelectTypePopUp(getContext(), new SelectTypePopUp.OnPopUpClickListener() {
+                    @Override
+                    public void onClick(int type) {
+                        mCurType = type;
+                        updateType();
+                    }
+                });
+                popUp.show(selectType);
+            }
+        });
 
         selectBackName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,10 +111,15 @@ public class BankInfoFragment extends BaseCommitFragment{
             @Override
             public void onClick(View view) {
                 if (checkCommitAvailable()){
-                    uploadBank();
+                    if (mCurType == TYPE_BANK) {
+                        uploadBank();
+                    } else if (mCurType == TYPE_WALLET) {
+                        uploadWallet();
+                    }
                 }
             }
         });
+        updateType();
     }
 
     @Override
@@ -97,7 +130,9 @@ public class BankInfoFragment extends BaseCommitFragment{
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = false)
     public void onEvent(BankListEvent event) {
         Pair<String, String> data = event.getData();
-        selectBackName.setData(data.second);
+        if (selectBackName != null) {
+            selectBackName.setData(data.second);
+        }
     }
 
     private boolean checkCommitAvailable(){
@@ -105,13 +140,30 @@ public class BankInfoFragment extends BaseCommitFragment{
 //            ToastUtils.showShort(" verify num null");
 //            return false;
 //        }
-        if (etAccountNum == null || etAccountNum.isEmptyText()) {
-            ToastUtils.showShort("account name is null");
-            return false;
-        }
-        if (selectBackName == null || TextUtils.isEmpty(selectBackName.getData())) {
-            ToastUtils.showShort("account name is null");
-            return false;
+        if (mCurType == TYPE_BANK) {
+            if (etAccountNum == null || etAccountNum.isEmptyText()) {
+                ToastUtils.showShort("account name is null");
+                return false;
+            }
+            if (selectBackName == null || TextUtils.isEmpty(selectBackName.getData())) {
+                ToastUtils.showShort("account name is null");
+                return false;
+            }
+        } else if (mCurType == TYPE_WALLET) {
+            if (etWalletAccount == null || etWalletAccount.isEmptyText()){
+                ToastUtils.showShort("wallet account is null");
+                return false;
+            }
+            if (etWalletAccountConfirm == null || etWalletAccountConfirm.isEmptyText()){
+                ToastUtils.showShort("wallet account confirm is null");
+                return false;
+            }
+            String text1 = etWalletAccount.getText();
+            String text2 = etWalletAccountConfirm.getText();
+            if (!TextUtils.equals(text1, text2)){
+                ToastUtils.showShort("wallet account not equal");
+                return false;
+            }
         }
         return true;
     }
@@ -152,6 +204,53 @@ public class BankInfoFragment extends BaseCommitFragment{
                         Log.e(TAG, "upload bank info = " + response.body());
                     }
                 });
+    }
+
+
+    private void uploadWallet() {
+        JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
+        try {
+            jsonObject.put("account_id", Constant.mAccountId);
+            //wallet 或者 bank
+            jsonObject.put("receive_type", "wallet");
+            //手机钱包账号
+            jsonObject.put("wallet_account", etWalletAccount.getText());
+            //确认手机钱包账号
+            jsonObject.put("wallet_account_confirm", etWalletAccountConfirm.getText());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        OkGo.<String>post(Api.UPLOAD_WALLET).tag(TAG)
+                .params("data", jsonObject.toString())
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        PhaseBean phaseBean = checkResponseSuccess(response, PhaseBean.class);
+                        if (phaseBean == null) {
+                            Log.e(TAG, " upload wallet info ." + response.body());
+                            return;
+                        }
+                        checkAndToPageByPhaseCode(phaseBean.getCurrent_phase());
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        Log.e(TAG, " upload wallet info = " + response.body());
+                    }
+                });
+    }
+
+    private void updateType(){
+        if (mCurType == TYPE_BANK){
+            llBank.setVisibility(View.VISIBLE);
+            llWallet.setVisibility(View.GONE);
+            selectType.setData(getResources().getString(R.string.load_person_profile_type_bank));
+        } else if (mCurType == TYPE_WALLET) {
+            llBank.setVisibility(View.GONE);
+            llWallet.setVisibility(View.VISIBLE);
+            selectType.setData(getResources().getString(R.string.load_person_profile_type_wallet));
+        }
     }
 
     @Override

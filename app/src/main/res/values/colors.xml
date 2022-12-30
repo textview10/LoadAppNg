@@ -18,4 +18,7 @@
     <color name="grey_50">#fffafafa</color>
     <color name="grey_600">#ff757575</color>
     <color name="bg_color">#3734A9</color>
+
+
+    <color name="mask">#60000000</color>
 </resources>

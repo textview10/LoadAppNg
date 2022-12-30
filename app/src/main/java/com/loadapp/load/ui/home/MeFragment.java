@@ -91,7 +91,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 logOut();
                 break;
             case R.id.ll_me_test_to_profile:
-                CommitProfileActivity.startActivity(getContext(), CommitProfileActivity.PHASE_1);
+                CommitProfileActivity.startActivity(getContext(), CommitProfileActivity.PHASE_4);
                 break;
         }
     }
