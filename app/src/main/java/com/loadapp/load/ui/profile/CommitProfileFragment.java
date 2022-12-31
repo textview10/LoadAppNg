@@ -45,6 +45,7 @@ public class CommitProfileFragment extends BaseFragment {
 
     private AccountProfileBean.AccountProfile mProfileBean;
     private BaseCommitFragment mCurFragment;
+    private String mCurTag = "";
 //    private FrameLayout flContainer;
 
     private Handler mHandler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
@@ -89,7 +90,7 @@ public class CommitProfileFragment extends BaseFragment {
                             if (mProfileBean != null) {
                                 mCurFragment.setProfileBean(mProfileBean);
                             }
-                            toFragment(mCurFragment);
+//                            toFragment(mCurFragment, mCurTag);
                         }
                     }
 
@@ -123,21 +124,26 @@ public class CommitProfileFragment extends BaseFragment {
             },200);
             return;
         }
+        String tag = "";
         switch (index) {
             case CommitProfileActivity.PHASE_1:
+                tag = "phase1";
                 mCurFragment = new PersonProfileFragment();
                 break;
             case CommitProfileActivity.PHASE_2:
+                tag = "phase2";
                 mCurFragment = new PersonProfile2Fragment();
                 break;
             case CommitProfileActivity.PHASE_3:
+                tag = "phase3";
                 mCurFragment = new PersonProfile3Fragment();
                 break;
             case CommitProfileActivity.PHASE_4:
+                tag = "phase4";
                 mCurFragment = new BankInfoFragment();
                 break;
             case CommitProfileActivity.PHASE_5:
-
+                tag = "phase5";
                 break;
             case CommitProfileActivity.PHASE_ALL:
                 EventBus.getDefault().post(new PhaseAllEvent());
@@ -164,15 +170,27 @@ public class CommitProfileFragment extends BaseFragment {
             if (mProfileBean != null) {
                 mCurFragment.setProfileBean(mProfileBean);
             }
-            toFragment(mCurFragment);
+            toFragment(mCurFragment, tag);
         }
     }
 
-    private void toFragment(BaseFragment fragment) {
+    private void toFragment(BaseFragment fragment, String tag) {
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();   // 开启一个事务
-        transaction.replace(R.id.fl_fragment_person_profile_container, fragment);
+        Log.e(TAG, " add tag = " + tag);
+        transaction.replace(R.id.fl_fragment_person_profile_container, fragment, tag);
+        transaction.addToBackStack(tag);
         transaction.commitAllowingStateLoss();
+    }
+
+    public boolean onBackInternal(){
+        int backStackEntryCount = getChildFragmentManager().getBackStackEntryCount();
+        if (backStackEntryCount > 1) {
+            getChildFragmentManager().popBackStackImmediate();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void onActivityResultInternal(int requestCode, int resultCode, @Nullable Intent data) {
@@ -180,5 +198,13 @@ public class CommitProfileFragment extends BaseFragment {
         if (mCurFragment != null && mCurFragment instanceof PersonProfile3Fragment) {
             ((PersonProfile3Fragment) mCurFragment).OnActivityResultInternal(requestCode, data);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        while (getChildFragmentManager().getBackStackEntryCount() > 0) {
+            getChildFragmentManager().popBackStackImmediate();
+        }
+        super.onDestroy();
     }
 }

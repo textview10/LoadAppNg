@@ -51,8 +51,8 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
 
     private FrameLayout flCommit;
     private SelectContainer selectRelationShip1, selectRelationShip2;
-    private EditSelectContainer editSelectMobile1, editSelectMobile2;
-    private EditTextContainer editTextName1 ,editTextName2;
+    private SelectContainer editSelectMobile1, editSelectMobile2;
+    private SelectContainer editTextName1 ,editTextName2;
 
     private static final int TYPE_SELECT_RELATIVE_1 = 114;
     private static final int TYPE_SELECT_RELATIVE_2 = 15;
@@ -116,18 +116,42 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
                 });
             }
         });
-        editSelectMobile1.setOnBgClickListener(new EditSelectContainer.OnBgClickListener() {
+        editSelectMobile1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick() {
+            public void onClick(View view) {
                 showContactDialog(TYPE_SELECT_PHONE_1);
             }
         });
-        editSelectMobile2.setOnBgClickListener(new EditSelectContainer.OnBgClickListener() {
+        editTextName1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick() {
+            public void onClick(View view) {
+                showContactDialog(TYPE_SELECT_PHONE_1);
+            }
+        });
+        editSelectMobile2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 showContactDialog(TYPE_SELECT_PHONE_2);
             }
         });
+        editTextName2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showContactDialog(TYPE_SELECT_PHONE_2);
+            }
+        });
+//        editSelectMobile1.setOnBgClickListener(new EditSelectContainer.OnBgClickListener() {
+//            @Override
+//            public void onClick() {
+//                showContactDialog(TYPE_SELECT_PHONE_1);
+//            }
+//        });
+//        editSelectMobile2.setOnBgClickListener(new EditSelectContainer.OnBgClickListener() {
+//            @Override
+//            public void onClick() {
+//                showContactDialog(TYPE_SELECT_PHONE_2);
+//            }
+//        });
         flCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -217,22 +241,22 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
                         case TYPE_SELECT_PHONE_1: {
                             String number = mContactList.get(pos).number;
                             if (editSelectMobile1 != null) {
-                                editSelectMobile1.setEditTextAndSelection(number);
+                                editSelectMobile1.setData(number);
                             }
                             String contactName = mContactList.get(pos).contactName;
                             if (editTextName1 != null) {
-                                editTextName1.setEditTextAndSelection(contactName);
+                                editTextName1.setData(contactName);
                             }
                             break;
                         }
                         case TYPE_SELECT_PHONE_2: {
                             String number = mContactList.get(pos).number;
                             if (editSelectMobile2 != null) {
-                                editSelectMobile2.setEditTextAndSelection(number);
+                                editSelectMobile2.setData(number);
                             }
                             String contactName = mContactList.get(pos).contactName;
                             if (editTextName2 != null) {
-                                editTextName2.setEditTextAndSelection(contactName);
+                                editTextName2.setData(contactName);
                             }
                             break;
                         }
@@ -283,11 +307,11 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
         try {
             jsonObject.put("access_token", Constant.mToken);
             jsonObject.put("account_id", Constant.mAccountId + "");
-            jsonObject.put("contact1_name", editTextName1.getText());
-            jsonObject.put("contact1_mobile", editSelectMobile1.getText());
+            jsonObject.put("contact1_name", editTextName1.getData());
+            jsonObject.put("contact1_mobile", editSelectMobile1.getData());
             jsonObject.put("contact1_relationship", mRelativeShip1.second);
-            jsonObject.put("contact2_name", editTextName2.getText());
-            jsonObject.put("contact2_mobile", editSelectMobile2.getText());
+            jsonObject.put("contact2_name", editTextName2.getData());
+            jsonObject.put("contact2_mobile", editSelectMobile2.getData());
             jsonObject.put("contact2_relationship", mRelativeShip2.second);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -319,16 +343,16 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
         super.setProfileBean(profileBean);
 //        private SelectContainer selectRelationShip1, selectRelationShip2
         if (editSelectMobile1 != null && !TextUtils.isEmpty(profileBean.getContact1_mobile())){
-            editSelectMobile1.setEditTextAndSelection(profileBean.getContact1_mobile());
+            editSelectMobile1.setData(profileBean.getContact1_mobile());
         }
         if (editSelectMobile2 != null && !TextUtils.isEmpty(profileBean.getContact2_mobile())){
-            editSelectMobile2.setEditTextAndSelection(profileBean.getContact2_mobile());
+            editSelectMobile2.setData(profileBean.getContact2_mobile());
         }
         if (editTextName1 != null && !TextUtils.isEmpty(profileBean.getContact1_name())){
-            editTextName1.setEditTextAndSelection(profileBean.getContact1_name());
+            editTextName1.setData(profileBean.getContact1_name());
         }
         if (editTextName2 != null && !TextUtils.isEmpty(profileBean.getContact2_name())){
-            editTextName2.setEditTextAndSelection(profileBean.getContact2_name());
+            editTextName2.setData(profileBean.getContact2_name());
         }
     }
 }

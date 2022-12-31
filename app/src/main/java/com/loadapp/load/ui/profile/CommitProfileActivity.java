@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -33,6 +35,8 @@ import com.lzy.okgo.model.Response;
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 public class CommitProfileActivity extends BaseActivity {
 
@@ -68,7 +72,7 @@ public class CommitProfileActivity extends BaseActivity {
         initPage();
     }
 
-    public static void startActivity(Context context , int phaseIndex){
+    public static void startActivity(Context context, int phaseIndex) {
         Intent intent = new Intent(context, CommitProfileActivity.class);
         intent.putExtra(INTENT_PHASE, phaseIndex);
         context.startActivity(intent);
@@ -87,7 +91,7 @@ public class CommitProfileActivity extends BaseActivity {
         commitProfileFragment.switchFragment(phaseIndex);
     }
 
-    public void switchFragment(int curPhase){
+    public void switchFragment(int curPhase) {
         if (commitProfileFragment != null) {
             commitProfileFragment.switchFragment(curPhase);
         }
@@ -112,11 +116,17 @@ public class CommitProfileActivity extends BaseActivity {
     private void onBackInternal() {
         int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
         if (backStackEntryCount > 1) {
-            if (tvTitle != null){
+            if (tvTitle != null) {
                 tvTitle.setText(R.string.loan_person_profile_title);
             }
             getSupportFragmentManager().popBackStackImmediate();
         } else {
+            if (commitProfileFragment != null) {
+                boolean onBackFlag = commitProfileFragment.onBackInternal();
+                if (onBackFlag) {
+                    return;
+                }
+            }
             finish();
         }
     }
@@ -125,8 +135,16 @@ public class CommitProfileActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (commitProfileFragment != null && commitProfileFragment instanceof CommitProfileFragment) {
-            ( commitProfileFragment).onActivityResultInternal(requestCode,
+            (commitProfileFragment).onActivityResultInternal(requestCode,
                     resultCode, data);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        while (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        }
+        super.onDestroy();
     }
 }

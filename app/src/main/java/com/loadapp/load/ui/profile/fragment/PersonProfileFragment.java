@@ -55,10 +55,13 @@ public class PersonProfileFragment extends BaseCommitFragment {
 
     private Pair<String, String> mMonthSalary;
     private Pair<String, String> mWorkYear;
+    private String emailStr;
+    private String streetStr;
+
     private ImageView checkAgree;
     private TextView tvTerms;
     private WebViewFragment webViewFragment;
-    private boolean isAgree = true;
+    private boolean isAgree = false;
 
     @Nullable
     @Override
@@ -88,6 +91,28 @@ public class PersonProfileFragment extends BaseCommitFragment {
         if (mProfileBean != null){
             updateText(mProfileBean);
         }
+        // 回退栈回退时,界面已经销毁,根据数据回显一下
+        revertPage();
+    }
+
+    public void revertPage(){
+        if (emailEditText != null && !TextUtils.isEmpty(emailStr)){
+            emailEditText.setEditTextAndSelection(emailStr);
+        }
+        if (selectMonthSalary != null && mMonthSalary != null) {
+            selectMonthSalary.setData(mMonthSalary.first);
+        }
+        if (selectWorkYear != null && mWorkYear != null) {
+            selectWorkYear.setData(mWorkYear.first);
+        }
+        if (selectCity != null && !TextUtils.isEmpty(mHomeCity) &&
+                !TextUtils.isEmpty(mHomeState)) {
+            selectCity.setData(mHomeCity + "-" + mHomeState);
+        }
+        if (streetEditText != null && !TextUtils.isEmpty(streetStr)){
+            streetEditText.setEditTextAndSelection(streetStr);
+        }
+        updateAgreeState();
     }
 
     private void initializeListener(){
@@ -298,16 +323,18 @@ public class PersonProfileFragment extends BaseCommitFragment {
 //            }
 //            return;
 //        }
+        streetStr = streetEditText.getText();
+        emailStr = emailEditText.getText();
         JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
             jsonObject.put("access_token", Constant.mToken);
             jsonObject.put("account_id", Constant.mAccountId + "");
-            jsonObject.put("email", emailEditText.getText());
+            jsonObject.put("email", emailStr);
             jsonObject.put("month_salary", mMonthSalary.second);
             jsonObject.put("working_year", mWorkYear.second);
             jsonObject.put("home_state", mHomeState);
             jsonObject.put("home_city", mHomeCity);
-            jsonObject.put("home_address", streetEditText.getText());
+            jsonObject.put("home_address", streetStr);
         } catch (JSONException e) {
             e.printStackTrace();
         }

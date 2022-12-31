@@ -2,6 +2,7 @@ package com.loadapp.load.ui.profile.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,5 +65,10 @@ public class SelectContainer extends FrameLayout {
 
     public String getData(){
         return tvDesc == null ? "" : tvDesc.getText().toString();
+    }
+
+    public boolean isEmptyText(){
+        String data = getData();
+        return TextUtils.isEmpty(data);
     }
 }
