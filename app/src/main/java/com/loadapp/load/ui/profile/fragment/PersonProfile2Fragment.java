@@ -79,6 +79,9 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (getActivity() instanceof CommitProfileActivity) {
+            ((CommitProfileActivity) getActivity()).setTitle(R.string.loan_person_profile_title);
+        }
         flCommit = view.findViewById(R.id.fl_profile2_commit);
         selectRelationShip1 = view.findViewById(R.id.select_container_profile2_relationship1);
         editSelectMobile1 = view.findViewById(R.id.edittext_container_profile2_mobile1);

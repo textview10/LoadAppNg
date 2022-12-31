@@ -111,6 +111,7 @@ public class InputPhoneNumFragment extends BaseFragment {
             String prefix = presenter.getSelectString(spinner.getSelectedItemPosition());
 //            jsonObject.put("mobile", prefix + mobile);
             // TODO 暂时去掉前缀
+            jsonObject.put("request_time", System.currentTimeMillis());
             jsonObject.put("mobile", mobile);
         } catch (JSONException e) {
             e.printStackTrace();

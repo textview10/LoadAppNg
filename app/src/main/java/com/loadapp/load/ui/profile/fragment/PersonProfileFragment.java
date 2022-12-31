@@ -211,7 +211,8 @@ public class PersonProfileFragment extends BaseCommitFragment {
                 selectWorkYear.setData(data.first);
             }
         }
-        if (selectCity != null) {
+        if (selectCity != null && !TextUtils.isEmpty(profileBean.getHome_city())
+            && !TextUtils.isEmpty(profileBean.getHome_state())) {
             mHomeCity = profileBean.getHome_city();
             mHomeState = profileBean.getHome_state();
             selectCity.setData(mHomeCity + "-" + mHomeState);

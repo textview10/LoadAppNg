@@ -148,7 +148,7 @@ public class CommitProfileFragment extends BaseFragment {
             case CommitProfileActivity.PHASE_ALL:
                 EventBus.getDefault().post(new PhaseAllEvent());
                 getActivity().finish();
-                break;
+                return;
             case CommitProfileActivity.PHASE_COLLECT_DATA:
                 // 收集信息.
                 CollectDataManager.getInstance().collectAuthData(getContext(), new CollectDataManager.Observer() {
@@ -202,9 +202,7 @@ public class CommitProfileFragment extends BaseFragment {
 
     @Override
     public void onDestroy() {
-        while (getChildFragmentManager().getBackStackEntryCount() > 0) {
-            getChildFragmentManager().popBackStackImmediate();
-        }
+        getChildFragmentManager().getFragments().clear();
         super.onDestroy();
     }
 }

@@ -67,6 +67,7 @@
     <string name="load_person_profile_family">Female</string>
 
     <string name="load_person_profile_bank_name_title">Your Bank Account Details</string>
+    <string name="load_person_profile_wallet_name_title">Your Wallet Account Details</string>
     <string name="load_person_profile_bank_veriy_name">Bank Verification Number (BVN)</string>
     <string name="load_person_profile_bank_bank_name">Bank Name</string>
     <string name="load_person_profile_type">Type</string>

@@ -51,10 +51,10 @@ public class GenderCheckBox extends LinearLayout {
     }
 
     private void updateState(){
-        if (mCurPos == 0){
+        if (mCurPos == 1){
             ivMale.setImageResource(R.drawable.ic_checkbox_check);
             ivFamily.setImageResource(R.drawable.ic_checkbox_uncheck);
-        } else {
+        } else if (mCurPos == 2){
             ivMale.setImageResource(R.drawable.ic_checkbox_uncheck);
             ivFamily.setImageResource(R.drawable.ic_checkbox_check);
         }

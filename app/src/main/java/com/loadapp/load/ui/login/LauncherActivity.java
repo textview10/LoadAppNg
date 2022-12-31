@@ -83,16 +83,14 @@ public class LauncherActivity extends BaseActivity {
                 mHandler.sendEmptyMessageDelayed(TO_WELCOME_PAGE, 1000);
             }
         } else {
-            Constant.mAccountId = accountId;
-            Constant.mToken = token;
-            requestDetail();
+            requestDetail(accountId, token);
             if (mHandler != null) {
                 mHandler.sendEmptyMessageDelayed(TO_WELCOME_PAGE, 3000);
             }
         }
     }
 
-    private void requestDetail() {
+    private void requestDetail(long accountId, String token) {
         requestTime = System.currentTimeMillis();
         JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
@@ -116,6 +114,8 @@ public class LauncherActivity extends BaseActivity {
                             if (orderInfo != null) {
                                 Constant.mLaunchOrderInfo = orderInfo;
                                 successEnter = true;
+                                Constant.mAccountId = accountId;
+                                Constant.mToken = token;
                             }
                         }
                         if (mHandler != null) {

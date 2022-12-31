@@ -66,8 +66,13 @@ public class PersonProfile3Fragment extends BaseCommitFragment {
     private SelectContainer selectBirth;
     private FrameLayout flCommit;
     private GenderCheckBox genderCheckBox;
+
     private String mBirthDate;
     private String mLeftPath1, mRightPath2, mRecognitionPath;
+    private String nameStr;
+    private String fatherNameStr;
+    private String identityStr;
+    private int genderPos = -1;
 
     private static final int REQUEST_CAMERA_LEFT = 111;
     private static final int REQUEST_CAMERA_RIGHT = 112;
@@ -87,6 +92,9 @@ public class PersonProfile3Fragment extends BaseCommitFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (getActivity() instanceof CommitProfileActivity) {
+            ((CommitProfileActivity) getActivity()).setTitle(R.string.loan_person_profile_title);
+        }
         flLeft = view.findViewById(R.id.fl_person_profile3_left_cnic);
         flRight= view.findViewById(R.id.fl_person_profile3_right_cnic);
         ivLeft = view.findViewById(R.id.iv_person_profile3_left_cnic);
@@ -103,6 +111,37 @@ public class PersonProfile3Fragment extends BaseCommitFragment {
 
         flCommit = view.findViewById(R.id.fl_person_profile3_commit);
         initializeListener();
+        revertData();
+    }
+
+    private void revertData(){
+        if (selectBirth != null && !TextUtils.isEmpty(mBirthDate)){
+            selectBirth.setData(mBirthDate);
+        }
+        if (etName != null && !TextUtils.isEmpty(nameStr)){
+            etName.setEditTextAndSelection(nameStr);
+        }
+        if (etFatherName != null && !TextUtils.isEmpty(fatherNameStr)){
+            etFatherName.setEditTextAndSelection(fatherNameStr);
+        }
+        if (etCnicNum != null && !TextUtils.isEmpty(identityStr)){
+            etCnicNum.setEditTextAndSelection(identityStr);
+        }
+        if (genderCheckBox != null && genderPos != -1){
+            genderCheckBox.setPos(genderPos);
+        }
+        if (etCnicNum != null && !TextUtils.isEmpty(identityStr)){
+            etCnicNum.setEditTextAndSelection(identityStr);
+        }
+        if (ivLeft != null && !TextUtils.isEmpty(mLeftPath1)){
+            Glide.with(ivLeft).load(mLeftPath1).into(ivLeft);
+        }
+        if (ivRight != null && !TextUtils.isEmpty(mRightPath2)){
+            Glide.with(ivRight).load(mRightPath2).into(ivRight);
+        }
+        if (ivRecognition != null && !TextUtils.isEmpty(mRecognitionPath)) {
+            Glide.with(ivRecognition).load(mRecognitionPath).into(ivRecognition);
+        }
     }
 
     private void initializeListener(){
@@ -266,6 +305,10 @@ public class PersonProfile3Fragment extends BaseCommitFragment {
     }
 
     private void uploadContact() {
+        nameStr = etName.getText().trim();
+        fatherNameStr = etFatherName.getText().trim();
+        identityStr = etCnicNum.getText().trim();
+        genderPos = genderCheckBox.getCurPos();
         JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
             jsonObject.put("account_id", Constant.mAccountId);
@@ -306,6 +349,10 @@ public class PersonProfile3Fragment extends BaseCommitFragment {
                     Log.i(TAG, " compress result = " + result.get(i).getPath() +
                             " size = " +  FileUtils.getSize(result.get(i)));
                 }
+                mLeftPath1 = result.get(0).getPath();
+                mRightPath2 = result.get(1).getPath();
+                mRecognitionPath = result.get(2).getPath();
+
                 OkGo.<String>post(Api.UPLOAD_IDENTITY).tag(TAG)
                         .params("data", jsonObject.toString())
                         //证件 正面照片

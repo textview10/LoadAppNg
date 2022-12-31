@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -242,14 +243,20 @@ public class BankInfoFragment extends BaseCommitFragment{
     }
 
     private void updateType(){
+        @StringRes int title = -1;
         if (mCurType == TYPE_BANK){
             llBank.setVisibility(View.VISIBLE);
             llWallet.setVisibility(View.GONE);
             selectType.setData(getResources().getString(R.string.load_person_profile_type_bank));
+            title = R.string.load_person_profile_bank_name_title;
         } else if (mCurType == TYPE_WALLET) {
             llBank.setVisibility(View.GONE);
             llWallet.setVisibility(View.VISIBLE);
             selectType.setData(getResources().getString(R.string.load_person_profile_type_wallet));
+            title = R.string.load_person_profile_wallet_name_title;
+        }
+        if (getActivity() instanceof CommitProfileActivity && title != -1) {
+            ((CommitProfileActivity) getActivity()).setTitle(title);
         }
     }
 
