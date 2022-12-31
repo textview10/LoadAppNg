@@ -142,9 +142,7 @@ public class CommitProfileActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        while (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
-        }
+//        getSupportFragmentManager().getFragments().clear();
         super.onDestroy();
     }
 }

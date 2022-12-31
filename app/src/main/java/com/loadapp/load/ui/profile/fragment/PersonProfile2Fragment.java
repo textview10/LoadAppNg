@@ -64,6 +64,10 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
 
     private Pair<String, String> mRelativeShip1;
     private Pair<String, String> mRelativeShip2;
+    private String name1Str;
+    private String mobile1Str;
+    private String name2Str;
+    private String mobile2Str;
 
     @Nullable
     @Override
@@ -85,6 +89,28 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
         editTextName2 = view.findViewById(R.id.edittext_container_profile2_name2);
         initListener();
         initializePermission();
+        revertPage();
+    }
+
+    private void revertPage(){
+        if (selectRelationShip1 != null && mRelativeShip1 != null){
+            selectRelationShip1.setData(mRelativeShip1.first);
+        }
+        if (selectRelationShip2 != null && mRelativeShip2 != null){
+            selectRelationShip2.setData(mRelativeShip2.first);
+        }
+        if (editSelectMobile1 != null && !TextUtils.isEmpty(mobile1Str)){
+            editSelectMobile1.setData(mobile1Str);
+        }
+        if (editTextName1 != null && !TextUtils.isEmpty(name1Str)){
+            editTextName1.setData(name1Str);
+        }
+        if (editSelectMobile2 != null && !TextUtils.isEmpty(mobile2Str)){
+            editSelectMobile2.setData(mobile2Str);
+        }
+        if (editTextName2 != null && !TextUtils.isEmpty(name2Str)){
+            editTextName2.setData(name2Str);
+        }
     }
 
     private void initListener() {
@@ -303,15 +329,19 @@ public class PersonProfile2Fragment extends BaseCommitFragment {
     }
 
     private void uploadContact() {
+        name1Str = editTextName1.getData();
+        mobile1Str = editSelectMobile1.getData();
+        name2Str = editTextName2.getData();
+        mobile2Str = editSelectMobile2.getData();
         JSONObject jsonObject = BuildRequestJsonUtil.buildRequestJson();
         try {
             jsonObject.put("access_token", Constant.mToken);
             jsonObject.put("account_id", Constant.mAccountId + "");
-            jsonObject.put("contact1_name", editTextName1.getData());
-            jsonObject.put("contact1_mobile", editSelectMobile1.getData());
+            jsonObject.put("contact1_name", name1Str);
+            jsonObject.put("contact1_mobile", mobile1Str);
             jsonObject.put("contact1_relationship", mRelativeShip1.second);
-            jsonObject.put("contact2_name", editTextName2.getData());
-            jsonObject.put("contact2_mobile", editSelectMobile2.getData());
+            jsonObject.put("contact2_name", name2Str);
+            jsonObject.put("contact2_mobile", mobile2Str);
             jsonObject.put("contact2_relationship", mRelativeShip2.second);
         } catch (JSONException e) {
             e.printStackTrace();
